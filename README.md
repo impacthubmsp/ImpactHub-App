@@ -1,10 +1,12 @@
-# ImpactHub-App
+# Delete this first section when project is completed.
+
+## ImpactHub-App
 A React application that allows members of co-work spaces to checkin and out.
 
-# Database Setup
-Database is done with PostgreSQL, it should be created and called "impact-hub-app'.
+## Database Setup
+Database is done with PostgreSQL, it should be created and called **"impact-hub-app'**.
 
-
+---
 
 # ImpactHub App
 
@@ -52,8 +54,6 @@ Steps to get the development environment running.
 
 
 ### Features
-
-High level list of items completed.
 
  Member check-in / check-out
 * Visitor check-in / check-out
