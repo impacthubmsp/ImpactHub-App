@@ -57,19 +57,19 @@ High level list of items completed.
 
  Member check-in / check-out
 * Visitor check-in / check-out
-.. * Add visitors to mailing list
+  * Add visitors to mailing list
 * Administrative View
-.. * Memebers present w/ info card
-... * Name
-... * Business / Mission
-... * Role
-... * Contact Info
-... * Avatar Image
-... * Website
-... * Phone Number
-.. * Group check-in
-.. * Attendance Trends (Data Visualization)
-.. * Retroactive check-in
+  * Memebers present w/ info card
+    * Name
+    * Business / Mission
+    * Role
+    * Contact Info
+    * Avatar Image
+    * Website
+    * Phone Number
+  * Group check-in
+  * Attendance Trends (Data Visualization)
+  * Retroactive check-in
 
 ### Next Steps
 
