@@ -48,27 +48,41 @@ Steps to get the development environment running.
 
 ## Screen Shot
 
-![Screen Shot](https://via.placeholder.com/350x150 "Screen Shot")
+![Screen Shot](https://via.placeholder.com/700x300 "Screen Shot")
 
 
-### Completed Features
+### Features
 
 High level list of items completed.
 
-- [x] Feature a
-- [x] Feature b
+* Member check-in / check-out
+* Visitor check-in / check-out
+..* Add visitors to mailing list
+* Administrative View
+..* Memebers present w/ info card
+...* Name
+...* Business / Mission
+...* Role
+...* Contact Info
+...* Avatar Image
+...* Website
+...* Phone Number
+..* Group check-in
+..* Attendance Trends (Data Visualization)
+..* Retroactive check-in
 
 ### Next Steps
 
 Features that you would like to add at some point in the future.
 
-- [ ] Feature c
-
 ## Authors
 
-* Name of author(s)
+* @k-burn (Kara Burnett)
+* @sBahta1 (Sam Bahta)
+* @lvang5 (Lais Vang)
+* @maelstrm (Jakeh Clark)
 
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
+We would like to thank our wonderful project owners from *Impact Hub MPLS* & and the faculty of *Prime Digital Academy* for this wonderful opportunity and their continued support.
