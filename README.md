@@ -3,6 +3,12 @@
 ## ImpactHub-App
 A React application that allows members of co-work spaces to checkin and out.
 
+
+https://docs.google.com/document/d/1oY9Uow1v0ioNsKaUkgfrAqzfyJtztJZcXDJwuJzligo/edit#
+
+
+https://trello.com/b/LyXnEMIn/impact-megasoft-corp
+
 ## Database Setup
 Database is done with PostgreSQL, it should be created and called **"impact-hub-app'**.
 
@@ -29,7 +35,9 @@ Project ImpactHub is a visit-tracking application for local coworking space, Imp
 
 ## Database Set-Up
 
-![DB table](https://imgur.com/Y6QFtPW)
+![DB table](https://imgur.com/Y6QFtPW "DB table
+
+")
 
 To set up this application on your computer, follow these instructions to create a new database for the local data to be stored.
 
