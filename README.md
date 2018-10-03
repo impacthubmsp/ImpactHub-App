@@ -85,4 +85,4 @@ Features that you would like to add at some point in the future.
 
 ## Acknowledgments
 
-We would like to thank our wonderful project owners from *Impact Hub MPLS* & and the faculty of *Prime Digital Academy* for this wonderful opportunity and their continued support.
+We would like to thank our wonderful project owners from **Impact Hub MPLS** & and the faculty of **Prime Digital Academy** for this wonderful opportunity and their continued support.
