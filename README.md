@@ -35,9 +35,11 @@ Project ImpactHub is a visit-tracking application for local coworking space, Imp
 
 ## Database Set-Up
 
-![DB table](https://imgur.com/Y6QFtPW "DB table
+To start off with dummy data use the test.sql file.
 
-")
+![DB table](https://imgur.com/Y6QFtPW "DB table")
+
+ 
 
 To set up this application on your computer, follow these instructions to create a new database for the local data to be stored.
 
