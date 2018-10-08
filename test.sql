@@ -15,11 +15,7 @@ INSERT INTO "members" (name,company) VALUES ('Alice','Pellentesque Ultricies Com
 INSERT INTO "members" (name,company) VALUES ('Regan','Nulla Institute'),('Scarlett','Eu Turpis Nulla Foundation'),('Tanya','Arcu Vivamus Limited'),('Alfonso','Suspendisse Non Leo Company'),('Renee','Lectus Nullam Inc.'),('Wylie','Porttitor Limited'),('Rigel','Mauris Ut Limited'),('Vance','Pede Limited'),('Riley','Pede Ac Urna Inc.'),('Leila','Felis Donec Tempor Ltd');
 
 
-SELECT * FROM "members"
 
-
-
-DROP TABLE IF EXISTS "visitors";
 
 CREATE TABLE "visitors" (
   id SERIAL PRIMARY KEY,
