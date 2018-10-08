@@ -44,8 +44,7 @@ To start off with dummy data use the test.sql.
 To set up this application on your computer, follow these instructions to create a new database for the local data to be stored.
 
 ```
-SQL
-```
+
 CREATE TABLE "person" (
 	"id" serial NOT NULL,
 	"username" varchar(80) NOT NULL,
