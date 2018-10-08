@@ -1,23 +1,61 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
-const Nav = () => (
-  <div className="navbar">
-    <div>
-      <ul>
-        <li>
-          <Link to="/admin">
-            Admin
-          </Link>
-        </li>
-        <li>
-          <Link to="/checkin">
-            CheckIn
-          </Link>
-        </li>
-      </ul>
-    </div>
-  </div>
-);
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default Nav;
+import { triggerLogout } from '../../redux/actions/loginActions';
+
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+class Nav extends Component {
+  constructor(props) {
+    super(props);
+    console.log('HERE');
+  }
+
+  // componentDidUpdate runs after props and state have changed.
+  //If we arent loading the user call AND we dont have a user, kick us out to home
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.userName === null) {
+      console.log('HERE');
+      this.props.history.push('/home');
+    }
+  }
+
+  logout = () => {
+    this.props.dispatch(triggerLogout());
+    console.log('logout function');
+  }
+
+  pushToAdmin = () => {
+    this.props.history.push('/admin');
+  }
+
+  pushToCheckin = () => {
+    this.props.history.push('/checkin');
+  }
+
+  render() {
+    return (
+      <div className="instructions">
+        <div>
+          <h1 className="lead">ImpactHub</h1>
+        </div>
+        <button onClick={this.pushToAdmin}>
+          Admin
+        </button>
+        <button onClick={this.pushToCheckin}>
+          Checkin
+        </button>
+        <button onClick={this.logout}>
+          Log Out
+          </button>
+      </div>
+    )
+
+  }
+}
+
+export default connect(mapStateToProps)(Nav);
