@@ -26,13 +26,13 @@ router.post('/', (req, res) => {
 
 //PUT route will switch "checkin.checked-in" from 'true' to 'false'.
 //To be used in conjunction with an API call to CoBot.
-//Required minimum req.body object format {checout:false, name:'', cobot_id:''}
+//Required minimum req.body object format {checkout:false, name:'', cobot_id:''}
 router.put('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckOut = req.body;
         //console.log(membCheckOut); 
         const queryText = `UPDATE "checkin" SET "checked-in" = $1 
-                            WHERE "checkin"."name" iLIKE  $2 AND "checkin"."cobot-id" = $3;`;
+                            WHERE "checkin"."name" iLIKE $2 AND "checkin"."cobot-id" = $3;`;
         pool.query(queryText, [membCheckOut.checkout, membCheckOut.name, membCheckOut.cobot_id])
             .then((results) => {
                 res.sendStatus(200);
