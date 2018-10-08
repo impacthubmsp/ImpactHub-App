@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
+import Nav from '../Nav/Nav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-class UserPage extends Component {
+class AdminPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -39,6 +39,12 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName }!
           </h1>
+
+          /ADMIN
+          <br />
+          This page will be the initial view. Will display the ADMIN view by default.
+          <br />
+          There will be a link that connects to the user-login screen.
           <p>Your ID is: {this.props.user.id}</p>
           <button
             onClick={this.logout}
@@ -59,5 +65,5 @@ class UserPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(AdminPage);
 

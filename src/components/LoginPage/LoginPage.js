@@ -30,7 +30,7 @@ class LoginPage extends Component {
   componentDidUpdate() {
     // if we have a response from the server and the user is logged in, redirect to the /user URL
     if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('/user');
+      this.props.history.push('/admin');
     }
   }
 

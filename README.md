@@ -3,10 +3,10 @@
 ## ImpactHub-App
 A React application that allows members of co-work spaces to checkin and out.
 
-
+## Scope Document
 https://docs.google.com/document/d/1oY9Uow1v0ioNsKaUkgfrAqzfyJtztJZcXDJwuJzligo/edit#
 
-
+## Trello Board
 https://trello.com/b/LyXnEMIn/impact-megasoft-corp
 
 ## Database Setup
