@@ -7,7 +7,7 @@ const router = express.Router();
 //Required minimum req.body object format {name:'', visitor:true, purpose:''}
 router.post('/', (req, res) => {
     if (req.isAuthenticated) {
-        const VisiCheckIn = req.body;
+        const visiCheckIn = req.body;
         //console.log(visiCheckIn);
         const queryText = `INSERT INTO "checkin" ("name","visitor","purpose") 
                             VALUES ($1, $2, $3, $4);`;
