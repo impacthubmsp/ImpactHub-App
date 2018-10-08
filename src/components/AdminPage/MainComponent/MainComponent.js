@@ -7,7 +7,7 @@ class MainComponent extends Component {
     constructor() {
         super();
         this.state = {
-            viewMode: 'graph'
+            viewMode: 'grouplogin'
         }
     }
     // Functions for setting the mode onClick
