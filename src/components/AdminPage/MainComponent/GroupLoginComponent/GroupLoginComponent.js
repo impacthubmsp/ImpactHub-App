@@ -5,7 +5,9 @@ class GroupLoginComponent extends Component {
   render() {
       return (
         <div>
-            <div className="container" className="formContainer" >
+            {/* Form Container*/}
+            <div className="container" className="viewContainer" >
+                {/* Form to Check-in Each Guest*/}
                 <form id= "groupCheck-InForm">
                     <h2>Group Check-in</h2>
                     <label>Group Name</label>
