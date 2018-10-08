@@ -14,10 +14,10 @@ CREATE TABLE "checkin" (
 	"time" TIMESTAMP NOT NULL,
 	"name" varchar(250) NOT NULL,
 	"quantity" integer NOT NULL DEFAULT 1,
-	"member" BOOLEAN NOT NULL,
-	"visitor" BOOLEAN NOT NULL,
+	"member" BOOLEAN NOT NULL DEFAULT false,
+	"visitor" BOOLEAN NOT NULL DEFAULT false,
 	"purpose" varchar(250) NOT NULL,
-	"checked-in" BOOLEAN NOT NULL DEFAULT 'false',
+	"checked-in" BOOLEAN NOT NULL DEFAULT true,
 	"cobot-id" varchar(500) NOT NULL,
 	CONSTRAINT checkin_pk PRIMARY KEY ("id")
 ) WITH (
