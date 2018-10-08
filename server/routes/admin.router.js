@@ -16,7 +16,6 @@ router.get('/count', (req, res) => {
             console.log('GET Count', error);
             res.sendStatus(500);
         });
-
     } else {
         res.sendStatus(403);
     }
