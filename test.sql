@@ -1,3 +1,13 @@
+CREATE TABLE "person" (
+	"id" serial NOT NULL,
+	"username" varchar(80) NOT NULL,
+	"password" varchar(80) NOT NULL,
+	CONSTRAINT person_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
 CREATE TABLE "members" (
   id SERIAL PRIMARY KEY,
   name varchar(255) default NULL,
