@@ -17,8 +17,8 @@ CREATE TABLE "checkin" (
 	"member" BOOLEAN  DEFAULT false,
 	"visitor" BOOLEAN  DEFAULT false,
 	"purpose" varchar(250) NOT NULL,
-	"checked-in" BOOLEAN DEFAULT true,
-	"cobot-id" varchar(500) ,
+	"checked_in" BOOLEAN DEFAULT true,
+	"cobot_id" varchar(500) ,
 	CONSTRAINT checkin_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -31,7 +31,7 @@ CREATE TABLE "members" (
 	"name" varchar(250) NOT NULL,
 	"company" varchar(250) NOT NULL,
 	"img_url" varchar(1000),
-	"cobot-id" varchar(500) NOT NULL,
+	"cobot_id" varchar(500) NOT NULL,
 	CONSTRAINT members_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -44,8 +44,8 @@ CREATE TABLE "mailinglist" (
 	"name" varchar(250) NOT NULL,
 	"phone" int NOT NULL,
 	"email" varchar(250) NOT NULL,
-	"date-time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	"init-welcome" BOOLEAN DEFAULT false,
+	"date_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"init_welcome" BOOLEAN DEFAULT false,
 	CONSTRAINT mailinglist_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
