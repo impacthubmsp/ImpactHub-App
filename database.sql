@@ -10,15 +10,15 @@ CREATE TABLE "person" (
 
 CREATE TABLE "checkin" (
 	"id" serial NOT NULL,
-	"day" DATE NOT NULL,
-	"time" TIMESTAMP NOT NULL,
+	"day" DATE DEFAULT CURRENT_DATE,
+	"time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"name" varchar(250) NOT NULL,
-	"quantity" integer NOT NULL DEFAULT 1,
-	"member" BOOLEAN NOT NULL DEFAULT false,
-	"visitor" BOOLEAN NOT NULL DEFAULT false,
+	"quantity" integer  DEFAULT 1,
+	"member" BOOLEAN  DEFAULT false,
+	"visitor" BOOLEAN  DEFAULT false,
 	"purpose" varchar(250) NOT NULL,
-	"checked-in" BOOLEAN NOT NULL DEFAULT true,
-	"cobot-id" varchar(500) NOT NULL,
+	"checked_in" BOOLEAN DEFAULT true,
+	"cobot_id" varchar(500) ,
 	CONSTRAINT checkin_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -30,8 +30,8 @@ CREATE TABLE "members" (
 	"id" serial NOT NULL,
 	"name" varchar(250) NOT NULL,
 	"company" varchar(250) NOT NULL,
-	"img_url" varchar(1000) NOT NULL,
-	"cobot-id" varchar(500) NOT NULL,
+	"img_url" varchar(1000),
+	"cobot_id" varchar(500) NOT NULL,
 	CONSTRAINT members_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -44,8 +44,8 @@ CREATE TABLE "mailinglist" (
 	"name" varchar(250) NOT NULL,
 	"phone" int NOT NULL,
 	"email" varchar(250) NOT NULL,
-	"date-time" TIMESTAMP NOT NULL,
-	"init-welcome" BOOLEAN NOT NULL,
+	"date_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"init_welcome" BOOLEAN DEFAULT false,
 	CONSTRAINT mailinglist_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -54,7 +54,7 @@ CREATE TABLE "mailinglist" (
 
 
 
-ALTER TABLE "checkin" ADD CONSTRAINT "checkin_fk0" FOREIGN KEY ("cobot-id") REFERENCES "members"("cobot-id");
+
 
 
 
