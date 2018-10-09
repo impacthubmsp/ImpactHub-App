@@ -23,15 +23,15 @@ router.get('/', (req, res) => {
 //Required minimum req.body object format {id:'', checked:boolean}
 router.put('/init', (req, res) => {
     if (req.isAuthenticated) {
-        const initsent = req.body;
-        //console.log(membCheckOut); 
+        const initSent = req.body;
+        //console.log(initSent); 
         const queryText = `UPDATE "mailinglist" SET "init_welcome" = $1 
                             WHERE "mailinglist"."id" = $2`;
-        pool.query(queryText, [initsent.id, initsent.checked])
+        pool.query(queryText, [initSent.checked, initSent.id])
             .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {
-                console.log('Member checkout failed', error);
+                console.log('Init failed', error);
                 res.sendStatus(500);
             });
     } else {
@@ -39,8 +39,23 @@ router.put('/init', (req, res) => {
     }
 });
 
-
-
+//Delete will remove individual entries in "mailinglist"
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        const idOfItemtoDelete = req.params.id;
+        //console.log('deleting ', idOfItemtoDelete);
+        const queryText = `DELETE FROM "mailinglist" 
+                            WHERE "id" = $1;`;
+        pool.query(queryText, [idOfItemtoDelete]).then((result) => {
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log('Error in delete', error);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 
 module.exports = router;
