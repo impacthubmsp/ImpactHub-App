@@ -42,6 +42,24 @@ router.get('/history/:date', (req, res) => {
     }
 });
 
+//GET route will return * "checkin" for todays date only 
+router.get('/today', (req, res) => {
+    if (req.isAuthenticated()) {
+        const qText = `SELECT * FROM "checkin" 
+                        WHERE "day" = CURRENT_DATE 
+                        ORDER BY "day" ASC;`;
+        pool.query(qText).then((results) => {
+            //console.log('todays checkins', results.rows);
+            res.send(results.rows);
+        }).catch((error) => {
+            console.log('GET Today', error);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 
 
 module.exports = router;
