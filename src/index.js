@@ -9,6 +9,8 @@ import reducer from './redux/reducers'; // imports ./redux/reducers/index.js
 
 import App from './App';
 import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
 
 // Initializing to an empty object, but here is where you could
 // preload your redux state with initial values (from localStorage, perhaps)
@@ -30,9 +32,14 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+// MaterialUI Theme applied over whole application
+const theme = createMuiTheme();
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('react-root'),
 );
