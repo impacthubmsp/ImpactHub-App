@@ -7,19 +7,23 @@ class NewContactComponent extends Component {
                 <div className="viewContainer">
                     <table>
                         <thead>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Contact Status</th>
-                            <th>Contact</th>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Subscribed on MailChimp?</th>
+                                <th>Add to the Mailing List</th>
+                            </tr>
                         </thead>
-                        <tr>
-                            <td>Kara Burnett</td>
-                            <td>hello_its_me@gmail.com</td>
-                            <td>641.000.0000</td>
-                            <td>No</td>
-                            <td><button>Send Welcome Email</button></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Kara Burnett</td>
+                                <td>hello_its_me@gmail.com</td>
+                                <td>641.000.0000</td>
+                                <td>No </td>
+                                <td><button>Add to Subscription List</button></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

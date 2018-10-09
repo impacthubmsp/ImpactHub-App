@@ -10,8 +10,9 @@ class MainComponent extends Component {
         super();
         this.state = {
             viewMode: 'grouplogin',
-            currentGuestCount: 10,
-            currentDeskContact: 6417809108, //this is Kara's phone number for default testing 
+            currentGuestCount: 0, //defaults to zero
+            currentDeskContactPhone: '', //phone number that will be texted when call bell is clicked
+            currentDeskContactName: '', //name of the front desk admin on duty
         }
     }
     // Functions for setting the mode onClick
@@ -50,6 +51,19 @@ class MainComponent extends Component {
                 return (<div><GraphComponent /></div>)
         }
     }
+    // sets the localState with the contact info of the desk attendant who will be contactable via call bell-iniatied text message
+    setCurrentDeskContact = (event) => {
+        console.log('in setCurrentDeskContact function');
+        this.setState({
+            [event.target.name]: event.target.value ,
+            [event.target.name]: event.target.value ,
+        })
+    }
+    // write a function to send local state to database of call bell contacts
+
+
+    // write a function here that GETs the number of people present from the database and sets it to state
+
   render() {
       return (
         <div>
@@ -59,9 +73,12 @@ class MainComponent extends Component {
             </div>
             {/*This is wear the current Front Desk Attendant adds the phone number they would like to be texted at*/}
             <div id="setCurrentDeskCell">
-                <form id="callBellCellForm">
+                <form id="callBellCellForm" > {/* Add a function here onSubmit to send local state to database so data persists even if page is closed and across different runs of the application */}
                     <label>Set the Call Bell Cell:</label>
-                    <input type="text" placeholder="(000) 867-5309"/>
+                    <input name="currentDeskContactName" type="text" placeholder="e.g. Mia" onChange={this.setCurrentDeskContact}></input>
+                    <input name="currentDeskContactPhone" type="text" placeholder="(000) 867-5309" onChange={this.setCurrentDeskContact}></input>
+                    <input type="submit" value="Submit"/>
+                    <h5>Currently on call: {this.state.currentDeskContactName} @ {this.state.currentDeskContactPhone}</h5> {/*Replace this with display of info called from Database*/} 
                 </form>
 
             </div>
