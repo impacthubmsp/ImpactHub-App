@@ -9,7 +9,7 @@ class MainComponent extends Component {
     constructor() {
         super();
         this.state = {
-            viewMode: 'grouplogin',
+            viewMode: 'graph',
             currentGuestCount: 0, //defaults to zero
             currentDeskContactPhone: '', //phone number that will be texted when call bell is clicked
             currentDeskContactName: '', //name of the front desk admin on duty
