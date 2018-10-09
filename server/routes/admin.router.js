@@ -4,6 +4,7 @@ const router = express.Router();
 
 //GET Route returns * "checked-in" = 'true'
 //Used to find AMOUNT of people checked in
+//Data will be added together in redux to get total
 router.get('/count', (req, res) => {
     if (req.isAuthenticated()) {
         const qText = `SELECT "quantity" 
