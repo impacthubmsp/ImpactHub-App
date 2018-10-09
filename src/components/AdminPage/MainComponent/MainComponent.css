@@ -1,0 +1,15 @@
+#currentGuestCount{
+    border: 2px black solid;
+    width: 10vw;
+    height: 10vw;
+}
+#callBellCellForm{
+    height: 10vh;
+    
+}
+.viewContainer{
+    height: 50vh;
+    width: 70vw;
+    border: 2px black solid;
+
+}
