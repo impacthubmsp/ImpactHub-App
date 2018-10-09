@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
 class GraphComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      dailyAttendanceData: {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        datasets: [
+          {
+            label: 'Attendance',
+            data: [1, 2, 4, 5, 7, 8, 2, 4, 1, 0],
+            borderColor: '#35DDFF',
+            backgroundColor: '#35DDFF',
+            fill: false,
+            borderWidth: '2px'
+          }
+        ]
+      }
+    }
+  }
   render() {
-      return (
-        <div>
-          <div className="viewContainer">
-            {/*This component will show the attendance data as  line charts - stacked area from chart.js. There will be options to show different timespans, but default will be today by hour */}
-            <img src="https://via.placeholder.com/500x300?text=Graph+Component" alt="graph" />
-          </div>
-        </div>
-      );
+    return (
+      <div className="viewContainer">
+        <Line
+          data={this.state.dailyAttendanceData}
+          options={{
+            title: {
+              display: true,
+              text: 'Attendance Today',
+              fontSize: 25
+            },
+            legend: {
+              position: 'bottom'
+            },
+          }}
+          height={150}
+        // width={1200}
+
+        />
+      </div>
+    );
   }
 }
 
