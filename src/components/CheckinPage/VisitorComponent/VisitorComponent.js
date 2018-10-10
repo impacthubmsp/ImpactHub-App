@@ -61,13 +61,13 @@ class VisitorComponent extends Component {
                                     {/* Visitor Select Purpose */}
                                     <div>
                                         <Button variant="contained">
-                                            One
+                                            Event
                                             </Button>
                                         <Button variant="contained">
-                                            Two
+                                            Guest
                                             </Button>
                                         <Button variant="contained">
-                                            Three
+                                            Tour
                                             </Button>
                                         <Button variant="contained">
                                             Four
