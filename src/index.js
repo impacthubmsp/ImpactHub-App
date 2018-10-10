@@ -33,7 +33,11 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 // MaterialUI Theme applied over whole application
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 ReactDOM.render(
   <Provider store={store}>
