@@ -5,6 +5,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Select from 'react-select';
 
+
 // Fake member data that for testing functionality
 import UserComponent_data from './UsernameComponent_data'
 
@@ -23,6 +24,10 @@ members.map(suggestion => ({
     value: suggestion.label,
     label: suggestion.label,
   }));
+
+function message (){
+return 'loading'
+}
 
 class UsernameComponent extends Component {
     constructor() {
@@ -50,20 +55,25 @@ class UsernameComponent extends Component {
                 /* This will be replaced with the autofill feature, when its implemented. 
                 For now, this is just filler material
                 It will display all users from the suggestions array, which will display on the DOM*/
+                
     render() {
+      
         return (
-            <div>
+         
                   
             <Select
-            className='input'
+            className="container"
+            classNamePrefix="input"
             isClearable
+            noOptionsMessage={() => "Prompt user by typing"}
+            backspaceRemovesValue
             options={members}
             value={this.state.multi}
             onChange={this.handleChange('multi')}
             placeholder="Name"
           />
           
-            </div>
+     
         );
     }
 }
