@@ -3,89 +3,66 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Select from 'react-select';
 
 // Fake member data that for testing functionality
 import UserComponent_data from './UsernameComponent_data'
+
+const members = [];
+
+function getMembers() {
+   console.log(UserComponent_data);
+    UserComponent_data.map((member)=>{
+        members.push({
+            label: <span><img className="avatar" src={member.avatar}/> <br/> {member.name} <br/> {member.organization} <br/> {member.phoneNumber} </span> ,
+            value: member.name + member.organization + member.phoneNumber
+        })
+       })
+}
+members.map(suggestion => ({
+    value: suggestion.label,
+    label: suggestion.label,
+  }));
 
 class UsernameComponent extends Component {
     constructor() {
         super();
         this.state = {
-            // Will contain the entire array of members used for suggestions.
-            suggestions: UserComponent_data,
-
             // Will be used in the callback function to MemberComponent
             selectedMember: '',
+            single: null,
+            multi: null,
         }
+    }
+    componentDidMount(){
+        getMembers();
     }
 
     // This will set the user when they are selected from the dropdown.
-    setSelectedUser = (toSelect) => {
+
+    handleChange = name => value => {
         this.setState({
-            selectedMember: toSelect,
-        })
-    }
-
+          [name]: value,
+        });
+      };
     // This will update the text field whenever there is a change to the dom
-    componentDidUpdate = () => {
-        this.inputFieldDisplay();
-    }
-
-    // This contains the function which will be used inside of the render.
-    inputFieldDisplay = () => {
-        return (
-            <div>
-                {/* Input field for name to be typed */}
-                <TextField
-                    id="input-with-icon-textfield"
-                    label="Full Name"
-                    value={this.state.selectedMember}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <AccountCircle />
-                            </InputAdornment>
-                        ),
-                    }} />
-
-                {/* This will be replaced with the autofill feature, when its implemented.
-                
+// This contains the function which will be used inside of the render.
+                /* This will be replaced with the autofill feature, when its implemented. 
                 For now, this is just filler material
-                
-                It will display all users from the suggestions array, which will display on the DOM*/}
-                <div>
-                    {this.state.suggestions.map((member, i) => {
-                        return (
-                            <div key={i}>
-                                {/* Member avatar */}
-                                <img src={member.avatar} alt="member avatar" />
-                                <br />
-
-                                {/* Temporary button for setting the member,w hen they are clicked */}
-                                <button onClick={() => this.setSelectedUser(member.name)}>
-                                    Select This User
-                                    </button>
-
-                                {/* Member information that will be displayed when they appear in the drop down menu */}
-                                <br />
-                                {member.name}
-                                <br />
-                                {member.organization}
-                                <br />
-                                {member.phoneNumber}
-                                <br />
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        )
-    }
-
+                It will display all users from the suggestions array, which will display on the DOM*/
     render() {
         return (
             <div>
-                {this.inputFieldDisplay()}
+                  
+            <Select
+            className='input'
+            isClearable
+            options={members}
+            value={this.state.multi}
+            onChange={this.handleChange('multi')}
+            placeholder="Name"
+          />
+          
             </div>
         );
     }
@@ -93,4 +70,3 @@ class UsernameComponent extends Component {
 
 // this allows us to use <App /> in index.js
 export default UsernameComponent;
-

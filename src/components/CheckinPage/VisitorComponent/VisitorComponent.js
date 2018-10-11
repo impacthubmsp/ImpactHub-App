@@ -15,6 +15,21 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class VisitorComponent extends Component {
+    state = {
+        name: '',
+        purpose: '',
+        interest: false,
+        email: '',
+        phone: ''
+    }
+
+
+    handleToggleClick = () => {
+        this.setState(state => ({
+          interest: !state.interest
+        }));
+      }
+
 
     render() {
         return (
@@ -46,13 +61,13 @@ class VisitorComponent extends Component {
                                     {/* Visitor Select Purpose */}
                                     <div>
                                         <Button variant="contained">
-                                            One
+                                            Event
                                             </Button>
                                         <Button variant="contained">
-                                            Two
+                                            Guest
                                             </Button>
                                         <Button variant="contained">
-                                            Three
+                                            Tour
                                             </Button>
                                         <Button variant="contained">
                                             Four
@@ -65,16 +80,19 @@ class VisitorComponent extends Component {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                value="true"
+                                                onClick={this.handleToggleClick}
                                             />
+                                            
                                         }
                                         label="Secondary"
+                                        
                                     />
                                     {/* Accompanying text for selecting interest */}
                                     <ListItemText primary="Are you interested in more information about membership options?" />
                                 </ListItem>
                                 {/* Enter email address for interest */}
-                                <ListItem divider>
+                                {/* TO-DO hide email and phone number entry */}
+                                {this.state.interest ?  <ListItem divider>
                                     <TextField
                                         id="filled-email-input"
                                         label="Email Address"
@@ -88,9 +106,9 @@ class VisitorComponent extends Component {
                                             ),
                                         }}
                                     />
-                                </ListItem>
-                                {/* Enter phone number for interest */}
-                                <ListItem divider>
+                                </ListItem> : ''}
+
+                                 {this.state.interest ? <ListItem divider>
                                     <TextField
                                         id="filled-email-input"
                                         label="Phone Number"
@@ -104,7 +122,10 @@ class VisitorComponent extends Component {
                                             ),
                                         }}
                                     />
-                                </ListItem>
+                                </ListItem>  : ''}
+                               
+                                {/* Enter phone number for interest */}
+                                
                                 <ListItem>
                                     {/* the variant 'contained' switches the color of the background and text */}
                                     <Button variant="contained" color="primary">
