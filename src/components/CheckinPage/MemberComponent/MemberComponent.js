@@ -22,9 +22,9 @@ class MemberComponent extends Component {
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     setCurrentUser = (selectedUser) => {
-        // this.setState({
-        //     currentuser: selectedUser,
-        // })
+        this.setState({
+            currentuser: selectedUser,
+        })
         console.log('setCurrentUser callback function working!');
     }
 

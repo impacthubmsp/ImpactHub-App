@@ -16,7 +16,7 @@ function getMembers() {
     UserComponent_data.map((member)=>{
         members.push({
             label: <span><img className="avatar" src={member.avatar}/> <br/> {member.name} <br/> {member.organization} <br/> {member.phoneNumber} </span> ,
-            value: member.name + member.organization + member.phoneNumber
+            value: member.name
         })
        })
 }
@@ -25,9 +25,7 @@ members.map(suggestion => ({
     label: suggestion.label,
   }));
 
-function message (){
-return 'loading'
-}
+
 
 class UsernameComponent extends Component {
     constructor() {
@@ -36,7 +34,6 @@ class UsernameComponent extends Component {
             // Will be used in the callback function to MemberComponent
             selectedMember: '',
             single: null,
-            multi: null,
         }
     }
     componentDidMount(){
@@ -47,7 +44,7 @@ class UsernameComponent extends Component {
 
     handleChange = name => value => {
         this.setState({
-          [name]: value,
+          [name]: value.value,
         });
       };
     // This will update the text field whenever there is a change to the dom
@@ -57,8 +54,9 @@ class UsernameComponent extends Component {
                 It will display all users from the suggestions array, which will display on the DOM*/
                 
     render() {
-      
+        console.log(this.state.single)
         return (
+         
          
                   
             <Select
@@ -68,8 +66,8 @@ class UsernameComponent extends Component {
             noOptionsMessage={() => "Prompt user by typing"}
             backspaceRemovesValue
             options={members}
-            value={this.state.multi}
-            onChange={this.handleChange('multi')}
+            value={this.state.single}
+            onChange={this.handleChange('single')}
             placeholder="Name"
           />
           
