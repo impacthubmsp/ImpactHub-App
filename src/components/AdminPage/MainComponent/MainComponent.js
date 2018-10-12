@@ -5,6 +5,8 @@ import TableComponent from './TableComponent/TableComponent';
 import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
+import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
+import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
 import './MainComponent.css';
 
 class MainComponent extends Component {
@@ -86,6 +88,8 @@ class MainComponent extends Component {
             <div>
                 <KPIComponent/>
                 <CurrentMemberVSVisitor/>
+                <VisitorAddInfo/>
+                <EventsMemberVSVisitor/>
             </div>
             {/* Display for the main admin functions */}
             <div>

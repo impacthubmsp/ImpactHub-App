@@ -3,12 +3,12 @@ import { Pie } from 'react-chartjs-2';
 
 
 
-class CurrentMemberVSVisitor extends Component {
+class VisitorAddInfo extends Component {
     constructor() {
         super();
         this.state = {
-            currentVisitors: 10,
-            currentMembers: 20,
+            visitorsNoAddInfo: 40,
+            visitorsAddInfo: 20,
         }
 
     }
@@ -19,30 +19,30 @@ class CurrentMemberVSVisitor extends Component {
     render(){
         const data = {
             labels: [
-                'Visitors',
-                'Members'
+                'Wanted Additional Info',
+                'Declined Additional Info'
             ],
             datasets: [{
-                data: [this.state.currentVisitors, this.state.currentMembers],
+                data: [this.state.visitorsNoAddInfo, this.state.visitorsAddInfo],
                 backgroundColor: [
-                '#FF6384',
-                '#36A2EB'
+                '#b03060',
+                '#ffd700'
                 ],
                 hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB'
+                '#b03060',
+                '#ffd700'
                 ]
             }]
         };
         const dataHere = this.state.currentVisitors;
         return(
             <div>
-                {dataHere && < Pie
+                 < Pie
                     data = {data}
-                />}
+                />
             </div>
         );
     }
 }
 
-export default CurrentMemberVSVisitor;
+export default VisitorAddInfo;
