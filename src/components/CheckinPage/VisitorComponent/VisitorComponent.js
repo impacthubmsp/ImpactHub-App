@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -30,8 +29,16 @@ class VisitorComponent extends Component {
         }));
       }
 
+    handleVisit = (value)  => {
+        this.setState({
+            purpose: value
+        })
+    }
+
 
     render() {
+       console.log(this.state.purpose);
+       
         return (
             <Grid className="classes" item xs={6} sm={6} md={6} lg={6}>
                 <div>
@@ -60,18 +67,15 @@ class VisitorComponent extends Component {
                                 <ListItem divider>
                                     {/* Visitor Select Purpose */}
                                     <div>
-                                        <Button variant="contained">
+                                        <Button variant="contained" onClick={() => this.handleVisit('Event')} >
                                             Event
                                             </Button>
-                                        <Button variant="contained">
+                                        <Button variant="contained" onClick={() => this.handleVisit('Guest')}>
                                             Guest
                                             </Button>
-                                        <Button variant="contained">
+                                        <Button variant="contained" onClick={() => this.handleVisit('Tour')}>
                                             Tour
                                             </Button>
-                                        <Button variant="contained">
-                                            Four
-                                    </Button>
                                     </div>
                                 </ListItem>
                                 {/* Select Interest in membership */}
@@ -84,7 +88,6 @@ class VisitorComponent extends Component {
                                             />
                                             
                                         }
-                                        label="Secondary"
                                         
                                     />
                                     {/* Accompanying text for selecting interest */}
