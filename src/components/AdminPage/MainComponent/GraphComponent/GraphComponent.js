@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 class GraphComponent extends Component {
   constructor() {
     super();
     this.state = {
       dailyAttendanceData: {
-        labels: [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
-        datasets: [
-          {
-            label: 'Members',
-            data: [1, 2, 4, 5, 7, 8, 2, 4, 1, 0, 10],
-            borderColor: '#35DDFF',
-            backgroundColor: 'red',
-            fill: true,
-            borderWidth: '2px'
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        datasets: [{
+            label: "Members",
+            backgroundColor: ["#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF"],
+            data: [10,40,20,50,20]
           },
           {
-            label: 'Visitors',
-            data: [2, 2, 2, 1, 0, 0, 1, 5, 9, 10, 10],
-            borderColor: '#35DDFF',
-            backgroundColor: '#35DDFF',
-            fill: true,
-            borderWidth: '2px'
-          }
-        ]
+            label: "Visitors",
+            backgroundColor: ["#c45850", "#c45850", "#c45850", "#c45850", "#c45850"],
+            data: [5, 10, 10, 30, 5]
+          }]
       },
       pastMonthAttendanceData: {
         labels: [1, 5, 10, 15, 20, 25, 30],
@@ -33,7 +25,7 @@ class GraphComponent extends Component {
             label: 'Members',
             data: [10, 20, 45, 50, 70, 80, 20],
             borderColor: '#35DDFF',
-            backgroundColor: '#35DDFF',
+            backgroundColor: ["#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF"],
             fill: false,
             borderWidth: '2px'
           },
@@ -75,12 +67,12 @@ class GraphComponent extends Component {
           <option>This Week</option>
           <option>This Month</option>
         </select>
-          <Line
+          <Bar
             data={this.state.dailyAttendanceData}
             options={{
               title: {
                 display: true,
-                text: 'Traffic',
+                text: 'Check-in Traffic',
                 fontSize: 25
               },
               legend: {

@@ -4,6 +4,7 @@ import GroupLoginComponent from './GroupLoginComponent/GroupLoginComponent';
 import TableComponent from './TableComponent/TableComponent';
 import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
+import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import './MainComponent.css';
 
 class MainComponent extends Component {
@@ -84,6 +85,7 @@ class MainComponent extends Component {
             </div>
             <div>
                 <KPIComponent/>
+                <CurrentMemberVSVisitor/>
             </div>
             {/* Display for the main admin functions */}
             <div>

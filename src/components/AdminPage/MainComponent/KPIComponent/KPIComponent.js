@@ -10,8 +10,12 @@ class KPIComponent extends Component {
             
         }
     }
+    //getCheckIn
+    componentDidMount(){
+        
+    }
     render(){
-
+            
     
         return(
             <div>
