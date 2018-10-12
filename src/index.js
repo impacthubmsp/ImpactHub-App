@@ -37,6 +37,22 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#afbdc4',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+      contrastText: '#37474f',
+    },
+    secondary: {
+      main: '#b2dfdb',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#37474f',
+    },
+    // error: will use the default color
+  },
+  
 });
 
 ReactDOM.render(
