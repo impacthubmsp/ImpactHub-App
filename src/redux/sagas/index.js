@@ -9,6 +9,7 @@ export default function* rootSaga() {
     userSaga(),
     loginSaga(),
     yield takeEvery('POST_DATA', postData),
+    yield takeEvery('FETCH_MEMBERS', getMember)
     // watchIncrementAsync()
   ]);
 }
@@ -21,6 +22,21 @@ function* postData(action) {
   }catch(err){
     console.log('Error', err);
     
+  };
+
+}
+
+function* getMember(action) {
+  try{ 
+    const response = yield call(axios.get, '/api/memb')
+    console.log(response);
+    const result = yield call(axios.get, '/api/memb/list')
+    console.log(result);
+    const responseAction = {type: 'SET_MEMBERS', payload: result.data}
+    console.log(responseAction)
+    yield dispatch(responseAction)
+  }catch(err){
+    console.log('Error', err);
   };
 
 }

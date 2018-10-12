@@ -63,16 +63,16 @@ class VisitorComponent extends Component {
 
 
     render() {
-        console.log(this.state);
-        
        
         return (
             <Grid className="classes" item xs={6} sm={6} md={6} lg={6}>
                 <div>
+                   
                     {/* Form for visitors */}
                     <div>
                         <div>
                             Are you a visitor?
+                          
                             </div>
                         {/* Visitor Enter name */}
                         <div>
@@ -170,16 +170,21 @@ class VisitorComponent extends Component {
                 </Button>
                                 </ListItem>
                             </List>
-
+                           
                         </div>
                     </div>
 
                 </div>
             </Grid>
+            
         );
     }
 }
+const mapStateToProps = state => ({
+    members: state.members
+  });
+
 
 // this allows us to use <App /> in index.js
-export default connect()(VisitorComponent);
+export default connect(mapStateToProps)(VisitorComponent);
 
