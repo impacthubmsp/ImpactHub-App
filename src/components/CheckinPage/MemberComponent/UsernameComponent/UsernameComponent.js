@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 // Fake member data that for testing functionality
 import UserComponent_data from './UsernameComponent_data'
+import axios from 'axios';
 
 
 const mapStateToProps = state => ({
@@ -14,12 +15,17 @@ const mapStateToProps = state => ({
 const members = [];
 
 function getMembers() {
-    this.props.members.map((member)=>{
-        members.push({
-            label: <span><img className="avatar" src={member.img_url}/> <br/> {member.name} <br/> {member.company}</span> ,
-            value: member.name
-        })
-       })
+    axios.get('/api/memb/list')
+    .then((response) =>{
+        let member = response.data;
+        member.map((member)=>{
+            members.push({
+                label: <span><img className="avatar" src={member.img_url}/> <br/> {member.name} <br/> {member.company}</span> ,
+                value: member.name
+            })
+           })
+    })
+  
 }
 
 
@@ -29,6 +35,7 @@ members.map(suggestion => ({
     value: suggestion.label,
     label: suggestion.label,
   }));
+
 
 
 
@@ -43,7 +50,7 @@ class UsernameComponent extends Component {
     }
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
-        // getMembers()
+        getMembers()
     }
 
     // This will set the user when they are selected from the dropdown.
@@ -66,7 +73,7 @@ class UsernameComponent extends Component {
             className="container"
             classNamePrefix="input"
             isClearable
-            noOptionsMessage={() => 'Prompt user to start typing'}
+            noOptionsMessage={() => 'Start by typing your member name'}
             backspaceRemovesValue
             options={members}
             value={this.state.single}

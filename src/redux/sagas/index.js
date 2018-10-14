@@ -30,11 +30,11 @@ function* getMember(action) {
   try{ 
     const response = yield call(axios.get, '/api/memb')
     console.log(response);
-    const result = yield call(axios.get, '/api/memb/list')
-    console.log(result);
-    const responseAction = {type: 'SET_MEMBERS', payload: result.data}
-    console.log(responseAction)
-    yield dispatch(responseAction)
+    // const result = yield call(axios.get, '/api/memb/list')
+    // console.log(result);
+    // const responseAction = {type: 'SET_MEMBERS', payload: result.data}
+    // console.log(responseAction)
+    // yield dispatch(responseAction)
   }catch(err){
     console.log('Error', err);
   };
