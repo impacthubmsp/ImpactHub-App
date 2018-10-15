@@ -54,6 +54,7 @@ class VisitorComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_VISITOR', payload: this.state})
+        //fix reset feature, not resetting interest
         this.resetForm();
     }
 
