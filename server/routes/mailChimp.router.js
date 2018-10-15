@@ -22,17 +22,16 @@ router.get('/getList', (req, res) => {
 // Modify the list id to change for impacthub's api
 router.post('/addVisitor', (req, res) => {
     console.log('addVisitor to add', req.body);
-    res.sendStatus(200);
-    // axios({
-    //     url: `https://us19.api.mailchimp.com/3.0/lists/4199edf633/members`,
-    //     method: 'POST',
-    //     headers: { Authorization: `user ${process.env.APIKEY}` },
-    //     data: userToAdd,
-    // }).then((response) => {
-    //     console.log(response.data);
-    //     res.sendStatus(200)
-    // }).catch((error) => {
-    //     console.log('error in /addVisitor: ', error);
-    // })
+    axios({
+        url: `https://us19.api.mailchimp.com/3.0/lists/4199edf633/members`,
+        method: 'POST',
+        headers: { Authorization: `user ${process.env.APIKEY}` },
+        data: req.body,
+    }).then((response) => {
+        console.log(response.data);
+        res.sendStatus(200)
+    }).catch((error) => {
+        console.log('error in /addVisitor: ', error);
+    })
 });
 module.exports = router;

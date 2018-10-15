@@ -54,8 +54,14 @@ class VisitorComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_VISITOR', payload: this.state})
+        // send user to mailchimp if interested
+        this.handleMailChimp();
+        //fix reset feature, not resetting interest
+        this.resetForm();
+    }
+    handleMailChimp = () => {
         //  If the user is interested, then post to mailchimp
-        if(this.state.interested) {
+        if(this.state.interest === true) {
             let name = this.state.name;
             let nameArray = name.trim().split(" ");
             let fName = nameArray[0];
@@ -70,10 +76,9 @@ class VisitorComponent extends Component {
                     "PHONE": this.state.phone,
                 }
             }
-            this.props.dispatch({type: 'POST_VISITOR', payload: userToAdd})
+            console.log('sending to mailchimp', userToAdd);
+            this.props.dispatch({type: 'ADD_MAILCHIMP', payload: userToAdd})
         }
-        //fix reset feature, not resetting interest
-        this.resetForm();
     }
     resetForm = () => {
         this.setState(this.baseState)

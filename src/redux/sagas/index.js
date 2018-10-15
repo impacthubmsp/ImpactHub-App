@@ -1,4 +1,6 @@
-import { all, takeEvery, call, put as dispatch } from 'redux-saga/effects';
+import { all, takeEvery, call,
+  //  put as dispatch 
+  } from 'redux-saga/effects';
 import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
@@ -25,6 +27,7 @@ function* postVisitor(action) {
     console.log('Error', err);
     
   };
+
 }
 
 function* addMailchimp(action) {
