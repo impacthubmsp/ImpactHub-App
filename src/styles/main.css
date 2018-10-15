@@ -78,3 +78,12 @@ li a:hover {
     text-decoration: underline;
     color: #eee;
 }
+
+.input {
+width: 500px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+}
