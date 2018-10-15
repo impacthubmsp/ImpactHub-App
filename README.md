@@ -12,6 +12,10 @@ https://trello.com/b/LyXnEMIn/impact-megasoft-corp
 ## Database Setup
 Database is done with PostgreSQL, it should be created and called **"impact-hub-app'**.
 
+To setup the database, use "database.sql" to create tables.
+
+Test user accounts can be added to database using "test.sql".
+
 ---
 
 # ImpactHub App

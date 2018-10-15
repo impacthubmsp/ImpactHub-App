@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { triggerLogout } from '../../redux/actions/loginActions';
 
+import MainAppBar from "./MainAppBar/MainAppBar"
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -39,20 +40,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <div className="instructions">
-        <div>
-          <h1 className="lead">ImpactHub</h1>
-        </div>
-        <button onClick={this.pushToAdmin}>
-          Admin
-        </button>
-        <button onClick={this.pushToCheckin}>
-          Checkin
-        </button>
-        <button onClick={this.logout}>
-          Log Out
-          </button>
-      </div>
+     <MainAppBar logout={this.logout} admin={this.pushToAdmin} checkin={this.pushToCheckin} />
     )
 
   }
