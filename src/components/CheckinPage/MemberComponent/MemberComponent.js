@@ -4,9 +4,6 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -20,9 +17,14 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
+<<<<<<< HEAD
                 label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
+=======
+                label: <span><img className="avatar" src={member.img_url} alt="avatar"/> <br/> {member.name} <br/> {member.company}</span> ,
+>>>>>>> 1448476059758bcd7e44bbd60e6158b59cc0e038
                 value: member.cobot_id + member.name
             })
+            return members;
            })
     })
   
@@ -95,14 +97,10 @@ class MemberComponent extends Component {
                         <div>
                             Member Login
                         </div>
-            
-                        
                         <div>
                             <List component="nav">
-
                                 {/* Component for selecting name & drop-down menu */}
                                 <ListItem divider>
-                                                        
                                     <Select
                                     className="container"
                                     classNamePrefix="input"
