@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckIn = req.body;
         let member = true;
-        let id = membCheckIn.single.value.slice(0, 31)
+        let id = membCheckIn.single.value.slice(0, 32)
         let name = membCheckIn.single.value.slice(32)
         console.log(membCheckIn);
        const queryText = `INSERT INTO "checkin" ("day", "time", "name", "member","purpose", "cobot_id") 
