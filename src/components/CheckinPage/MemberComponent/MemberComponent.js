@@ -20,7 +20,7 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-                label: <span><img className="avatar" src={member.img_url}/> <br/> {member.name} <br/> {member.company}</span> ,
+                label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
                 value: member.cobot_id + member.name
             })
            })
@@ -127,13 +127,13 @@ class MemberComponent extends Component {
                                     <Button variant="contained" color="primary" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
                                         Work
                                     </Button>
-                                    <Button variant="contained" color="secondary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
+                                    <Button variant="contained" color="primary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
                                         Event
                                     </Button>
-                                    <Button variant="contained" onClick={this.handlePost}>
+                                    <Button variant="contained" color="primary" onClick={this.handlePost}>
                                         Submit
                                     </Button>
-                                    <Button variant="contained" onClick={this.resetForm}>
+                                    <Button variant="contained" color="secondary" onClick={this.resetForm}>
                                         Cancel
                                     </Button>
 
