@@ -36,7 +36,7 @@ class VisitorAddInfo extends Component {
         };
         const dataHere = this.state.currentVisitors;
         return(
-            <div>
+            <div className="viewContainer"> 
                  < Pie
                     data = {data}
                 />

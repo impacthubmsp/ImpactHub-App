@@ -32,7 +32,7 @@ class EventsMemberVSVisitor extends Component {
           options={{
             title: {
               display: true,
-              text: 'Check-in Traffic',
+              text: 'Event Traffic',
               fontSize: 25
             },
             legend: {
