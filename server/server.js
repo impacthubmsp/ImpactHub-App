@@ -15,6 +15,7 @@ const visitorRouter = require('./routes/visitor.router');
 const memberRouter = require('./routes/member.router');
 const templateRouter = require('./routes/template.router');
 const mailListRouter = require('./routes/mailList.router');
+const mailChimpRouter = require('./routes/mailChimp.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +34,7 @@ app.use('/api/visi', visitorRouter);
 app.use('/api/memb', memberRouter);
 app.use('/api/template', templateRouter);
 app.use('/api/mail', mailListRouter);
+app.use('/api/mailchimp', mailChimpRouter);
 // Serve static files
 app.use(express.static('build'));
 
