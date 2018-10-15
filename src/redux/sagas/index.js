@@ -8,14 +8,15 @@ export default function* rootSaga() {
   yield all([
     userSaga(),
     loginSaga(),
-    yield takeEvery('POST_DATA', postData),
-    yield takeEvery('FETCH_MEMBERS', getMember)
+    yield takeEvery('POST_VISITOR', postVisitor),
+    yield takeEvery('FETCH_MEMBERS', getMember),
+    yield takeEvery('POST_MEMBER', postMember)
     // watchIncrementAsync()
   ]);
 }
 
 
-function* postData(action) {
+function* postVisitor(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/visi', action.payload)
@@ -37,6 +38,17 @@ function* getMember(action) {
     // yield dispatch(responseAction)
   }catch(err){
     console.log('Error', err);
+  };
+
+}
+
+function* postMember(action) {
+  console.log(action.payload);
+  try{ 
+    yield call(axios.post, '/api/memb', action.payload)
+  }catch(err){
+    console.log('Error', err);
+    
   };
 
 }

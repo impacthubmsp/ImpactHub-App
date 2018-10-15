@@ -53,7 +53,7 @@ class VisitorComponent extends Component {
     }
 
     handlePost = () => {
-        this.props.dispatch({type: 'POST_DATA', payload: this.state})
+        this.props.dispatch({type: 'POST_VISITOR', payload: this.state})
         this.resetForm();
     }
 
@@ -96,17 +96,17 @@ class VisitorComponent extends Component {
                                 <Divider />
                                 <ListItem divider>
                                     {/* Visitor Select Purpose */}
-                                    <div>
-                                        <Button variant="contained" onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
+                                   
+                                        <Button variant="contained" onClick={() => this.handleVisit('Event')}>
                                             Event
                                             </Button>
-                                        <Button variant="contained" onClick={() => this.handleVisit('Guest')} value={this.state.purpose}>
+                                        <Button variant="contained" onClick={() => this.handleVisit('Guest')}>
                                             Guest
                                             </Button>
-                                        <Button variant="contained" onClick={() => this.handleVisit('Tour')} value={this.state.purpose}>
+                                        <Button variant="contained" onClick={() => this.handleVisit('Tour')}>
                                             Tour
                                             </Button>
-                                    </div>
+                                   
                                 </ListItem>
                                 {/* Select Interest in membership */}
                                 <ListItem divider>
