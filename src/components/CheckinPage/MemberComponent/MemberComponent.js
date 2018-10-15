@@ -95,14 +95,10 @@ class MemberComponent extends Component {
                         <div>
                             Member Login
                         </div>
-            
-                        
                         <div>
                             <List component="nav">
-
                                 {/* Component for selecting name & drop-down menu */}
                                 <ListItem divider>
-                                                        
                                     <Select
                                     className="container"
                                     classNamePrefix="input"

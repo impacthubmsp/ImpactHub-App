@@ -10,7 +10,8 @@ export default function* rootSaga() {
     loginSaga(),
     yield takeEvery('POST_VISITOR', postVisitor),
     yield takeEvery('FETCH_MEMBERS', getMember),
-    yield takeEvery('POST_MEMBER', postMember)
+    yield takeEvery('POST_MEMBER', postMember),
+    yield takeEvery('ADD_MAILCHIMP', addMailchimp),
     // watchIncrementAsync()
   ]);
 }
@@ -20,6 +21,16 @@ function* postVisitor(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/visi', action.payload)
+  }catch(err){
+    console.log('Error', err);
+    
+  };
+}
+
+function* addMailchimp(action) {
+  console.log(action.payload);
+  try{ 
+    yield call(axios.post, '/api/mailChimp/addVisitor', action.payload)
   }catch(err){
     console.log('Error', err);
     
