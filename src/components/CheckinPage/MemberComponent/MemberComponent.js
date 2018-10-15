@@ -44,8 +44,6 @@ class MemberComponent extends Component {
         //Whis will be used for axios request.
         this.state = {
             single: null,
-            name: '',
-            id: '',
             purpose: null,
             day: null,
             time: null
@@ -62,16 +60,14 @@ class MemberComponent extends Component {
     handleChange = name => value => {
         this.setState({
           [name]: value,
-          name: value.value.slice(32),
-          id: value.value.slice(0,31),
-          day: moment().format("L"),
-          time: moment().format("LTS")
         });
       };
 
       handleVisit = (value)  => {
         this.setState({
             purpose: value,
+            day: moment().format("L"),
+            time: moment().format("LTS")
         })
     }
 

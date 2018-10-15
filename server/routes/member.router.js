@@ -45,10 +45,12 @@ router.post('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckIn = req.body;
         let member = true;
-       console.log(membCheckIn);
+        let id = membCheckIn.single.value.slice(0, 31)
+        let name = membCheckIn.single.value.slice(32)
+        console.log(membCheckIn);
        const queryText = `INSERT INTO "checkin" ("day", "time", "name", "member","purpose", "cobot_id") 
                             VALUES ($1, $2, $3, $4, $5, $6);`;
-        pool.query(queryText, [membCheckIn.day, membCheckIn.time, membCheckIn.name, member, membCheckIn.purpose, membCheckIn.id])
+        pool.query(queryText, [membCheckIn.day, membCheckIn.time, name, member, membCheckIn.purpose, id])
             .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {
