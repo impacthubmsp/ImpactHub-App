@@ -54,27 +54,44 @@ class VisitorComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_VISITOR', payload: this.state})
+        // send user to mailchimp if interested
+        this.handleMailChimp();
         //fix reset feature, not resetting interest
         this.resetForm();
     }
+    handleMailChimp = () => {
+        //  If the user is interested, then post to mailchimp
+        if(this.state.interest === true) {
+            let name = this.state.name;
+            let nameArray = name.trim().split(" ");
+            let fName = nameArray[0];
+            let lName = nameArray[nameArray.length - 1];
 
+            let userToAdd = {
+                "email_address": this.state.email,
+                "status": "subscribed",
+                "merge_fields": {
+                    "FNAME": fName,
+                    "LNAME": lName,
+                    "PHONE": this.state.phone,
+                }
+            }
+            console.log('sending to mailchimp', userToAdd);
+            this.props.dispatch({type: 'ADD_MAILCHIMP', payload: userToAdd})
+        }
+    }
     resetForm = () => {
         this.setState(this.baseState)
       }
-
-
     render() {
-       
         return (
             <Grid className="classes" item xs={6} sm={6} md={6} lg={6}>
                 <div>
-                   
                     {/* Form for visitors */}
                     <div>
                         <div>
                             Are you a visitor?
-                          
-                            </div>
+                        </div>
                         {/* Visitor Enter name */}
                         <div>
                             <List component="nav">
@@ -97,7 +114,6 @@ class VisitorComponent extends Component {
                                 <Divider />
                                 <ListItem divider>
                                     {/* Visitor Select Purpose */}
-                                   
                                         <Button variant="contained" onClick={() => this.handleVisit('Event')}>
                                             Event
                                             </Button>
@@ -107,7 +123,6 @@ class VisitorComponent extends Component {
                                         <Button variant="contained" onClick={() => this.handleVisit('Tour')}>
                                             Tour
                                             </Button>
-                                   
                                 </ListItem>
                                 {/* Select Interest in membership */}
                                 <ListItem divider>
@@ -117,9 +132,7 @@ class VisitorComponent extends Component {
                                             <Checkbox
                                                 onClick={this.handleToggleClick}
                                             />
-                                            
                                         }
-                                        
                                     />
                                     {/* Accompanying text for selecting interest */}
                                     <ListItemText primary="Are you interested in more information about membership options?" />
@@ -143,7 +156,6 @@ class VisitorComponent extends Component {
                                         }}
                                     />
                                 </ListItem> : ''}
-
                                  {this.state.interest ? <ListItem divider>
                                     <TextField
                                         id="filled-email-input"
@@ -161,9 +173,7 @@ class VisitorComponent extends Component {
                                         }}
                                     />
                                 </ListItem>  : ''}
-                               
                                 {/* Enter phone number for interest */}
-                                
                                 <ListItem>
                                     {/* the variant 'contained' switches the color of the background and text */}
                                     <Button variant="contained" color="primary" onClick={this.handlePost}>
@@ -171,13 +181,10 @@ class VisitorComponent extends Component {
                 </Button>
                                 </ListItem>
                             </List>
-                           
                         </div>
                     </div>
-
                 </div>
             </Grid>
-            
         );
     }
 }
