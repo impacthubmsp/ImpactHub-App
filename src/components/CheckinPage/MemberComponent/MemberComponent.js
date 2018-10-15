@@ -17,11 +17,7 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-<<<<<<< HEAD
                 label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
-=======
-                label: <span><img className="avatar" src={member.img_url} alt="avatar"/> <br/> {member.name} <br/> {member.company}</span> ,
->>>>>>> 1448476059758bcd7e44bbd60e6158b59cc0e038
                 value: member.cobot_id + member.name
             })
             return members;
