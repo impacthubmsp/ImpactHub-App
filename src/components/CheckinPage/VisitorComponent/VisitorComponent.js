@@ -168,7 +168,7 @@ class VisitorComponent extends Component {
                                     {/* the variant 'contained' switches the color of the background and text */}
                                     <Button variant="contained" color="primary" onClick={this.handlePost}>
                                         Submit
-                </Button>
+                                    </Button>
                                 </ListItem>
                             </List>
                            

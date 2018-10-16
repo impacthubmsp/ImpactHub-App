@@ -66,11 +66,12 @@ class MemberComponent extends Component {
         });
       };
 
-      handleVisit = (value)  => {
+    handleVisit = (value)  => {
         this.setState({
             purpose: value,
         })
     }
+
     handlePut = () => {
         this.setState({
             checked_in: false,
