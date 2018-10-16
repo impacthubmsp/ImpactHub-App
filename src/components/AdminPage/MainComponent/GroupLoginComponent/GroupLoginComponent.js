@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './GroupLoginComponent.css';
+import axios from 'axios';
 
 class GroupLoginComponent extends Component {
     constructor() {
         super();
         this.state = {
-            groupName: '', // name of the group (to be sent to database)
-            purposeOfVisit: '', // purpose of the group's visit  (will be sent to database)
-            numberOfPeople: '', // number of people in the group ( will be sent to database)
+            name: '', // name of the group (to be sent to database)
+            purpose: 'Tour', // purpose of the group's visit  (will be sent to database)
+            quantity: '', // number of people in the group ( will be sent to database)
         }
     }
     // onChange, the input values are sent to local state
@@ -25,6 +26,18 @@ class GroupLoginComponent extends Component {
         })
     }
     //write a function here that sends local state to database on form submit
+    sendGroupToDatabase = () => {
+        axios({
+            method: 'POST',
+            url: '/api/visi/group',
+            data: this.state
+        }).then((response)=>{
+            console.log('Group visit successfully added to database', response);
+        }).catch((error)=>{
+            console.log('an error has occurred while trying to send group visit data to the database', error);
+            alert('Error submitting group visit data')
+        })
+    }
 
 
   render() {
@@ -33,14 +46,14 @@ class GroupLoginComponent extends Component {
             {/* Form Container*/}
             <div className="viewContainer" >
                 {/* Form to Check-in Each Guest*/}
-                <form id= "groupCheck-InForm">
+                <form id= "groupCheck-InForm" onSubmit={this.sendGroupToDatabase}>
                     <h2>Group Check-in</h2>
                     {JSON.stringify(this.state)}
                     <label>Group Name</label>
                     <br/>
                     *optional
                     <br/>
-                    <input name="groupName" placeholder="Junior Innovators League" style={{ width:"200px" }} onChange={this.setGroupDetailsFromInput}></input>
+                    <input name="name" placeholder="Junior Innovators League" style={{ width:"200px" }} onChange={this.setGroupDetailsFromInput}></input>
                     <br/>
                     <label>Reason for Visiting</label>
                     <br/>
@@ -49,7 +62,7 @@ class GroupLoginComponent extends Component {
                     <br/>
                     <label>Number of People in the Group </label>
                     <br/>
-                    <input name="numberOfPeople" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
+                    <input name="quantity" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>

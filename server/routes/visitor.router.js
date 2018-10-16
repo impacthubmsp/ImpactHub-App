@@ -43,6 +43,24 @@ router.put('/', (req, res) => {
     }
 });
 
+//Group login -- this post will add groups of visitors to the database
+router.post('/group', (req, res) => {
+    if (req.isAuthenticated) {
+        const groupCheckIn = req.body;
+        console.log(groupCheckIn);
+        const queryText = `INSERT INTO "checkin" ("name", "quantity", "member", "visitor", "purpose", "checked_in")
+                            VALUES ($1, $2, $3, $4, $5, $6);`;
+        pool.query(queryText, [groupCheckIn.name, groupCheckIn.quantity, false, true, groupCheckIn.purpose, true])
+            .then((results) => {
+                res.sendStatus(200);
+            }).catch((error) => {
+                console.log('Visitor Checkin POST Failed', error);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 
 
