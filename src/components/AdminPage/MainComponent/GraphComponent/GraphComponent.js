@@ -42,7 +42,7 @@ class GraphComponent extends Component {
     }
   }
   // Renders graph displayed based on variable selected from dropdown
-  graphToDisplay = () => {
+ /*  graphToDisplay = () => {
     switch (this.state.viewGraph) {
       case 'today':
       //return ({todaysAttendance})
@@ -53,7 +53,7 @@ class GraphComponent extends Component {
       default:
         return (<div><GraphComponent /></div>)
     }
-  }
+  } */
 
   // GET route for graph data will be here
 
