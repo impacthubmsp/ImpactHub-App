@@ -35,10 +35,13 @@ router.get('/list', (req, res) => {
      .catch(error => res.sendStatus(500));
 });
 
-router.get('/checkedin', (req, res) => {
+router.put('/checkedin', (req, res) => {
+    let memberStatus = req.body
+    console.log(memberStatus)
+    let name = memberStatus.single.value.slice(32)
     // queries for checked in or checked out members
-    const queryText =`SELECT DISTINCT ON (day, name) * FROM checkin WHERE member = true;`
-    pool.query(queryText)
+    const queryText =`SELECT DISTINCT ON (cobot_id) * FROM checkin WHERE member = true AND day = CURRENT_DATE and name ILIKE $1;`
+    pool.query(queryText, [name])
     .then(response => res.send(response.rows))
      .catch(error => res.sendStatus(500));
 });
