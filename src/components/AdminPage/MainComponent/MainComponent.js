@@ -48,13 +48,15 @@ class MainComponent extends Component {
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                    <Paper className="paper">
-                        <KPIComponent />
-                    </Paper>
+                        <Paper className="paper">
+                            <KPIComponent />
+                        </Paper>
                     </Grid>
-                    <Paper className="paper">
-                        <GraphComponent />
-                    </Paper>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <Paper className="paper">
+                            <GraphComponent />
+                        </Paper>
+                    </Grid>
                     <Paper className="paper">
                         <CurrentMemberVSVisitor />
                     </Paper>
