@@ -35,6 +35,14 @@ router.get('/list', (req, res) => {
      .catch(error => res.sendStatus(500));
 });
 
+router.get('/checkedin', (req, res) => {
+    // queries for checked in or checked out members
+    const queryText =`SELECT DISTINCT ON (day, name) * FROM checkin WHERE member = true;`
+    pool.query(queryText)
+    .then(response => res.send(response.rows))
+     .catch(error => res.sendStatus(500));
+});
+
 
 
 

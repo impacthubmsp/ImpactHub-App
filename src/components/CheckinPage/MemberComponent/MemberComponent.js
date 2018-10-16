@@ -10,6 +10,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const members = [];
+const checkedIn = [];
 
 function getMembers() {
     axios.get('/api/memb/list')
@@ -23,8 +24,25 @@ function getMembers() {
             return members;
            })
     })
-  
 }
+
+function getCheckedIn() {
+    axios.get('/api/memb/checkedin')
+    .then((response) =>{
+        let checkedInMembers = response.data;
+        checkedInMembers.map((member)=>{
+            checkedIn.push({
+                member
+            })
+            return checkedIn;
+           })
+    })
+}
+
+
+// get list of member array and their checked-in status
+// map through an array 
+
 
 members.map(suggestion => ({
     value: suggestion.label,
@@ -53,7 +71,7 @@ class MemberComponent extends Component {
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
-        
+        getCheckedIn()
     }
 
     handleChange = name => value => {
@@ -96,7 +114,9 @@ class MemberComponent extends Component {
 
 
     render() {
-        console.log(this.state);
+        console.log(checkedIn);
+
+        
 
         return (
             <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -138,8 +158,9 @@ class MemberComponent extends Component {
                                         Event
                                     </Button>
                                     <Button variant="contained" color="primary" onClick={this.handlePost}>
-                                        Submit
-                                    </Button>
+                                             Check-In
+                                         </Button>
+                                    
                                     <Button variant="contained" color="secondary" onClick={this.resetForm}>
                                         Cancel
                                     </Button>
