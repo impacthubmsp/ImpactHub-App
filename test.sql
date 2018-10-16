@@ -46,4 +46,23 @@ INSERT INTO "visitors" (name,reason,email,phone) VALUES ('name','blandit','conse
 INSERT INTO "visitors" (name,reason,email,phone) VALUES ('name','vestibulum.','cubilia@odiosemper.org','phone'),('name','vehicula','erat@felisullamcorperviverra.edu','phone'),('name','non','tincidunt@consectetuer.co.uk','phone'),('name','lectus','fringilla@et.org','phone'),('name','Duis','sagittis@velit.org','phone'),('name','ligula.','fermentum.metus.Aenean@pellentesque.net','phone'),('name','sodales','nisi.dictum@anteipsum.net','phone'),('name','nonummy','in@Crasdictumultricies.net','phone'),('name','non,','nulla.at.sem@Namacnulla.edu','phone'),('name','dignissim','dapibus.id@sedleo.edu','phone');
 INSERT INTO "visitors" (name,reason,email,phone) VALUES ('name','vehicula','lobortis.mauris.Suspendisse@Nullasempertellus.co.uk','phone'),('name','nunc','lacus.pede@diamProindolor.ca','phone'),('name','ullamcorper.','magna@fringillaDonecfeugiat.co.uk','phone'),('name','dui,','nibh.Donec@eu.net','phone'),('name','at,','faucibus.lectus@iaculis.edu','phone'),('name','mattis','quis@nislarcu.ca','phone'),('name','Ut','Cras.vehicula@volutpatornarefacilisis.net','phone'),('name','morbi','sapien@sit.co.uk','phone'),('name','congue','at@Cras.com','phone'),('name','Sed','amet@vestibulumlorem.edu','phone');
 
+-- Create Twilio Table and Mockup data
 
+ CREATE TABLE "twilio" (
+	"id" serial NOT NULL,
+	"date_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"body" varchar(600) DEFAULT CURRENT_TIMESTAMP,
+	"cobot_id" varchar(500),
+	"sender_name" varchar(255),
+	PRIMARY KEY ("id")
+);
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (1, '11/13/2017', 'Proin eu mi.', '14-2509964', 'Kellie Girardini');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (2, '4/4/2018', 'Pellentesque viverra pede ac diam.', '11-6234547', 'Auria McIlvaney');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (3, '5/8/2018', 'Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '96-9414441', 'Chrisy Gornal');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (4, '10/16/2017', 'Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', '23-3196374', 'Kane Mullen');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (5, '10/6/2018', 'Morbi a ipsum. Integer a nibh.', '65-8993601', 'Arleta Watting');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (6, '6/3/2018', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', '99-9549499', 'Catarina Peltzer');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (7, '1/12/2018', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', '71-2169488', 'Pasquale Oland');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (8, '5/21/2018', 'Curabitur gravida nisi at nibh.', '86-3165803', 'Wain Ashfull');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (9, '12/21/2017', 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti.', '66-7097033', 'Una Tortice');
+insert into twilio (id, date_time, body, cobot_id, sender_name) values (10, '2/20/2018', 'Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.', '50-1173742', 'Nanci Woodland');

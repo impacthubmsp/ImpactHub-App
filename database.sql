@@ -38,7 +38,6 @@ CREATE TABLE "members" (
 );
 
 
-
 CREATE TABLE "mailinglist" (
 	"id" serial NOT NULL,
 	"name" varchar(250) NOT NULL,
@@ -51,6 +50,14 @@ CREATE TABLE "mailinglist" (
   OIDS=FALSE
 );
 
+ CREATE TABLE "twilio" (
+	"id" serial NOT NULL,
+	"date_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"body" varchar(600) DEFAULT CURRENT_TIMESTAMP,
+	"cobot_id" varchar(500),
+	"sender_name" varchar(255),
+	PRIMARY KEY ("id")
+);
 
 
 
