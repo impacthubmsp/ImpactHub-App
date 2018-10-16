@@ -3,29 +3,47 @@ import axios from "axios";
 
 class TwilioComponent extends Component {
 
-    sendTwilio = () => {
-        console.log('sendTwilio');
-        // axios.get('/api/memb/list')
-        //     .then((response) => {
-        //         let member = response.data;
-        //         member.map((member) => {
-        //             members.push({
-        //                 label: <span><img className="avatar" src={member.img_url} />  {member.name} <br /> {member.company}</span>,
-        //                 value: member.cobot_id + member.name
-        //             })
-        //             return members;
-        //         })
-        //     })
+    constructor() {
+        super();
+        this.state = {
+            twilioMessages: [],
+        }
+    }
+    // When component loads, will get the last 15 twilio messages from the DB
+    componentDidMount = () => {
+        this.getTwilio();
+    }
+    // Axior request to retrieve twilio messages from teh server
+    getTwilio = () => {
+        axios({
+            method: 'get',
+            url: 'api/twilio/getTwilioMessages',
+        }).then((response) => {
+            console.log('response from twilio', response.data);
+            this.setState({
+                twilioMessages: response.data,
+            })
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     render() {
         return (
             <div>
-                Twilio
-          <form onSubmit={this.sendTwilio}>
-                    <input type="text" />
-                    <input type="submit" />
-                </form>
+                {/* Will create a new component for each of the messages */}
+                {this.state.twilioMessages.map((message, i) => {
+                    return (
+                        <div key={i}>
+                            <div>{message.sender_name}</div>
+                            <div>{message.id}</div>
+                            <div>{message.date_time}</div>
+                            <div>{message.body}</div>
+                            <div>{message.cobot_id}</div>
+                            <hr />
+                        </div>
+                    )
+                })}
             </div>
         );
     }
