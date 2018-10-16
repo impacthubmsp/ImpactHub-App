@@ -39,16 +39,7 @@ class MainComponent extends Component {
                 <Grid container sm={12}>
                     <Grid item xs={12} sm={6} md={4}>
                         <Paper className="paper">
-                            {/*This is where the current Front Desk Attendant adds the phone number they would like to be texted at*/}
-                            <div id="setCurrentDeskCell">
-                                <form id="callBellCellForm" > {/* Add a function here onSubmit to send local state to database so data persists even if page is closed and across different runs of the application */}
-                                    <label>Set the Call Bell Cell:</label>
-                                    <input name="currentDeskContactName" type="text" placeholder="e.g. Mia" onChange={this.setCurrentDeskContact}></input>
-                                    <input name="currentDeskContactPhone" type="text" placeholder="(000) 867-5309" onChange={this.setCurrentDeskContact}></input>
-                                    <input type="submit" value="Submit" />
-                                    <h5>Currently on call: {this.state.currentDeskContactName} @ {this.state.currentDeskContactPhone}</h5> {/*Replace this with display of info called from Database*/}
-                                </form>
-                            </div>
+                            <h2>Placeholder for Twilio</h2>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>

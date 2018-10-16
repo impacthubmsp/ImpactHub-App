@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/', (req, res) => {
     if (req.isAuthenticated) {
         const visiCheckIn = req.body;
-        //console.log(visiCheckIn);
-        const queryText = `INSERT INTO "checkin" ("name","visitor","purpose") 
-                            VALUES ($1, $2, $3, $4);`;
-        pool.query(queryText, [visiCheckIn.name, visiCheckIn.member, visiCheckIn.purpose, visiCheckIn.cobot_id])
+        console.log(visiCheckIn);
+        const queryText = `INSERT INTO "checkin" ("name","visitor","purpose")
+                            VALUES ($1, $2, $3);`;
+        pool.query(queryText, [visiCheckIn.name, visiCheckIn.status, visiCheckIn.purpose])
             .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {

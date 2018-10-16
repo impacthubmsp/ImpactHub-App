@@ -4,13 +4,12 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
-
 import reducer from './redux/reducers'; // imports ./redux/reducers/index.js
-
 import App from './App';
 import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
+import teal from '@material-ui/core/colors/teal';
+import deepOrange from '@material-ui/core/colors/deepOrange'
 
 // Initializing to an empty object, but here is where you could
 // preload your redux state with initial values (from localStorage, perhaps)
@@ -39,20 +38,17 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      // light: will be calculated from palette.primary.main,
-      main: '#afbdc4',
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
-      contrastText: '#37474f',
+      main: teal[100],
+      contrastText: '#455a64'
     },
     secondary: {
-      main: '#b2dfdb',
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: '#37474f',
+      main: deepOrange[300],
+      contrastText: '#455a64'
     },
-    // error: will use the default color
   },
-  
+  shape:{
+    borderRadius:4
+  }
 });
 
 ReactDOM.render(
@@ -62,4 +58,5 @@ ReactDOM.render(
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('react-root'),
+
 );
