@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './GroupLoginComponent.css';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 class GroupLoginComponent extends Component {
     constructor() {
         super();
         this.state = {
-            name: '', // name of the group (to be sent to database)
-            purpose: 'Tour', // purpose of the group's visit  (will be sent to database)
-            quantity: '', // number of people in the group ( will be sent to database)
+            name: '', // name of the group (sent to database on form submit)
+            purpose: '', // purpose of the group's visit  (sent to database on form submit)
+            quantity: '', // number of people in the group (sent to database on form submit)
         }
     }
     // onChange, the input values are sent to local state
@@ -39,6 +40,18 @@ class GroupLoginComponent extends Component {
         })
     }
 
+    //sets the value of purpose for visiting in state, which is sent to the database on form submit
+    handleBTNclick = (value) => {
+        this.setState({
+            purpose: value,
+        })
+    }
+
+    //"depress" purpose button that has been selected
+    depressPurposeBTN = () => {
+        
+    }
+
 
   render() {
       return (
@@ -57,8 +70,8 @@ class GroupLoginComponent extends Component {
                     <br/>
                     <label>Reason for Visiting</label>
                     <br/>
-                    {/*Replace buttons below with radio buttons*/}
-                    <button>Tour</button><button>Event</button><button>Visiting a Member</button><button>Other</button>
+                    {/*Buttons set the state for purpose of visit*/}
+                    <Button id="tourBTN" className="purposeBTN" onClick={() => this.handleBTNclick('tour')}>Tour</Button><Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button><Button id="memberVisitBTN" className="purposeBTN" onClick={() => this.handleBTNclick('memberVisit')}>Visiting a Member</Button><Button id="otherBTN" className="purposeBTN" onClick={() => this.handleBTNclick('other')}>Other</Button>
                     <br/>
                     <label>Number of People in the Group </label>
                     <br/>
