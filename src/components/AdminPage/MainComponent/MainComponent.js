@@ -36,7 +36,7 @@ class MainComponent extends Component {
     render() {
         return (
             <div id="adminView">
-                <Grid container sm={12}>
+                <Grid container>
                     <Grid item xs={12} sm={6} md={4}>
                         <Paper className="paper">
                             <h2>Placeholder for Twilio</h2>
