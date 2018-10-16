@@ -4,9 +4,6 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -20,9 +17,10 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-                label: <span><img className="avatar" src={member.img_url}/> <br/> {member.name} <br/> {member.company}</span> ,
+                label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
                 value: member.cobot_id + member.name
             })
+            return members;
            })
     })
   
@@ -108,14 +106,10 @@ class MemberComponent extends Component {
                         <div>
                             Member Login
                         </div>
-            
-                        
                         <div>
                             <List component="nav">
-
                                 {/* Component for selecting name & drop-down menu */}
                                 <ListItem divider>
-                                                        
                                     <Select
                                     className="container"
                                     classNamePrefix="input"
@@ -140,13 +134,13 @@ class MemberComponent extends Component {
                                     <Button variant="contained" color="primary" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
                                         Work
                                     </Button>
-                                    <Button variant="contained" color="secondary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
+                                    <Button variant="contained" color="primary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
                                         Event
                                     </Button>
-                                    <Button variant="contained" onClick={this.handlePost}>
+                                    <Button variant="contained" color="primary" onClick={this.handlePost}>
                                         Submit
                                     </Button>
-                                    <Button variant="contained" onClick={this.resetForm}>
+                                    <Button variant="contained" color="secondary" onClick={this.resetForm}>
                                         Cancel
                                     </Button>
 
