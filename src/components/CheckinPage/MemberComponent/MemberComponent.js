@@ -46,7 +46,8 @@ class MemberComponent extends Component {
             single: null,
             purpose: null,
             day: null,
-            time: null
+            time: null,
+            checked_in: null,
         }
     }
 
@@ -60,15 +61,26 @@ class MemberComponent extends Component {
     handleChange = name => value => {
         this.setState({
           [name]: value,
+          day: moment().format("L"),
+          time: moment().format("LTS")
         });
       };
 
       handleVisit = (value)  => {
         this.setState({
             purpose: value,
-            day: moment().format("L"),
-            time: moment().format("LTS")
         })
+    }
+    handlePut = () => {
+        this.setState({
+            checked_in: false,
+        })
+        axios.put('/api/memb',  this.state)
+      .then(response => {
+        console.log('Member checked-out', response);
+      }).catch(error => {
+        console.log('You got an error');
+      })
     }
 
 
@@ -145,7 +157,7 @@ class MemberComponent extends Component {
                                     Button for testing out the checkout feature.
                                 </ListItem>
                                 <ListItem>
-                                    <Button variant="contained" color="primary">
+                                    <Button variant="contained" color="primary" onClick={this.handlePut}>
                                         Checkout
                                     </Button>
 

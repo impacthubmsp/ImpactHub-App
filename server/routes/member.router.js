@@ -69,7 +69,18 @@ postCheckin = (id) => {
         headers: { Authorization: `Bearer ${process.env.myKey}` }
     }).then((response) => {
         console.log(response.data);
-        res.send(response.data);
+    }).catch((error) => {
+        console.log('error in posting check-in, check here: ', error);
+    })
+}
+
+memberCheckout = (id) => {
+    axios({
+        url: `https://impactdev.cobot.me/api/memberships/${id}/check_ins/current`,
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${process.env.myKey}` }
+    }).then((response) => {
+        console.log(response.data);
     }).catch((error) => {
         console.log('error in posting check-in, check here: ', error);
     })
@@ -80,10 +91,12 @@ postCheckin = (id) => {
 router.put('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckOut = req.body;
-        //console.log(membCheckOut); 
-        const queryText = `UPDATE "checkin" SET "checked-in" = $1 
-                            WHERE "checkin"."name" iLIKE $2 AND "checkin"."cobot-id" = $3;`;
-        pool.query(queryText, [membCheckOut.checkout, membCheckOut.name, membCheckOut.cobot_id])
+        let id = membCheckOut.single.value.slice(0, 32)
+        console.log(membCheckOut, id); 
+        memberCheckout(id);
+        const queryText = `UPDATE "checkin" SET "checked_in" = $1
+        WHERE "checkin"."day" = $2 AND "checkin"."cobot_id" = $3;`;
+        pool.query(queryText, [membCheckOut.checked_in, membCheckOut.day, id])
             .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {
@@ -95,8 +108,6 @@ router.put('/', (req, res) => {
     }
 });
 
-
-router.delete('/')
 
 
 module.exports = router;
