@@ -10,6 +10,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const members = [];
+const checkedIn = [];
 
 function getMembers() {
     axios.get('/api/memb/list')
@@ -17,14 +18,19 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-                label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
+                label: <span><img className="avatar" src={member.img_url}/> <br/>  {member.name} <br/> {member.company}</span> ,
                 value: member.cobot_id + member.name
             })
             return members;
            })
     })
-  
 }
+
+
+
+// get list of member array and their checked-in status
+// assume that 
+
 
 members.map(suggestion => ({
     value: suggestion.label,
@@ -41,10 +47,12 @@ class MemberComponent extends Component {
         // This will store the user that is selected from the drop-down menu.
         //Whis will be used for axios request.
         this.state = {
-            single: null,
+            single: '',
             purpose: null,
             day: null,
-            time: null
+            time: null,
+            checked_in: false,
+            status: false,
         }
     }
 
@@ -52,21 +60,46 @@ class MemberComponent extends Component {
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
-        
     }
 
     handleChange = name => value => {
         this.setState({
           [name]: value,
+          day: moment().format("L"),
+          time: moment().format("LTS")
         });
+        //change checked in to status of user if they are already checked if not then button will remain checked-in
+        this.getCheckedIn();
       };
+      getCheckedIn() {
+        axios.put('/api/memb/checkedin', this.state)
+        .then((response) =>{
+          console.log(response.data[0].checked_in); 
+          this.setState({
+              checked_in: response.data[0].checked_in
+          })   
+        }).catch((error)=>{
+            console.log('error', error);
+        })
+    }
 
-      handleVisit = (value)  => {
+    handleVisit = (value)  => {
         this.setState({
             purpose: value,
-            day: moment().format("L"),
-            time: moment().format("LTS")
+          
         })
+    }
+
+    handlePut = () => {
+        this.setState({
+            checked_in: false,
+        })
+        axios.put('/api/memb',  this.state)
+      .then(response => {
+        console.log('Member checked-out', response);
+      }).catch(error => {
+        console.log('You got an error');
+      })
     }
 
 
@@ -83,8 +116,19 @@ class MemberComponent extends Component {
 
 
     render() {
-        console.log(this.state);
 
+        let button;
+
+        if (this.state.checked_in) {
+          button = <Button variant="contained" color="primary" onClick={this.handlePut}>
+          Checkout
+      </Button>;
+        } else {
+          button = <Button variant="contained" color="primary" onClick={this.handlePost}>
+          Check-In
+      </Button>
+        }
+        console.log(this.state);
         return (
             <Grid item xs={6} sm={6} md={6} lg={6}>
                 <div>
@@ -124,9 +168,13 @@ class MemberComponent extends Component {
                                     <Button variant="contained" color="primary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
                                         Event
                                     </Button>
-                                    <Button variant="contained" color="primary" onClick={this.handlePost}>
-                                        Submit
-                                    </Button>
+                                  {/* <Button variant="contained" color="primary" onClick={this.handlePost}>
+                                             Check-In
+                                         </Button>: <Button variant="contained" color="primary" onClick={this.handlePut}>
+                                        Checkout
+                                    </Button>  */}
+                                    {button}
+                                    
                                     <Button variant="contained" color="secondary" onClick={this.resetForm}>
                                         Cancel
                                     </Button>
@@ -139,9 +187,10 @@ class MemberComponent extends Component {
                                     Button for testing out the checkout feature.
                                 </ListItem>
                                 <ListItem>
-                                    <Button variant="contained" color="primary">
+
+                                    {/* <Button variant="contained" color="primary" onClick={this.handlePut}>
                                         Checkout
-                                    </Button>
+                                    </Button> */}
 
                                 </ListItem>
                             </List>
