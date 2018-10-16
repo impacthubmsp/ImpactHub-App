@@ -35,6 +35,7 @@ class GroupLoginComponent extends Component {
                 {/* Form to Check-in Each Guest*/}
                 <form id= "groupCheck-InForm">
                     <h2>Group Check-in</h2>
+                    {JSON.stringify(this.state)}
                     <label>Group Name</label>
                     <br/>
                     *optional

@@ -1,15 +1,33 @@
+html, body{
+    color: #37474f;
+}
 #currentGuestCount{
-    border: 2px black solid;
     width: 10vw;
     height: 10vw;
 }
 #callBellCellForm{
-    height: 10vh;
+    height: auto;
+    width: auto;
+    background-color: transparent;
     
 }
+#groupCheck-InForm{
+    height: auto;
+    width: auto;
+    background-color: transparent;
+}
+.paper{
+    text-align: center;
+    display: inline-flex;
+    padding: 2vw;
+    margin: 8px;
+}
+#adminView{
+    background-color: #b0bec5;
+    height: 100%;
+    width: 100vw;
+    padding: 2vh;
+}
 .viewContainer{
-    height: 50vh;
-    width: 70vw;
-    border: 2px black solid;
-
+    display: inline-flex;
 }

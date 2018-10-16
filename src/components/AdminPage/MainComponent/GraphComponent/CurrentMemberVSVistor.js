@@ -36,7 +36,7 @@ class CurrentMemberVSVisitor extends Component {
         };
         const dataHere = this.state.currentVisitors;
         return(
-            <div>
+            <div className= "viewContainer">
                 {dataHere && < Pie
                     data = {data}
                 />}
