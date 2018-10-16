@@ -48,10 +48,11 @@ router.post('/', (req, res) => {
         let id = membCheckIn.single.value.slice(0, 32)
         let name = membCheckIn.single.value.slice(32)
         console.log(membCheckIn);
+        postCheckin(id);
        const queryText = `INSERT INTO "checkin" ("day", "time", "name", "member","purpose", "cobot_id") 
                             VALUES ($1, $2, $3, $4, $5, $6);`;
         pool.query(queryText, [membCheckIn.day, membCheckIn.time, name, member, membCheckIn.purpose, id])
-            .then((results) => {
+       .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {
                 console.log('Member Checkin POST Failed', error);
@@ -61,7 +62,18 @@ router.post('/', (req, res) => {
         res.sendStatus(403);
     }
 });
-
+postCheckin = (id) => {
+    axios({
+        url: `https://impactdev.cobot.me/api/memberships/${id}/work_sessions`,
+        method: 'POST',
+        headers: { Authorization: `Bearer ${process.env.myKey}` }
+    }).then((response) => {
+        console.log(response.data);
+        res.send(response.data);
+    }).catch((error) => {
+        console.log('error in posting check-in, check here: ', error);
+    })
+}
 //PUT route will switch "checkin.checked-in" from 'true' to 'false'.
 //To be used in conjunction with an API call to CoBot.
 //Required minimum req.body object format {checkout:false, name:'', cobot_id:''}
@@ -82,6 +94,9 @@ router.put('/', (req, res) => {
         res.sendStatus(403);
     }
 });
+
+
+router.delete('/')
 
 
 module.exports = router;
