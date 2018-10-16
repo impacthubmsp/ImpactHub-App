@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import TwilioMessageComponent from './TwilioMessageComponent/TwilioMessageComponent';
 
 class TwilioComponent extends Component {
 
@@ -35,12 +36,7 @@ class TwilioComponent extends Component {
                 {this.state.twilioMessages.map((message, i) => {
                     return (
                         <div key={i}>
-                            <div>{message.sender_name}</div>
-                            <div>{message.id}</div>
-                            <div>{message.date_time}</div>
-                            <div>{message.body}</div>
-                            <div>{message.cobot_id}</div>
-                            <hr />
+                            <TwilioMessageComponent data={message}/>
                         </div>
                     )
                 })}
