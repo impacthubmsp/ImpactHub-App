@@ -5,12 +5,6 @@ html, body{
     width: 10vw;
     height: 10vw;
 }
-#callBellCellForm{
-    height: auto;
-    width: auto;
-    background-color: transparent;
-    
-}
 #groupCheck-InForm{
     height: auto;
     width: auto;
@@ -18,7 +12,6 @@ html, body{
 }
 .paper{
     text-align: center;
-    display: inline-flex;
     padding: 2vw;
     margin: 8px;
 }
@@ -30,4 +23,42 @@ html, body{
 }
 .viewContainer{
     display: inline-flex;
+
+}
+.masonry-layout {
+}
+.masonry-layout_column{
+    display: inline-block;
+
+}
+.leftColumn{
+    width: 25vw;
+    float: left;
+    background-color: red;
+}
+.centerColumn{
+    width: 50vw;
+    float: center;
+    background-color: blue;
+    text-align: center;
+}
+.rightColumn{
+    width: 25vw;
+    float: right;
+    background-color: green;
+}
+.masonry-layout_panel {
+    break-inside: avoid;
+    padding: 5px;
+}
+.masonry-layout__panel-content {
+    padding: 10px;
+    border-radius: 10px;
+}
+.subColumnHalf{
+    display: inline-block;
+    width: 40%;
+}
+.subColumn{
+    background-color: yellow;
 }

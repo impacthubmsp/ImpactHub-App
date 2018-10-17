@@ -61,12 +61,11 @@ class GroupLoginComponent extends Component {
                 {/* Form to Check-in Each Guest*/}
                 <form id= "groupCheck-InForm" onSubmit={this.sendGroupToDatabase}>
                     <h2>Group Check-in</h2>
-                    {JSON.stringify(this.state)}
                     <label>Group Name</label>
                     <br/>
                     *optional
                     <br/>
-                    <input name="name" placeholder="Junior Innovators League" style={{ width:"200px" }} onChange={this.setGroupDetailsFromInput}></input>
+                    <input className="groupInput" name="name" placeholder="e.g. Junior Innovators League" style={{ width:"240px" }} onChange={this.setGroupDetailsFromInput}></input>
                     <br/>
                     <label>Reason for Visiting</label>
                     <br/>
@@ -75,7 +74,7 @@ class GroupLoginComponent extends Component {
                     <br/>
                     <label>Number of People in the Group </label>
                     <br/>
-                    <input name="quantity" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
+                    <input className="groupInput" name="quantity" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>
