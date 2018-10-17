@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from "axios";
 
-class TwilioMessageComponent extends Component {
+class MessageComponent extends Component {
 
     render() {
         return (
@@ -20,5 +19,5 @@ class TwilioMessageComponent extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default TwilioMessageComponent;
+export default MessageComponent;
 
