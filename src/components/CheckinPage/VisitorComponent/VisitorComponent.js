@@ -20,13 +20,15 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Collapse from '@material-ui/core/Collapse';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 const styles = {
     root: {
         position: 'relative',
         display: 'flex',
         justify: 'center',
         flexDirection: 'column',
-        alignItems: 'center',
+       
 
     },
     container: {
@@ -43,7 +45,7 @@ class VisitorComponent extends Component {
         super()
         this.state = {
             name: '',
-            purpose: '',
+            purpose: null,
             interest: false,
             day: null,
             time: null,
@@ -58,7 +60,9 @@ class VisitorComponent extends Component {
 
     handleShowBtn = () => {
         console.log('YAY!!', this.state.open);
-        this.setState(state => ({ open: !state.open }));
+        this.setState({
+            open: true,
+        });
     }
     handleToggleClick = () => {
         this.setState(state => ({
@@ -82,6 +86,7 @@ class VisitorComponent extends Component {
     handleClickAway = () => {
         this.setState({
             open: false,
+            purpose:null
         });
     };
 
@@ -116,121 +121,122 @@ class VisitorComponent extends Component {
     resetForm = () => {
         this.setState(this.baseState)
     }
+    handleAlignment = (event, purpose) => this.setState({ purpose });
     render() {
         const { classes } = this.props;
-
+        const{ purpose } = this.state
         return (
-           
-            <Grid className="classes" item xs={6} sm={6} md={6} lg={6} className={classes.root}>
-            <ClickAwayListener onClickAway={this.handleClickAway}>
-                <Paper className={classes.container}>
-                    <div style={{ margin: '15px 0 0 40px' }}>
-                        <Typography variant="h3">
-                            Are you a visitor?
-                        </Typography>
-                    </div>
-                    {/* Visitor Enter name */}
-                    <div style={{ padding: '0 30px 0 30px' }}>
-                        <List >
-                            <ListItem>
-                                <TextField
-                                    id="input-with-icon-textfield"
-                                    label="Full Name"
-                                    name="name"
-                                    onChange={this.handleInfo}
-                                    value={this.state.name}
-                                    onFocus={this.handleShowBtn}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircle />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            </ListItem>
-                            <Divider />
-                        </List>
-                        
-                        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItem  >
-                                    {/* Visitor Select Purpose */}
-                                    <Button variant="contained" onClick={() => this.handleVisit('Event')}>
-                                        Event
-                                    </Button>
-                                    <Button variant="contained" onClick={() => this.handleVisit('Guest')}>
-                                        Guest
-                                    </Button>
-                                    <Button variant="contained" onClick={() => this.handleVisit('Tour')}>
-                                        Tour
-                                    </Button>
-                                </ListItem>
 
-                                {/* Select Interest in membership */}
-                                <ListItem divider>
-                                    {/* Checkbox for selecting interest */}
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                onClick={this.handleToggleClick}
-                                            />
-                                        }
-                                    />
-                                    {/* Accompanying text for selecting interest */}
-                                    <ListItemText primary="Are you interested in more information about membership options?" />
-                                </ListItem>
-                                {/* Enter email address for interest */}
-                                {/* TO-DO hide email and phone number entry */}
-                                {this.state.interest ? <ListItem divider>
-                                    <TextField
-                                        id="filled-email-input"
-                                        label="Email Address"
-                                        type="email"
-                                        name="email"
-                                        value={this.state.email}
-                                        onChange={this.handleInfo}
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <AlternateEmail />
-                                                </InputAdornment>
-                                            ),
-                                        }}
-                                    />
-                                </ListItem> : ''}
-                                {this.state.interest ? <ListItem divider>
-                                    <TextField
-                                        id="filled-email-input"
-                                        label="Phone Number"
-                                        name="phone"
-                                        type="number"
-                                        value={this.state.phone}
-                                        onChange={this.handleInfo}
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <Phone />
-                                                </InputAdornment>
-                                            ),
-                                        }}
-                                    />
-                                </ListItem> : ''}
-                                {/* Enter phone number for interest */}
+            <Grid className="classes" item xs={6} sm={6} md={6} lg={6} className={classes.root}>
+                <ClickAwayListener onClickAway={this.handleClickAway}>
+                    <Paper className={classes.container}>
+                        <div style={{ margin: '15px 0 0 40px' }}>
+                            <Typography variant="h3">
+                                Are you a visitor?
+                        </Typography>
+                        </div>
+                        {/* Visitor Enter name */}
+                        <div style={{ padding: '0 30px 0 30px' }}>
+                            <List >
                                 <ListItem>
-                                    {/* the variant 'contained' switches the color of the background and text */}
-                                    <Button variant="contained" color="primary" onClick={this.handlePost}>
-                                        Submit
-                                    </Button>
+                                    <TextField
+                                        id="input-with-icon-textfield"
+                                        label="Full Name"
+                                        name="name"
+                                        onChange={this.handleInfo}
+                                        value={this.state.name}
+                                        onFocus={this.handleShowBtn}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <AccountCircle />
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
                                 </ListItem>
+                                <Divider />
                             </List>
-                        </Collapse>
-                       
-                    </div>
-                </Paper>
+
+                            <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{padding:0}}>
+              <ToggleButton value="guest" style={{border:'1px solid darkgrey'}}>
+                Guest
+              </ToggleButton>
+              <ToggleButton value="event" style={{border:'1px solid darkgrey'}}>
+                Event
+              </ToggleButton>
+              <ToggleButton value="tour" style={{border:'1px solid darkgrey'}}>
+                Tour
+              </ToggleButton>
+              
+            </ToggleButtonGroup>
+
+                                    {/* Select Interest in membership */}
+                                    <ListItem divider>
+                                        {/* Checkbox for selecting interest */}
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    onClick={this.handleToggleClick}
+                                                />
+                                            }
+                                        />
+                                        {/* Accompanying text for selecting interest */}
+                                        <ListItemText primary="Are you interested in more information about membership options?" />
+                                    </ListItem>
+                                    {/* Enter email address for interest */}
+                                    {/* TO-DO hide email and phone number entry */}
+                                    {this.state.interest ? <ListItem divider>
+                                        <TextField
+                                            id="filled-email-input"
+                                            label="Email Address"
+                                            type="email"
+                                            name="email"
+                                            value={this.state.email}
+                                            onChange={this.handleInfo}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <AlternateEmail />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </ListItem> : ''}
+                                    {this.state.interest ? <ListItem divider>
+                                        <TextField
+                                            id="filled-email-input"
+                                            label="Phone Number"
+                                            name="phone"
+                                            type="number"
+                                            value={this.state.phone}
+                                            onChange={this.handleInfo}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <Phone />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </ListItem> : ''}
+                                    {/* Enter phone number for interest */}
+                                    <ListItem>
+                                        {/* the variant 'contained' switches the color of the background and text */}
+                                        <Button variant="contained" color="primary" onClick={this.handlePost}>
+                                            Submit
+                                    </Button>
+                                    </ListItem>
+                                </List>
+                            </Collapse>
+
+                        </div>
+                    </Paper>
                 </ClickAwayListener>
             </Grid >
-            
+
         );
     }
 }
