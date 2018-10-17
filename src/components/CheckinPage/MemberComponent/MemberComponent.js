@@ -67,7 +67,7 @@ class MemberComponent extends Component {
           day: moment().format("L"),
           time: moment().format("LTS")
         });
-        if(this.state.single === null){
+        if(this.state.single === null || this.state.single === ''){
             this.resetForm()
         }else{
             this.checkStatus(this.state.single.value)
@@ -150,6 +150,7 @@ class MemberComponent extends Component {
         </Button>;
         }
         console.log(this.state);
+        
         return (
             <Grid item xs={6} sm={6} md={6} lg={6}>
                 <div>
