@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import TwilioMessageComponent from './TwilioMessageComponent/TwilioMessageComponent';
+import MessageComponent from './MessageComponent/MessageComponent';
 
-class TwilioComponent extends Component {
+class DisplayMessageComponent extends Component {
 
     constructor() {
         super();
         this.state = {
-            twilioMessages: [],
+            messages: [],
         }
     }
     // When component loads, will get the last 15 twilio messages from the DB
     componentDidMount = () => {
-        this.getTwilio();
+        this.getMessages();
     }
     // Axior request to retrieve twilio messages from teh server
-    getTwilio = () => {
+    getMessages = () => {
         axios({
             method: 'get',
-            url: 'api/twilio/getTwilioMessages',
+            url: 'api/message/getMessages',
         }).then((response) => {
-            console.log('response from twilio', response.data);
+            console.log('response from messages', response.data);
             this.setState({
-                twilioMessages: response.data,
+                messages: response.data,
             })
         }).catch(function (error) {
             console.log(error);
@@ -33,10 +33,10 @@ class TwilioComponent extends Component {
         return (
             <div>
                 {/* Will create a new component for each of the messages */}
-                {this.state.twilioMessages.map((message, i) => {
+                {this.state.messages.map((message, i) => {
                     return (
                         <div key={i}>
-                            <TwilioMessageComponent data={message}/>
+                            <MessageComponent data={message}/>
                         </div>
                     )
                 })}
@@ -46,5 +46,5 @@ class TwilioComponent extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default TwilioComponent;
+export default DisplayMessageComponent;
 
