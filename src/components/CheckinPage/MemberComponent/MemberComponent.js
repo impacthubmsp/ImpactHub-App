@@ -8,7 +8,8 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
-
+import Avatar from '@material-ui/core/Avatar';
+import ListItemText from '@material-ui/core/ListItemText';
 const members = [];
 
 function getMembers() {
@@ -17,7 +18,7 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-                label: <span><img className="avatar" src={member.img_url}/>  {member.name} <br/> {member.company}</span> ,
+                label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
                 value: member.cobot_id + member.name
             })
             return members;

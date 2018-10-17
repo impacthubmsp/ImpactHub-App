@@ -35,6 +35,7 @@ sagaMiddleware.run(rootSaga);
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
+    fontFamily:['Voltaire', 'sansserif'],
   },
   palette: {
     primary: {
