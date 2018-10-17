@@ -95,10 +95,6 @@ li a:hover {
     height: 100px;
 }
 
-.input-option.is-focused  {
-    color: red;
-}
-
 .input__option {
     height: 100px;
 }
