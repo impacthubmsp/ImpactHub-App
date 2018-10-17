@@ -11,14 +11,17 @@ router.get('/', (req, res) => {
         method: 'GET',
         headers: { Authorization: `Bearer ${process.env.myKey}` }
     }).then((response) => {
-        //To-do limit the amount of data coming back
-        for (let member of response.data) {
-            //create a new array of object parsing only information wanted
-            const queryText = `INSERT INTO "members" ("name", "company", "img_url", "cobot_id")
+        const queryDel = 'DELETE FROM "members";';
+        pool.query(queryDel).then(() => {
+            //To-do limit the amount of data coming back
+            for (let member of response.data) {
+                //create a new array of object parsing only information wanted
+                const queryText = `INSERT INTO "members" ("name", "company", "img_url", "cobot_id")
             VALUES ($1, $2, $3, $4)`;
-            pool.query(queryText, [member.name, member.address.company, member.picture, member.id])
-        }
-        res.sendStatus(200);
+                pool.query(queryText, [member.name, member.address.company, member.picture, member.id])
+            }
+            res.sendStatus(200);
+        })
     }).catch((error) => {
         console.log('error in member get look here: ', error);
     })
@@ -26,24 +29,23 @@ router.get('/', (req, res) => {
 
 router.get('/list', (req, res) => {
     // queries for single entries of member and returns each member
-    const queryText =`SELECT cobot_id, name, company, img_url FROM (SELECT cobot_id, name, company, img_url, ROW_NUMBER() OVER 
+    const queryText = `SELECT cobot_id, name, company, img_url FROM (SELECT cobot_id, name, company, img_url, ROW_NUMBER() OVER 
   (PARTITION BY (name) ORDER BY name DESC) AS rn
      FROM members
     ) tmp WHERE rn = 1;`
     pool.query(queryText)
-    .then(response => res.send(response.rows))
-     .catch(error => res.sendStatus(500));
+        .then(response => res.send(response.rows))
+        .catch(error => res.sendStatus(500));
 });
 
-router.put('/checkedin', (req, res) => {
-    let memberStatus = req.body
-    console.log(memberStatus)
-    let name = memberStatus.single.value.slice(32)
+router.get('/checkedin', (req, res) => {
+
+    // let name = memberStatus.single.value.slice(32)
     // queries for checked in or checked out members
-    const queryText =`SELECT DISTINCT ON (cobot_id) * FROM checkin WHERE member = true AND day = CURRENT_DATE and name ILIKE $1;`
-    pool.query(queryText, [name])
-    .then(response => res.send(response.rows))
-     .catch(error => res.sendStatus(500));
+    const queryText = `SELECT DISTINCT ON (cobot_id) * FROM checkin WHERE member = true AND day = CURRENT_DATE AND checked_in = TRUE;`;
+    pool.query(queryText)
+        .then(response => res.send(response.rows))
+        .catch(error => res.sendStatus(500));
 });
 
 
@@ -60,10 +62,10 @@ router.post('/', (req, res) => {
         let name = membCheckIn.single.value.slice(32)
         console.log(membCheckIn);
         postCheckin(id);
-       const queryText = `INSERT INTO "checkin" ("day", "time", "name", "member","purpose", "cobot_id") 
+        const queryText = `INSERT INTO "checkin" ("day", "time", "name", "member","purpose", "cobot_id") 
                             VALUES ($1, $2, $3, $4, $5, $6);`;
         pool.query(queryText, [membCheckIn.day, membCheckIn.time, name, member, membCheckIn.purpose, id])
-       .then((results) => {
+            .then((results) => {
                 res.sendStatus(200);
             }).catch((error) => {
                 console.log('Member Checkin POST Failed', error);
@@ -103,7 +105,7 @@ router.put('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckOut = req.body;
         let id = membCheckOut.single.value.slice(0, 32)
-        console.log(membCheckOut, id); 
+        console.log(membCheckOut, id);
         memberCheckout(id);
         const queryText = `UPDATE "checkin" SET "checked_in" = $1
         WHERE "checkin"."day" = $2 AND "checkin"."cobot_id" = $3;`;

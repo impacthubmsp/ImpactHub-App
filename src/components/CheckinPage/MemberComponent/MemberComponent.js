@@ -8,9 +8,10 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
+import Avatar from '@material-ui/core/Avatar'
+import ListItemText from '@material-ui/core/ListItemText';
 
 const members = [];
-const checkedIn = [];
 
 function getMembers() {
     axios.get('/api/memb/list')
@@ -18,7 +19,7 @@ function getMembers() {
         let member = response.data;
         member.map((member)=>{
             members.push({
-                label: <span><img className="avatar" src={member.img_url}/> <br/>  {member.name} <br/> {member.company}</span> ,
+                label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
                 value: member.cobot_id + member.name
             })
             return members;
@@ -26,11 +27,7 @@ function getMembers() {
     })
 }
 
-
-
 // get list of member array and their checked-in status
-// assume that 
-
 
 members.map(suggestion => ({
     value: suggestion.label,
@@ -51,8 +48,8 @@ class MemberComponent extends Component {
             purpose: null,
             day: null,
             time: null,
-            checked_in: false,
-            status: false,
+            checked_in: true,
+            membersCheckedIn: []
         }
     }
 
@@ -60,40 +57,61 @@ class MemberComponent extends Component {
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
+        this.getCheckedIn()
     }
 
-    handleChange = name => value => {
-        this.setState({
+    handleChange = name => async value => {
+        await this.setState({
           [name]: value,
           day: moment().format("L"),
           time: moment().format("LTS")
         });
-        //change checked in to status of user if they are already checked if not then button will remain checked-in
-        this.getCheckedIn();
+        this.checkStatus(this.state.single.value)
       };
+
+       //change checked in to status of user if they are already checked if not then button will remain checked-in
+        //based on user selected we will compare it to members that are checked in
+        //if user is checked in button will changed to checkout 
+        //if user is not checked in button will remain checked in
+
       getCheckedIn() {
-        axios.put('/api/memb/checkedin', this.state)
+        axios.get('/api/memb/checkedin')
         .then((response) =>{
-          console.log(response.data[0].checked_in); 
+          console.log(response.data); 
           this.setState({
-              checked_in: response.data[0].checked_in
-          })   
+              membersCheckedIn: response.data
+          })  
         }).catch((error)=>{
             console.log('error', error);
         })
     }
 
+    //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
+
+    checkStatus (selectedMember) {
+        console.log('in selectedMember', selectedMember);
+        for(let user of this.state.membersCheckedIn){
+            let combineUserInfo = `${user.cobot_id}${user.name}`;
+            if(combineUserInfo === selectedMember){
+                this.setState({
+                    checked_in: false
+                })
+            }
+            else{
+                this.setState({
+                    checked_in: true
+                })
+            }
+        }
+    }
+
     handleVisit = (value)  => {
         this.setState({
             purpose: value,
-          
         })
     }
 
     handlePut = () => {
-        this.setState({
-            checked_in: false,
-        })
         axios.put('/api/memb',  this.state)
       .then(response => {
         console.log('Member checked-out', response);
@@ -102,31 +120,29 @@ class MemberComponent extends Component {
       })
     }
 
-
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
         this.resetForm();
     }
 
     resetForm = () => {
+        console.log(this.state);
         this.setState(this.baseState)
       }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
-
-
     render() {
 
         let button;
 
         if (this.state.checked_in) {
-          button = <Button variant="contained" color="primary" onClick={this.handlePut}>
-          Checkout
-      </Button>;
+            button = <Button variant="contained" color="primary" onClick={this.handlePost}>
+            Check-In
+        </Button>
         } else {
-          button = <Button variant="contained" color="primary" onClick={this.handlePost}>
-          Check-In
-      </Button>
+            button = <Button variant="contained" color="primary" onClick={this.handlePut}>
+            Checkout
+        </Button>;
         }
         console.log(this.state);
         return (
