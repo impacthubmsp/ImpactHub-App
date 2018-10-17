@@ -10,6 +10,49 @@ import axios from 'axios';
 import moment from 'moment';
 import Avatar from '@material-ui/core/Avatar'
 import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
+const styles = theme => ({
+    root: {
+        position: 'relative',
+        display: 'flex',
+        justify: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+
+    },
+    container: {
+        position: 'absolute',
+        top: '40%',
+        width: '500px'
+    },
+    toggleContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        margin: `${theme.spacing.unit}px 0`,
+        background: theme.palette.background.default,
+        size: 'large'
+      },
+      button: {
+        background: 'white',
+        borderRadius: 3,
+        color: 'black',
+        height: 41.5,
+        padding: '0 30px',
+        webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        border: '1px solid darkgrey',
+      },
+    
+});
+
 
 const members = [];
 
@@ -110,11 +153,11 @@ class MemberComponent extends Component {
         }
     }
 
-    handleVisit = (value)  => {
+    handleVisit = (event, purpose)  => 
         this.setState({
-            purpose: value,
+            purpose
         })
-    }
+    
 
     handlePut = () => {
         axios.put('/api/memb',  this.state)
@@ -137,28 +180,32 @@ class MemberComponent extends Component {
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
-
+        const { classes } = this.props;
+        const { purpose } = this.state;
         let button;
 
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" size="large" onClick={this.handlePost}>
             Check-In
         </Button>
         } else {
-            button = <Button variant="contained" color="primary" onClick={this.handlePut}>
+            button = <Button variant="contained" color="primary"  size="large" onClick={this.handlePut}>
             Checkout
         </Button>;
         }
         console.log(this.state);
         
         return (
-            <Grid item xs={6} sm={6} md={6} lg={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
+            <Paper className={classes.container}>
                 <div>
                     {/* Form for members */}
                     <div>
-                        <div>
-                            Member Login
-                        </div>
+                    <div style={{ marginLeft: '25px' }}>
+                        <Typography variant="h3">
+                            Are you a Member?
+                        </Typography>
+                    </div>
                         <div>
                             <List component="nav">
                                 {/* Component for selecting name & drop-down menu */}
@@ -167,64 +214,70 @@ class MemberComponent extends Component {
                                     className="container"
                                     classNamePrefix="input"
                                     isClearable
-                                    noOptionsMessage={() => 'Start by typing your member name'}
+                                    noOptionsMessage={() => 'Start by typing your name'}
                                     backspaceRemovesValue
                                     options={members}
                                     value={this.state.single}
                                     onChange={this.handleChange('single')}
-                                    placeholder="Name"
+                                    placeholder="Full Name"
                                      />
                                 </ListItem>
                                 <Divider />
 
                                 <ListItem>
-                                    <div>These are checkin options.</div>
+                                <div style={{ margin: '0' }}>
+                        <Typography variant="h4">
+                            Purpose:
+                        </Typography>
+                    </div>
                                 </ListItem>
 
                                 {/* Buttons for selecting the type of work */}
                                 <ListItem>
                                     {/* will appear on dom after the user has been selected.*/}
-                                    <Button variant="contained" color="primary" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
+                                    {/* <Button variant="contained" color="contained" size="large" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
                                         Work
                                     </Button>
-                                    <Button variant="contained" color="primary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
+                                    <Button variant="contained" color="contained" size="large"  onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
                                         Event
-                                    </Button>
-                                  {/* <Button variant="contained" color="primary" onClick={this.handlePost}>
-                                             Check-In
-                                         </Button>: <Button variant="contained" color="primary" onClick={this.handlePut}>
-                                        Checkout
-                                    </Button>  */}
+                                    </Button> */}
+                                    <div className={classes.toggleContainer}>
+                                       <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
+                                        <ToggleButton value="Work" className={classes.button}>
+                                        Work
+                                        </ToggleButton>
+                                        <ToggleButton value="Event" className={classes.button} >
+                                        Event
+                                        </ToggleButton>
+                                        
+                                        </ToggleButtonGroup>
+                                    </div>
                                     {button}
                                     
-                                    <Button variant="contained" color="secondary" onClick={this.resetForm}>
+                                    <Button variant="contained" color="secondary" size="large" onClick={this.resetForm}>
                                         Cancel
                                     </Button>
 
                                 </ListItem>
                                 <Divider/>
-
-                                {/* will be used to check the user out if they are checked in. */}
                                 <ListItem>
-                                    Button for testing out the checkout feature.
-                                </ListItem>
-                                <ListItem>
-
-                                    {/* <Button variant="contained" color="primary" onClick={this.handlePut}>
-                                        Checkout
-                                    </Button> */}
-
                                 </ListItem>
                             </List>
 
                         </div>
                     </div>
                 </div>
+                </Paper>
             </Grid>
         );
     }
 }
 
+MemberComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+const MemberWithStyle = withStyles(styles)(MemberComponent)
+
 // this allows us to use <App /> in index.js
-export default connect()(MemberComponent);
+export default connect()(MemberWithStyle);
 
