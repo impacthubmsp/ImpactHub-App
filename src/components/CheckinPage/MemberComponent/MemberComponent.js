@@ -51,6 +51,7 @@ class MemberComponent extends Component {
             checked_in: true,
             membersCheckedIn: []
         }
+        this.baseState = this.state 
     }
 
 
@@ -66,7 +67,11 @@ class MemberComponent extends Component {
           day: moment().format("L"),
           time: moment().format("LTS")
         });
-        this.checkStatus(this.state.single.value)
+        if(this.state.single === null){
+            this.resetForm()
+        }else{
+            this.checkStatus(this.state.single.value)
+        }
       };
 
        //change checked in to status of user if they are already checked if not then button will remain checked-in
@@ -122,12 +127,12 @@ class MemberComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
-        this.resetForm();
     }
 
     resetForm = () => {
         console.log(this.state);
         this.setState(this.baseState)
+        this.getCheckedIn();
       }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
