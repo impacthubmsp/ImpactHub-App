@@ -36,76 +36,23 @@ Project ImpactHub is a visit-tracking application for local coworking space, Imp
 * Chart.js
 * Balsamiq Mockups
 * DB Designer
+* Twilio
 
 ## Database Set-Up
 
 To start off with dummy data use the test.sql.
 
-![DB table](https://imgur.com/a/q2sbCX5 "DB table")
+![DB Table](https://via.placeholder.com/700x300 "Screen Shot")
 
  
 
 To set up this application on your computer, follow these instructions to create a new database for the local data to be stored.
 
+Database is done with PostgreSQL, it should be created and called **"impact-hub-app'**.
+
 ```
 
-CREATE TABLE "person" (
-	"id" serial NOT NULL,
-	"username" varchar(80) NOT NULL,
-	"password" varchar(80) NOT NULL,
-	CONSTRAINT person_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-CREATE TABLE "checkin" (
-	"id" serial NOT NULL,
-	"day" DATE NOT NULL,
-	"time" TIMESTAMP NOT NULL,
-	"name" varchar(250) NOT NULL,
-	"quantity" integer NOT NULL DEFAULT 1,
-	"member" BOOLEAN NOT NULL,
-	"visitor" BOOLEAN NOT NULL,
-	"purpose" varchar(250) NOT NULL,
-	"checked-in" BOOLEAN NOT NULL DEFAULT 'false',
-	"cobot-id" varchar(500) NOT NULL,
-	CONSTRAINT checkin_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "members" (
-	"id" serial NOT NULL,
-	"name" varchar(250) NOT NULL,
-	"company" varchar(250) NOT NULL,
-	"img_url" varchar(1000) NOT NULL,
-	"cobot-id" varchar(500) NOT NULL,
-	CONSTRAINT members_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "mailinglist" (
-	"id" serial NOT NULL,
-	"name" varchar(250) NOT NULL,
-	"phone" int NOT NULL,
-	"email" varchar(250) NOT NULL,
-	"date-time" TIMESTAMP NOT NULL,
-	"init-welcome" BOOLEAN NOT NULL,
-	CONSTRAINT mailinglist_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-
-ALTER TABLE "checkin" ADD CONSTRAINT "checkin_fk0" FOREIGN KEY ("cobot-id") REFERENCES "members"("cobot-id");
+DB Setup will be updated at the end of the project.
 
 ```
 
@@ -121,18 +68,18 @@ Steps to get the development environment running.
 
 ## Screen Shot
 
-![Screen Shot](https://via.placeholder.com/700x300 "Screen Shot")
+![Screenshot](https://via.placeholder.com/700x300 "Screen Shot")
 
 
 
 
 ### Features
 
- Member check-in / check-out
-* Visitor check-in / check-out
-  * Add visitors to mailing list
-* Administrative View
-  * Memebers present w/ info card
+* [x] Member check-in / check-out
+* [x] Visitor check-in / check-out
+  * [x] Add visitors to mailing list
+* [x] Administrative View
+  * [ ] Memebers present w/ info card
     * Name
     * Business / Mission
     * Role
@@ -140,13 +87,15 @@ Steps to get the development environment running.
     * Avatar Image
     * Website
     * Phone Number
-  * Group check-in
-  * Attendance Trends (Data Visualization)
-  * Retroactive check-in
+  * [x] Group check-in
+  * [x] Attendance Trends (Data Visualization)
+  * [ ] Retroactive check-in
+  * [x] Messenger
+  * [ ] Twilio notifications
 
 ### Next Steps
 
-Features that you would like to add at some point in the future.
+[TBA]
 
 ## Authors
 

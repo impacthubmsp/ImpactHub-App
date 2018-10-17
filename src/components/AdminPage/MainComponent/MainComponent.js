@@ -11,8 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import './MainComponent.css';
 
-import DisplayMessageComponent from './DisplayMessageComponent/DisplayMessageComponent';
-
 class MainComponent extends Component {
     constructor() {
         super();
