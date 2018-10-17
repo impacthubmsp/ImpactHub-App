@@ -50,13 +50,15 @@ CREATE TABLE "mailinglist" (
   OIDS=FALSE
 );
 
- CREATE TABLE "twilio" (
+  CREATE TABLE "messages" (
 	"id" serial NOT NULL,
 	"date_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	"body" varchar(600) DEFAULT CURRENT_TIMESTAMP,
+	"body" varchar(600),
 	"cobot_id" varchar(500),
 	"sender_name" varchar(255),
-	PRIMARY KEY ("id")
+	CONSTRAINT twilio_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
 
