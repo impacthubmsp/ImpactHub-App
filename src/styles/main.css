@@ -95,8 +95,12 @@ li a:hover {
     height: 100px;
 }
 
+.input__option {
+    height: 100px;
+}
+
 .avatar {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
 }
 
