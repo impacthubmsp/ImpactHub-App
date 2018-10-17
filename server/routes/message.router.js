@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const twilio = require('twilio');
 
 // This request will retrieve all the members inside of the "interested in membership" list.
 // Modify the list id to change for impacthub's api
@@ -34,4 +35,29 @@ router.post('/sendMessage', (req, res) => {
         res.sendStatus(403);
     }
 });
+
+// This request will post the new user to the email list
+// Modify the list id to change for impacthub's api
+router.post('/notifyTwilio', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log('touchdown on /notifyTwilio');
+
+        const accountSid = process.env.TwilioSID;
+        const authToken = process.env.TwilioAuth;
+        const client = require('twilio')(accountSid, authToken);
+
+        client.messages
+            .create({
+                body: 'Someone needs you at the front desk!',
+                from: '+16125090746',
+                to: '+12146776670'
+            })
+            .then(message => console.log(message.sid))
+            .done();
+
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 module.exports = router;
