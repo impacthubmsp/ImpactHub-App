@@ -63,9 +63,11 @@ class MainComponent extends Component {
                             <div className={classNames("masonry-layout_column", "subColumnHalf")}>
                                 <Paper className={classNames("paper")}>
                                     <h2>Test Thang</h2>
+                                    <img src="https://via.placeholder.com/300x100?text=Table+Component"/>
                                 </Paper>
                                 <Paper className={classNames("paper")}>
                                     <h2>Test Thang</h2>
+                                    <img src="https://via.placeholder.com/300x140?text=Table+Component"/>
                                 </Paper>
                             </div>
                         </div>

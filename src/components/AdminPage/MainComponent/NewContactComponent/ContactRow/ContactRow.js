@@ -9,8 +9,6 @@ class ContactRow extends Component {
                 <td>Kara Burnett</td>
                 <td>hello_its_me@gmail.com</td>
                 <td>641.000.0000</td>
-                <td>No </td>
-                <td><button id="addToMailList">Add to Subscription List</button></td>
             </tr>
         )
     }

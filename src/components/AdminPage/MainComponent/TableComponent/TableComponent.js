@@ -5,7 +5,7 @@ class TableComponent extends Component {
       return (
         <div className="viewContainer">
             <div>
-            <img src="https://via.placeholder.com/500x300?text=Table+Component" alt="graph" />
+            <img src="https://via.placeholder.com/300x300?text=Table+Component" alt="graph" />
         </div>
         </div>
       );

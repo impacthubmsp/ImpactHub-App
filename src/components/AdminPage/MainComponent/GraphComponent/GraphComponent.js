@@ -18,7 +18,7 @@ class GraphComponent extends Component {
           data: [5, 10, 10, 30, 5]
         }]
       },
-      pastMonthAttendanceData: {
+      /* pastMonthAttendanceData: {
         labels: [1, 5, 10, 15, 20, 25, 30],
         datasets: [
           {
@@ -38,7 +38,7 @@ class GraphComponent extends Component {
             borderWidth: '2px'
           }
         ]
-      }
+      } */
     }
   }
   // Renders graph displayed based on variable selected from dropdown
@@ -76,14 +76,14 @@ class GraphComponent extends Component {
               fontSize: 25
             },
             legend: {
-              position: 'bottom'
+              position: 'top'
             },
             scales: {
               xAxes: [{ stacked: true }],
               yAxes: [{ stacked: true }]
             }
           }}
-          //height={120}
+          //height={240}
         />
 
       </div>
