@@ -24,7 +24,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
-import { ListSubheader } from '../../../../node_modules/@material-ui/core';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const styles = theme => ({
     root: {
@@ -52,9 +52,9 @@ const styles = theme => ({
         background: 'white',
         borderRadius: 3,
         color: 'black',
-        fontSize: 30,
+        fontSize: 40,
         height: '100px',
-        width: '200px',
+        width: '250px',
         webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
@@ -71,6 +71,12 @@ const styles = theme => ({
       secondaryItemText:{
         fontSize:'2em',//Insert your required size
         display: 'inline',
+      },
+      font: {
+        fontSize: '2em',
+        height: '100px',
+        width: '500px',
+        margin: 'auto'
       }
 });
 
@@ -219,7 +225,7 @@ class MemberComponent extends Component {
         let button;
         let visit;
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" size="large" style={{fontSize: "2em"}} onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" onClick={this.handlePost} textDense={true} className={classes.font}>
             <Check></Check>
             Check-In
         </Button>
@@ -244,7 +250,7 @@ class MemberComponent extends Component {
             </div>
 
         } else {
-            button = <Button variant="contained" color="primary"  size="large" style={{fontSize: "2em"}} onClick={this.handlePut}>
+            button = <Button variant="contained" color="primary" onClick={this.handlePut} textDense={true} className={classes.font} >
             <Check></Check>
             Checkout
         </Button>;
@@ -290,14 +296,12 @@ class MemberComponent extends Component {
                                     <div className='dialogContainer'>
                                     <Toolbar>
                                     <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
-                                            position: 'absolute',
-                                            top:'0', 
-                                            right:'0',
+                                          position: "absolute",
+                                          top: "0",
+                                          right: "0",
                                             fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
-                                        <div className="xButton">
                                         <CloseIcon onClick={this.handleClose} />
-                                        </div>
-                                    </IconButton>
+                                        </IconButton>
                                     </Toolbar>
                                     {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
                                     <Typography variant="h1">
@@ -319,10 +323,12 @@ class MemberComponent extends Component {
                                         {visit}
                                    
                                     </div>
+                                    <div className={classes.font}>
                                     {button}
-                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} style={{fontSize: "2em"}} onClick={this.handleClose}>
+                                    <Button variant="contained" color="secondary" textDense={true} fullwidth={true} onClick={this.handleClose} className={classes.font}>
                                     <ArrowBack></ArrowBack> Back
                                     </Button>
+                                    </div>
                                     </Dialog>
                                 </div>
 
