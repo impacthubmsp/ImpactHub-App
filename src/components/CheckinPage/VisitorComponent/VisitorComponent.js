@@ -32,7 +32,8 @@ const styles = {
     container: {
         position: 'absolute',
         top: '40%',
-        width: '500px'
+        width: '500px',
+        margin:'0 0 40px 0'
     }
 }
 

@@ -15,6 +15,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const styles = theme => ({
   root: {
     width: '100%',
+
   },
   grow: {
     flexGrow: 1,
@@ -145,15 +146,15 @@ class MainAppBar extends React.Component {
               </Tooltip>
               {/* Checkin Link */}
               <Tooltip title="Check-in Page">
-              <IconButton className={classes.navLink} color="inherit" onClick={this.props.checkin}>
-                <HowToReg />
-              </IconButton>
+                <IconButton className={classes.navLink} color="inherit" onClick={this.props.checkin}>
+                  <HowToReg />
+                </IconButton>
               </Tooltip>
               {/* Logout */}
               <Tooltip title="Log Out">
-              <IconButton className={classes.navLink} color="inherit" onClick={this.props.logout}>
-                <ExitToApp />
-              </IconButton>
+                <IconButton className={classes.navLink} color="inherit" onClick={this.props.logout}>
+                  <ExitToApp />
+                </IconButton>
               </Tooltip>
             </div>
             <div className={classes.sectionMobile}>

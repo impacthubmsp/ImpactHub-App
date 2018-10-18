@@ -25,6 +25,7 @@ class CheckinPage extends Component {
         <Grid container className={classes.masterGrid} spacing={0}>
           <VisitorComponent />
           <MemberComponent />
+          
         </Grid>
       </div>
     );
