@@ -23,7 +23,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack, Check } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
@@ -51,12 +51,16 @@ const styles = theme => ({
         background: 'white',
         borderRadius: 3,
         color: 'black',
-        height: 41.5,
-        padding: '0 30px',
+        fontSize: 30,
+        height: '100px',
+        width: '200px',
         webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         border: '1px solid darkgrey',
+      },
+      nameNcompany: {
+        fontSize: 60px,
       }
 });
 
@@ -169,6 +173,7 @@ class MemberComponent extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+        this.resetForm();
       };
 
     handleVisit = (event, purpose)  => 
@@ -184,14 +189,15 @@ class MemberComponent extends Component {
       }).catch(error => {
         console.log('You got an error');
       })
+      this.handleClose()
     }
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
+        this.handleClose()
     }
 
     resetForm = () => {
-        console.log(this.state);
         this.setState(this.baseState)
         this.getCheckedIn();
       }
@@ -204,14 +210,16 @@ class MemberComponent extends Component {
 
         if (this.state.checked_in) {
             button = <Button variant="contained" color="primary" size="large" onClick={this.handlePost}>
+            <Check></Check>
             Check-In
         </Button>
         } else {
             button = <Button variant="contained" color="primary"  size="large" onClick={this.handlePut}>
+            <Check></Check>
             Checkout
         </Button>;
         }
-        console.log(this.state.single);
+        console.log(this.state);
         
         return (
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
@@ -257,23 +265,25 @@ class MemberComponent extends Component {
                                             right:'0',
                                             fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
                                         <div className="xButton">
-                                        <CloseIcon onClick={this.resetForm} />
+                                        <CloseIcon onClick={this.handleClose} />
                                         </div>
                                     </IconButton>
                                     </Toolbar>
                                     {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
-                                    <Typography variant="h4">
+                                    <Typography variant="h1">
                                         Is this you?
                                     </Typography>
                                     <DialogContent>
                                         <DialogContentText>
                                         <ListItem>
-                                        <Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={this.state.single.img_url}/>
-                                        </Avatar> <ListItemText primary={this.state.single.name} secondary={this.state.single.company} />
+                                        <Avatar style={{width:'150px', height:'150px'}}><img className="modolImg" src={this.state.single.img_url}/>
+                                        </Avatar> 
+                                       <ListItemText className={classes.nameNcompany} disableTypography={false} primary={this.state.single.name} secondary={this.state.single.company} />
+                                    
                                         </ListItem>
                                         </DialogContentText>
                                     </DialogContent>
-                                    <Typography variant="h4">
+                                    <Typography variant="h2">
                                         Purpose:
                                     </Typography>
                                     <DialogActions>
@@ -287,11 +297,13 @@ class MemberComponent extends Component {
                                         </ToggleButton>
                                         </ToggleButtonGroup>
                                     </div>
-                                    {button}
+                                   
                                    
                                     </DialogActions>
+                                   
                                     </div>
-                                    <Button variant="contained" color="secondary" size="large" onClick={this.resetForm}>
+                                    {button}
+                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} onClick={this.handleClose}>
                                     <ArrowBack></ArrowBack> Back
                                     </Button>
                                     </Dialog>
