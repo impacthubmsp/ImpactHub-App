@@ -160,7 +160,9 @@ class VisitorComponent extends Component {
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
                                     <ListItemText secondary="What brings you in today?" />
-                                    <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0 }}>
+                                   <FormControlLabel
+                                   control={
+                                    <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0, margin:'0 0 0 20px' }}>
                                         <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }}>
                                             Guest
                                         </ToggleButton>
@@ -170,9 +172,11 @@ class VisitorComponent extends Component {
                                         <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
                                             Tour
                                         </ToggleButton>
-
                                     </ToggleButtonGroup>
-
+                                   }
+                                //    labelPlacement="start"
+                                //    label="What brings you in today?"
+                                   />
                                     {/* Select Interest in membership */}
                                     <ListItem divider>
                                         {/* Checkbox for selecting interest */}
