@@ -7,8 +7,8 @@ import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
 import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
+import CSVComponent from './CSVComponent/CSVComponent';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import './MainComponent.css';
 
@@ -62,8 +62,7 @@ class MainComponent extends Component {
                             </Paper>
                             <div className={classNames("masonry-layout_column", "subColumnHalf")}>
                                 <Paper className={classNames("paper")}>
-                                    <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/300x100?text=Table+Component"/>
+                                    <CSVComponent/>
                                 </Paper>
                                 <Paper className={classNames("paper")}>
                                     <h2>Test Thang</h2>
