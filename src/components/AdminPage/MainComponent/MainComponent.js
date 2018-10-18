@@ -41,11 +41,6 @@ class MainComponent extends Component {
                     <div className={classNames("masonry-layout_column", "leftColumn")}>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <h2>Placeholder for Twilio</h2>
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
                                 <CurrentMemberVSVisitor />
                             </Paper>
                         </div>
@@ -56,50 +51,57 @@ class MainComponent extends Component {
                         </div>
                     </div>
                     <div className={classNames("masonry-layout_column", "centerColumn")}>
-                        <div className="masonry-layout_panel">
-                            <Paper className={classNames("paper", "subColumnHalf")}>
-                                <GroupLoginComponent />
-                            </Paper>
-                            <div className={classNames("masonry-layout_column", "subColumnHalf")}>
-                                <Paper className={classNames("paper", "miniPaper")}>
-                                    <CSVComponent/>
+                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
+                            <div className="masonry-layout_panel">
+                                <Paper className="paper">
+                                    <h2>Placeholder for Twilio</h2>
                                 </Paper>
-                                <Paper className={classNames("paper", "miniPaper")}>
-                                    <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder"/>
+                            </div>
+                            <div className="masonry-layout_panel">
+                                <Paper className={classNames("paper")}>
+                                    <GroupLoginComponent />
                                 </Paper>
                             </div>
                         </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <GraphComponent />
+                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
+                            <Paper className={classNames("paper", "miniPaper")}>
+                                <CSVComponent />
+                            </Paper>
+                            <Paper className={classNames("paper", "miniPaper")}>
+                                <h2>Test Thang</h2>
+                                <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder" />
                             </Paper>
                         </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <EventsMemberVSVisitor />
-                            </Paper>
-                        </div>
+                    <div className="masonry-layout_panel">
+                        <Paper className="paper">
+                            <GraphComponent />
+                        </Paper>
                     </div>
-                    <div className={classNames("masonry-layout_column", "rightColumn")}>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <KPIComponent />
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <NewContactComponent />
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <VisitorAddInfo />
-                            </Paper>
-                        </div>
+                    <div className="masonry-layout_panel">
+                        <Paper className="paper">
+                            <EventsMemberVSVisitor />
+                        </Paper>
                     </div>
                 </div>
-            </div>)
+                <div className={classNames("masonry-layout_column", "rightColumn")}>
+                    <div className="masonry-layout_panel">
+                        <Paper className="paper">
+                            <KPIComponent />
+                        </Paper>
+                    </div>
+                    <div className="masonry-layout_panel">
+                        <Paper className="paper">
+                            <NewContactComponent />
+                        </Paper>
+                    </div>
+                    <div className="masonry-layout_panel">
+                        <Paper className="paper">
+                            <VisitorAddInfo />
+                        </Paper>
+                    </div>
+                </div>
+            </div>
+            </div >)
 
     }
 }
