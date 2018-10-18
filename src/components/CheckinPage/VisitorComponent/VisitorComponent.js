@@ -28,8 +28,6 @@ const styles = {
         display: 'flex',
         justify: 'center',
         flexDirection: 'column',
-       
-
     },
     container: {
         position: 'absolute',
@@ -37,8 +35,6 @@ const styles = {
         width: '500px'
     }
 }
-
-
 
 class VisitorComponent extends Component {
     constructor() {
@@ -86,7 +82,7 @@ class VisitorComponent extends Component {
     handleClickAway = () => {
         this.setState({
             open: false,
-            purpose:null
+            purpose: null
         });
     };
 
@@ -123,8 +119,10 @@ class VisitorComponent extends Component {
     }
     handleAlignment = (event, purpose) => this.setState({ purpose });
     render() {
+
         const { classes } = this.props;
-        const{ purpose } = this.state
+        const { purpose, interest } = this.state;
+
         return (
 
             <Grid className="classes" item xs={6} sm={6} md={6} lg={6} className={classes.root}>
@@ -135,7 +133,6 @@ class VisitorComponent extends Component {
                                 Are you a visitor?
                         </Typography>
                         </div>
-                        {/* Visitor Enter name */}
                         <div style={{ padding: '0 30px 0 30px' }}>
                             <List >
                                 <ListItem>
@@ -157,21 +154,19 @@ class VisitorComponent extends Component {
                                 </ListItem>
                                 <Divider />
                             </List>
-
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
-                                <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{padding:0}}>
-              <ToggleButton value="guest" style={{border:'1px solid darkgrey'}}>
-                Guest
-              </ToggleButton>
-              <ToggleButton value="event" style={{border:'1px solid darkgrey'}}>
-                Event
-              </ToggleButton>
-              <ToggleButton value="tour" style={{border:'1px solid darkgrey'}}>
-                Tour
-              </ToggleButton>
-              
-            </ToggleButtonGroup>
+                                    <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0 }}>
+                                        <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }}>
+                                            Guest
+                                        </ToggleButton>
+                                        <ToggleButton value="event" style={{ border: '1px solid darkgrey' }}>
+                                            Event
+                                        </ToggleButton>
+                                        <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
+                                            Tour
+                                        </ToggleButton>
+                                    </ToggleButtonGroup>
 
                                     {/* Select Interest in membership */}
                                     <ListItem divider>
@@ -231,12 +226,10 @@ class VisitorComponent extends Component {
                                     </ListItem>
                                 </List>
                             </Collapse>
-
                         </div>
                     </Paper>
                 </ClickAwayListener>
             </Grid >
-
         );
     }
 }
