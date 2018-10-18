@@ -16,6 +16,14 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { ArrowBack } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
@@ -49,8 +57,7 @@ const styles = theme => ({
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         border: '1px solid darkgrey',
-      },
-    
+      }
 });
 
 
@@ -63,7 +70,10 @@ function getMembers() {
         member.map((member)=>{
             members.push({
                 label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
-                value: member.cobot_id + member.name
+                value: member.cobot_id + member.name,
+                img_url: member.img_url,
+                company: member.company,
+                name: member.name
             })
             return members;
            })
@@ -88,11 +98,12 @@ class MemberComponent extends Component {
         //Whis will be used for axios request.
         this.state = {
             single: '',
-            purpose: null,
+            purpose: 'Work',
             day: null,
             time: null,
             checked_in: true,
-            membersCheckedIn: []
+            membersCheckedIn: [],
+            open: false,
         }
         this.baseState = this.state 
     }
@@ -114,6 +125,9 @@ class MemberComponent extends Component {
             this.resetForm()
         }else{
             this.checkStatus(this.state.single.value)
+            this.setState({
+                open: true
+            })
         }
       };
 
@@ -153,6 +167,10 @@ class MemberComponent extends Component {
         }
     }
 
+    handleClose = () => {
+        this.setState({ open: false });
+      };
+
     handleVisit = (event, purpose)  => 
         this.setState({
             purpose
@@ -180,7 +198,7 @@ class MemberComponent extends Component {
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
-        const { classes } = this.props;
+        const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
         let button;
 
@@ -193,7 +211,7 @@ class MemberComponent extends Component {
             Checkout
         </Button>;
         }
-        console.log(this.state);
+        console.log(this.state.single);
         
         return (
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
@@ -222,26 +240,44 @@ class MemberComponent extends Component {
                                     placeholder="Full Name"
                                      />
                                 </ListItem>
-                                <Divider />
-
-                                <ListItem>
-                                <div style={{ margin: '0' }}>
-                        <Typography variant="h4">
-                            Purpose:
-                        </Typography>
-                    </div>
-                                </ListItem>
-
-                                {/* Buttons for selecting the type of work */}
-                                <ListItem>
-                                    {/* will appear on dom after the user has been selected.*/}
-                                    {/* <Button variant="contained" color="contained" size="large" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
-                                        Work
-                                    </Button>
-                                    <Button variant="contained" color="contained" size="large"  onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
-                                        Event
-                                    </Button> */}
-                                    <div className={classes.toggleContainer}>
+                                 <div >
+                                    <Dialog
+                                    fullScreen={fullScreen}
+                                    onExit={this.resetForm}
+                                    open={this.state.open}
+                                    onClose={this.handleClose}
+                                    aria-labelledby="responsive-dialog-title"
+                                    
+                                    >
+                                    <div className='dialogContainer'>
+                                    <Toolbar>
+                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
+                                            position: 'absolute',
+                                            top:'0', 
+                                            right:'0',
+                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
+                                        <div className="xButton">
+                                        <CloseIcon onClick={this.resetForm} />
+                                        </div>
+                                    </IconButton>
+                                    </Toolbar>
+                                    {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
+                                    <Typography variant="h4">
+                                        Is this you?
+                                    </Typography>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                        <ListItem>
+                                        <Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={this.state.single.img_url}/>
+                                        </Avatar> <ListItemText primary={this.state.single.name} secondary={this.state.single.company} />
+                                        </ListItem>
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <Typography variant="h4">
+                                        Purpose:
+                                    </Typography>
+                                    <DialogActions>
+                                        <div className={classes.toggleContainer}>
                                        <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
                                         <ToggleButton value="Work" className={classes.button}>
                                         Work
@@ -249,19 +285,21 @@ class MemberComponent extends Component {
                                         <ToggleButton value="Event" className={classes.button} >
                                         Event
                                         </ToggleButton>
-                                        
                                         </ToggleButtonGroup>
                                     </div>
                                     {button}
-                                    
+                                   
+                                    </DialogActions>
+                                    </div>
                                     <Button variant="contained" color="secondary" size="large" onClick={this.resetForm}>
-                                        Cancel
+                                    <ArrowBack></ArrowBack> Back
                                     </Button>
+                                    </Dialog>
+                                </div>
 
-                                </ListItem>
-                                <Divider/>
-                                <ListItem>
-                                </ListItem>
+
+                                {/* Buttons for selecting the type of work */}
+                                {/* will appear on dom after the user has been selected.*/}
                             </List>
 
                         </div>
@@ -275,6 +313,7 @@ class MemberComponent extends Component {
 
 MemberComponent.propTypes = {
     classes: PropTypes.object.isRequired,
+    fullScreen: PropTypes.bool.isRequired,
 };
 const MemberWithStyle = withStyles(styles)(MemberComponent)
 
