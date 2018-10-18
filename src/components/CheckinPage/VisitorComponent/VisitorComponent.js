@@ -22,6 +22,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Tooltip from '@material-ui/core/Tooltip';
 const styles = {
     root: {
         position: 'relative',
@@ -32,8 +33,9 @@ const styles = {
     container: {
         position: 'absolute',
         top: '40%',
+        left: '40px',
         width: '500px',
-        margin:'0 0 40px 0'
+        margin: '0 0 40px 0'
     }
 }
 
@@ -157,6 +159,7 @@ class VisitorComponent extends Component {
                             </List>
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
+                                    <ListItemText secondary="What brings you in today?" />
                                     <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0 }}>
                                         <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }}>
                                             Guest
@@ -167,6 +170,7 @@ class VisitorComponent extends Component {
                                         <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
                                             Tour
                                         </ToggleButton>
+
                                     </ToggleButtonGroup>
 
                                     {/* Select Interest in membership */}
@@ -178,9 +182,10 @@ class VisitorComponent extends Component {
                                                     onClick={this.handleToggleClick}
                                                 />
                                             }
+                                            label="Are you interested in more information about membership options?"
                                         />
                                         {/* Accompanying text for selecting interest */}
-                                        <ListItemText primary="Are you interested in more information about membership options?" />
+                                        {/* <ListItemText primary="Are you interested in more information about membership options?" /> */}
                                     </ListItem>
                                     {/* Enter email address for interest */}
                                     {/* TO-DO hide email and phone number entry */}
