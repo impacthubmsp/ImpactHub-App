@@ -7,29 +7,27 @@ class CSVComponent extends Component {
         super();
         this.state = {
             csvData: [
-            'firstname', 'lastname', 'email' ,
-            'Ahmed', 'Tomi' , 'ah@smthing.co.com' ,
-            'Raed', 'Labes' , 'rl@smthing.co.com' ,
-            'Yezzi','Min l3b', 'ymin@cocococo.com',
-            ]
-           
-
+                ['firstname', 'lastname', 'email'] ,
+                ['Ahmed', 'Tomi' , 'ah@smthing.co.com'] ,
+                ['Raed', 'Labes' , 'rl@smthing.co.com'] ,
+                ['Yezzi','Min l3b', 'ymin@cocococo.com']
+              ],
         }
     }
 
     getVisitData = () => {
-        //axios request to database to get visitor
+        //axios request to database to get visitor data from database
     }
     
     componentDidMount() {
         //get visitor data from database
     }
     render() {
-        const csvData =[ this.state.csvData];
+        const csvData = this.state.csvData;
 
         return (
             <div className="viewContainer">
-                <Button> <CSVLink data={csvData} fileName={"visitorData.csv"}>Download Visitor Data CSV</CSVLink></Button>
+                <Button> <CSVLink data={csvData} filename={"visitorData.csv"}>Download Visitor Data CSV</CSVLink></Button>
             </div>
         );
     }

@@ -66,7 +66,7 @@ class MainComponent extends Component {
                                 </Paper>
                                 <Paper className={classNames("paper")}>
                                     <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/300x140?text=Table+Component"/>
+                                    <img src="https://via.placeholder.com/300x140?text=Table+Component" alt="placeholder"/>
                                 </Paper>
                             </div>
                         </div>
