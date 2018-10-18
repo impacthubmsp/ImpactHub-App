@@ -67,6 +67,10 @@ const styles = theme => ({
       },
       listItemText:{
         fontSize:'3em',//Insert your required size
+      },
+      secondaryItemText:{
+        fontSize:'2em',//Insert your required size
+        display: 'inline',
       }
 });
 
@@ -213,14 +217,34 @@ class MemberComponent extends Component {
         const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
         let button;
-
+        let visit;
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" size="large" onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" size="large" style={{fontSize: "2em"}} onClick={this.handlePost}>
             <Check></Check>
             Check-In
         </Button>
+        visit = <div>
+                <Typography variant="h2">
+                Purpose:
+                </Typography>
+                <DialogActions>
+                <div className={classes.toggleContainer}>
+                <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
+                <ToggleButton value="Work" className={classes.button}>
+                Work
+                </ToggleButton>
+                <ToggleButton value="Event" className={classes.button} >
+                Event
+                </ToggleButton>
+                </ToggleButtonGroup>
+                </div>
+
+
+                </DialogActions>
+            </div>
+
         } else {
-            button = <Button variant="contained" color="primary"  size="large" onClick={this.handlePut}>
+            button = <Button variant="contained" color="primary"  size="large" style={{fontSize: "2em"}} onClick={this.handlePut}>
             <Check></Check>
             Checkout
         </Button>;
@@ -286,33 +310,17 @@ class MemberComponent extends Component {
                                         <Avatar style={{width:'150px', height:'150px'}}><img className="modolImg" src={this.state.single.img_url}/>
                                         </Avatar> 
                                              <ListItemText 
-                                            classes={{primary:classes.listItemText}}
+                                            classes={{primary:classes.listItemText, secondary:classes.secondaryItemText}}
                                             inset={true} primary={this.state.single.name} secondary={this.state.single.company} />
                                         </ListItem>
                                         </div> 
                                         </DialogContentText>
                                     </DialogContent>
-                                    <Typography variant="h2">
-                                        Purpose:
-                                    </Typography>
-                                    <DialogActions>
-                                        <div className={classes.toggleContainer}>
-                                       <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
-                                        <ToggleButton value="Work" className={classes.button}>
-                                        Work
-                                        </ToggleButton>
-                                        <ToggleButton value="Event" className={classes.button} >
-                                        Event
-                                        </ToggleButton>
-                                        </ToggleButtonGroup>
-                                    </div>
-                                   
-                                   
-                                    </DialogActions>
+                                        {visit}
                                    
                                     </div>
                                     {button}
-                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} onClick={this.handleClose}>
+                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} style={{fontSize: "2em"}} onClick={this.handleClose}>
                                     <ArrowBack></ArrowBack> Back
                                     </Button>
                                     </Dialog>
