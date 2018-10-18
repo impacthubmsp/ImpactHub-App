@@ -7,8 +7,9 @@ import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
 import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
+import CSVComponent from './CSVComponent/CSVComponent';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import classNames from 'classnames';
 import './MainComponent.css';
 
 class MainComponent extends Component {
@@ -36,43 +37,70 @@ class MainComponent extends Component {
     render() {
         return (
             <div id="adminView">
-                <Grid container>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Paper className="paper">
-                            <h2>Placeholder for Twilio</h2>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Paper className="paper">
-                            <GroupLoginComponent />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                    <Paper className="paper">
-                        <KPIComponent />
-                    </Paper>
-                    </Grid>
-                    <Paper className="paper">
-                        <GraphComponent />
-                    </Paper>
-                    <Paper className="paper">
-                        <CurrentMemberVSVisitor />
-                    </Paper>
-                    <Paper className="paper">
-                        <VisitorAddInfo />
-                    </Paper>
-                    <Paper className="paper">
-                        <EventsMemberVSVisitor />
-                    </Paper>
-                    <Paper className="paper">
-                        <TableComponent />
-                    </Paper>
-                    <Paper className="paper">
-                        <NewContactComponent />
-                    </Paper>
-                </Grid>
-            </div>
-        );
+                <div className="masonry-layout">
+                    <div className={classNames("masonry-layout_column", "leftColumn")}>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <h2>Placeholder for Twilio</h2>
+                            </Paper>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <CurrentMemberVSVisitor />
+                            </Paper>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <TableComponent />
+                            </Paper>
+                        </div>
+                    </div>
+                    <div className={classNames("masonry-layout_column", "centerColumn")}>
+                        <div className="masonry-layout_panel">
+                            <Paper className={classNames("paper", "subColumnHalf")}>
+                                <GroupLoginComponent />
+                            </Paper>
+                            <div className={classNames("masonry-layout_column", "subColumnHalf")}>
+                                <Paper className={classNames("paper", "miniPaper")}>
+                                    <CSVComponent/>
+                                </Paper>
+                                <Paper className={classNames("paper", "miniPaper")}>
+                                    <h2>Test Thang</h2>
+                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder"/>
+                                </Paper>
+                            </div>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <GraphComponent />
+                            </Paper>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <EventsMemberVSVisitor />
+                            </Paper>
+                        </div>
+                    </div>
+                    <div className={classNames("masonry-layout_column", "rightColumn")}>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <KPIComponent />
+                            </Paper>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <NewContactComponent />
+                            </Paper>
+                        </div>
+                        <div className="masonry-layout_panel">
+                            <Paper className="paper">
+                                <VisitorAddInfo />
+                            </Paper>
+                        </div>
+                    </div>
+                </div>
+            </div>)
+
     }
 }
 

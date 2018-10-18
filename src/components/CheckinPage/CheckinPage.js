@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import NotifyComponent from './NotifyComponent/NotifyComponent';
 const styles = theme => ({
     masterGrid: {
     },
@@ -20,6 +21,7 @@ class CheckinPage extends Component {
     return (
       <div>
         <Nav history={this.props.history} />
+        <NotifyComponent />
         <Grid container className={classes.masterGrid} spacing={0}>
           <VisitorComponent />
           <MemberComponent />

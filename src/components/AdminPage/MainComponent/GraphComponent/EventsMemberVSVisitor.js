@@ -36,14 +36,13 @@ class EventsMemberVSVisitor extends Component {
               fontSize: 25
             },
             legend: {
-              position: 'bottom'
+              position: 'top'
             },
             scales: {
               xAxes: [{ stacked: true }],
               yAxes: [{ stacked: true }]
             }
           }}
-          height={120}
         />
       </div>
     );
