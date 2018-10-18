@@ -61,12 +61,12 @@ class MainComponent extends Component {
                                 <GroupLoginComponent />
                             </Paper>
                             <div className={classNames("masonry-layout_column", "subColumnHalf")}>
-                                <Paper className={classNames("paper")}>
+                                <Paper className={classNames("paper", "miniPaper")}>
                                     <CSVComponent/>
                                 </Paper>
-                                <Paper className={classNames("paper")}>
+                                <Paper className={classNames("paper", "miniPaper")}>
                                     <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/300x140?text=Table+Component" alt="placeholder"/>
+                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder"/>
                                 </Paper>
                             </div>
                         </div>
