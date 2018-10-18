@@ -20,14 +20,13 @@ class NewContactComponent extends Component {
         return (
             <div>
                 <div className="viewContainer">
+                    <h3>Visitors Seeking More Info</h3>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
-                                <th>Subscribed on MailChimp?</th>
-                                <th>Follow-up via phone?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,8 +34,6 @@ class NewContactComponent extends Component {
                                 <td>Kara Burnett</td>
                                 <td>hello_its_me@gmail.com</td>
                                 <td>641.000.0000</td>
-                                <td>No </td>
-                                <td>No</td>
                             </tr>
                             {/* This will be where the cards with each garment will be displayed. 
                             cards will be mapped over here and will appear in a grid*/}
