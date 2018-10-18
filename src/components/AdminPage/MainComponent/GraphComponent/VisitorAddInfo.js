@@ -38,6 +38,13 @@ class VisitorAddInfo extends Component {
             <div className="viewContainer"> 
                  < Pie
                     data = {data}
+                    options={{
+                        title: {
+                            display: true,
+                            text: 'Visitor Interest',
+                            fontSize: 18
+                        }
+                    }}
                 />
             </div>
         );

@@ -43,7 +43,6 @@ class EventsMemberVSVisitor extends Component {
               yAxes: [{ stacked: true }]
             }
           }}
-          //height={240}
         />
       </div>
     );
