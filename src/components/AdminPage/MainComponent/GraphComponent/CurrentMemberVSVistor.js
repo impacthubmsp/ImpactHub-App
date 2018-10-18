@@ -9,14 +9,15 @@ class CurrentMemberVSVisitor extends Component {
         this.state = {
             currentVisitors: 10,
             currentMembers: 20,
+            currentGuests: 30
         }
 
     }
-    
-    //function to setState with result of API call here
-    
 
-    render(){
+    //function to setState with result of API call here
+
+
+    render() {
         const data = {
             labels: [
                 'Visitors',
@@ -25,21 +26,30 @@ class CurrentMemberVSVisitor extends Component {
             datasets: [{
                 data: [this.state.currentVisitors, this.state.currentMembers],
                 backgroundColor: [
-                '#FF6384',
-                '#36A2EB'
+                    '#FF6384',
+                    '#36A2EB'
                 ],
                 hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB'
+                    '#FF6384',
+                    '#36A2EB'
                 ]
             }]
         };
         const dataHere = this.state.currentVisitors;
-        return(
-            <div className= "viewContainer">
+        return (
+            <div className="viewContainer">
                 {dataHere && < Pie
-                    data = {data}
+                    options={{
+                        title: {
+                            display: true,
+                            text: 'Current Guests',
+                            fontSize: 18
+                        }
+                    }}
+
+                    data={data}
                 />}
+                <h4>{this.state.currentGuests} current guests</h4>
             </div>
         );
     }
