@@ -24,6 +24,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
+import { ListSubheader } from '../../../../node_modules/@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -59,8 +60,13 @@ const styles = theme => ({
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         border: '1px solid darkgrey',
       },
-      nameNcompany: {
-        fontSize: 60px,
+      rooot: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+      },
+      listItemText:{
+        fontSize:'3em',//Insert your required size
       }
 });
 
@@ -275,12 +281,15 @@ class MemberComponent extends Component {
                                     </Typography>
                                     <DialogContent>
                                         <DialogContentText>
+                                         <div className={classes.rooot}>
                                         <ListItem>
                                         <Avatar style={{width:'150px', height:'150px'}}><img className="modolImg" src={this.state.single.img_url}/>
                                         </Avatar> 
-                                       <ListItemText className={classes.nameNcompany} disableTypography={false} primary={this.state.single.name} secondary={this.state.single.company} />
-                                    
+                                             <ListItemText 
+                                            classes={{primary:classes.listItemText}}
+                                            inset={true} primary={this.state.single.name} secondary={this.state.single.company} />
                                         </ListItem>
+                                        </div> 
                                         </DialogContentText>
                                     </DialogContent>
                                     <Typography variant="h2">
