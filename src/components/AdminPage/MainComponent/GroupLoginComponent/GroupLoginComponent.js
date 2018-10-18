@@ -76,7 +76,7 @@ class GroupLoginComponent extends Component {
                     <br/>
                     <input className="groupInput" name="quantity" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
                     <br/>
-                    <input type="submit" value="Submit"/>
+                    <Button variant="contained" type="submit" value="Submit">Submit</Button>
                 </form>
             </div>
         </div>

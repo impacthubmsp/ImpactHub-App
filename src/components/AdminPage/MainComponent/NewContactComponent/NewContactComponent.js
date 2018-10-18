@@ -20,6 +20,7 @@ class NewContactComponent extends Component {
         return (
             <div>
                 <div className="viewContainer">
+                    <h3>Visitors Seeking More Info</h3>
                     <table>
                         <thead>
                             <tr>
