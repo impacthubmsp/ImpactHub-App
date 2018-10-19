@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import GraphComponent from './GraphComponent/GraphComponent';
 import GroupLoginComponent from './GroupLoginComponent/GroupLoginComponent';
-import TableComponent from './TableComponent/TableComponent';
 import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
 import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
 import CSVComponent from './CSVComponent/CSVComponent';
+import TownHallComponent from '../TownHallComponent/TownHallComponent';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import './MainComponent.css';
@@ -46,7 +46,7 @@ class MainComponent extends Component {
                         </div>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <TableComponent />
+                                <TownHallComponent/>
                             </Paper>
                         </div>
                     </div>

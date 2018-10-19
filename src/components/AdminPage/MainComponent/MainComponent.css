@@ -61,5 +61,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background: #FFF
 }
+#townHallContainer{
+    height: 50vh;
+    overflow: scroll;
+}
 
 
