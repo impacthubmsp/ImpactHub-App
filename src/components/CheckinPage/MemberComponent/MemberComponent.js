@@ -20,7 +20,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
@@ -81,7 +80,11 @@ const styles = theme => ({
 
 
 const members = [];
-
+//TO-DO
+//Change how data is being passed 
+//Currently passing name and co-bot ID
+//Change to only look up names
+//
 function getMembers() {
     axios.get('/api/memb/list')
     .then((response) =>{
