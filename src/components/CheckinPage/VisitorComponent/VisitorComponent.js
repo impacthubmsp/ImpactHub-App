@@ -27,7 +27,7 @@ const styles = {
     root: {
         position: 'relative',
         display: 'flex',
-        justify: 'center',
+        //justify: 'center',
         flexDirection: 'column',
     },
     container: {
@@ -35,7 +35,8 @@ const styles = {
         top: '40%',
         left: '40px',
         width: '500px',
-        margin: '0 0 40px 0'
+        margin: '0 0 40px 0',
+       
     }
 }
 
@@ -124,17 +125,17 @@ class VisitorComponent extends Component {
     render() {
 
         const { classes } = this.props;
-        const { purpose, interest } = this.state;
+        const { purpose } = this.state;
 
         return (
 
-            <Grid className="classes" item xs={6} sm={6} md={6} lg={6} className={classes.root}>
+            <Grid  item xs={6} sm={6} md={6} lg={6} className={classes.root}>
                 <ClickAwayListener onClickAway={this.handleClickAway}>
                     <Paper className={classes.container}>
                         <div style={{ margin: '15px 0 0 40px' }}>
                             <Typography variant="h3">
                                 Are you a visitor?
-                        </Typography>
+                            </Typography>
                         </div>
                         <div style={{ padding: '0 30px 0 30px' }}>
                             <List >
@@ -160,23 +161,23 @@ class VisitorComponent extends Component {
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
                                     <ListItemText secondary="What brings you in today?" />
-                                   <FormControlLabel
-                                   control={
-                                    <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0, margin:'0 0 0 20px' }}>
-                                        <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }}>
-                                            Guest
-                                        </ToggleButton>
-                                        <ToggleButton value="event" style={{ border: '1px solid darkgrey' }}>
-                                            Event
-                                        </ToggleButton>
-                                        <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
-                                            Tour
-                                        </ToggleButton>
-                                    </ToggleButtonGroup>
-                                   }
-                                //    labelPlacement="start"
+                                    <FormControlLabel
+                                        control={
+                                            <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0, margin: '0 0 0 20px' }}>
+                                                <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }}>
+                                                    Guest
+                                                </ToggleButton>
+                                                <ToggleButton value="event" style={{ border: '1px solid darkgrey' }}>
+                                                    Event
+                                                </ToggleButton>
+                                                <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
+                                                    Tour
+                                                </ToggleButton>
+                                            </ToggleButtonGroup>
+                                        }
+                                //       labelPlacement="start"
                                 //    label="What brings you in today?"
-                                   />
+                                    />
                                     {/* Select Interest in membership */}
                                     <ListItem divider>
                                         {/* Checkbox for selecting interest */}
