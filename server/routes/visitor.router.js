@@ -66,7 +66,7 @@ router.post('/group', (req, res) => {
 router.get('/', (req, res)=>{
     if (req.isAuthenticated()){
         const queryText = `SELECT "name","phone", "email"
-                            FROM "visitors"
+                            FROM "mailinglist"
                             WHERE "email" IS NOT NULL
                             LIMIT 5;`;
         pool.query(queryText)
