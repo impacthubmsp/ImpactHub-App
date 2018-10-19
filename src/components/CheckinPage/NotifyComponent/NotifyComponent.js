@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faConciergeBell } from '@fortawesome/free-solid-svg-icons';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class NotifyComponent extends Component {
 
@@ -9,19 +13,26 @@ class NotifyComponent extends Component {
         axios({
             method: 'post',
             url: 'api/message/notifyTwilio',
-          }).then( (response) => {
+        }).then((response) => {
             console.log(response);
-          }).catch(function (error) {
+        }).catch(function (error) {
             console.log(error, "sendNotification didnt work");
-          });
+        });
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.sendNotification}>
-                    <button type="submit">Notify Admin</button>
-                </form>
+            <div >
+                <Tooltip title="Need Help? Click Here To Notify an Attendant">
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        style={{ left: '45%', margin: '10px' }}
+                        onClick={this.sendNotification}
+                    >
+                        <FontAwesomeIcon icon={faConciergeBell} size="lg" />
+                    </Button>
+                </Tooltip>
             </div>
         );
     }
