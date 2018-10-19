@@ -20,11 +20,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
-import { ListSubheader } from '../../../../node_modules/@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -52,9 +50,9 @@ const styles = theme => ({
         background: 'white',
         borderRadius: 3,
         color: 'black',
-        fontSize: 30,
+        fontSize: 40,
         height: '100px',
-        width: '200px',
+        width: '250px',
         webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
@@ -71,12 +69,22 @@ const styles = theme => ({
       secondaryItemText:{
         fontSize:'2em',//Insert your required size
         display: 'inline',
+      },
+      font: {
+        fontSize: '2em',
+        height: '100px',
+        width: '500px',
+        margin: 'auto'
       }
 });
 
 
 const members = [];
-
+//TO-DO
+//Change how data is being passed 
+//Currently passing name and co-bot ID
+//Change to only look up names
+//
 function getMembers() {
     axios.get('/api/memb/list')
     .then((response) =>{
@@ -137,7 +145,8 @@ class MemberComponent extends Component {
         });
         if(this.state.single === null || this.state.single === ''){
             this.resetForm()
-        }else{
+        }
+        else{
             this.checkStatus(this.state.single.value)
             this.setState({
                 open: true
@@ -218,23 +227,24 @@ class MemberComponent extends Component {
         const { purpose } = this.state;
         let button;
         let visit;
+
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" size="large" style={{fontSize: "2em"}} onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" onClick={this.handlePost} textDense={true} className={classes.font}>
             <Check></Check>
             Check-In
         </Button>
         visit = <div>
-                <Typography variant="h2">
+                <Typography variant="h3">
                 Purpose:
                 </Typography>
                 <DialogActions>
                 <div className={classes.toggleContainer}>
                 <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
                 <ToggleButton value="Work" className={classes.button}>
-                Work
+                {this.state.purpose === 'Work' ? <Check></Check> : ''}Work
                 </ToggleButton>
                 <ToggleButton value="Event" className={classes.button} >
-                Event
+                {this.state.purpose === 'Event' ? <Check></Check> : ''}Event
                 </ToggleButton>
                 </ToggleButtonGroup>
                 </div>
@@ -244,7 +254,7 @@ class MemberComponent extends Component {
             </div>
 
         } else {
-            button = <Button variant="contained" color="primary"  size="large" style={{fontSize: "2em"}} onClick={this.handlePut}>
+            button = <Button variant="contained" color="primary" onClick={this.handlePut} textDense={true} className={classes.font} >
             <Check></Check>
             Checkout
         </Button>;
@@ -288,22 +298,21 @@ class MemberComponent extends Component {
                                     
                                     >
                                     <div className='dialogContainer'>
-                                    <Toolbar>
+                                    {/* <Toolbar>
+                                  
+                                    </Toolbar> */}
+                                    <DialogContent>
                                     <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
-                                            position: 'absolute',
-                                            top:'0', 
-                                            right:'0',
-                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
-                                        <div className="xButton">
+                                          position: "absolute",
+                                          top: "0",
+                                          right: "0",
+                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+                                            padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
-                                        </div>
-                                    </IconButton>
-                                    </Toolbar>
-                                    {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
-                                    <Typography variant="h1">
+                                        </IconButton>
+                                    <Typography variant="h1" align="center">
                                         Is this you?
                                     </Typography>
-                                    <DialogContent>
                                         <DialogContentText>
                                          <div className={classes.rooot}>
                                         <ListItem>
@@ -319,10 +328,12 @@ class MemberComponent extends Component {
                                         {visit}
                                    
                                     </div>
+                                    <div className={classes.font}>
                                     {button}
-                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} style={{fontSize: "2em"}} onClick={this.handleClose}>
+                                    <Button variant="contained" color="secondary" textDense={true} fullwidth={true} onClick={this.handleClose} className={classes.font}>
                                     <ArrowBack></ArrowBack> Back
                                     </Button>
+                                    </div>
                                     </Dialog>
                                 </div>
 
