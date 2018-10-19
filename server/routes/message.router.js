@@ -3,8 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const twilio = require('twilio');
 
-// This request will retrieve all the members inside of the "interested in membership" list.
-// Modify the list id to change for impacthub's api
+// This will get all messages left by members for the admin to see
 router.get('/getMessages', (req, res) => {
     if (req.isAuthenticated) {
         // queries for single entries of member and returns each member
@@ -18,8 +17,7 @@ router.get('/getMessages', (req, res) => {
 });
 
 
-// This request will post the new user to the email list
-// Modify the list id to change for impacthub's api
+// This will send messages to the admin from the member component
 router.post('/sendMessage', (req, res) => {
     if (req.isAuthenticated) {
         const queryText = `INSERT INTO "messages" ("body", "cobot_id", "sender_name")
@@ -36,8 +34,22 @@ router.post('/sendMessage', (req, res) => {
     }
 });
 
-// This request will post the new user to the email list
-// Modify the list id to change for impacthub's api
+// this gets the current twilio settings from DB
+router.get('/getTwilioSettings', (req, res) => {
+    console.log('touchdown /getTwilioSettings');
+    
+    if (req.isAuthenticated) {
+        // queries for single entries of member and returns each member
+        const queryText = `SELECT * FROM "twilioLogin";`
+        pool.query(queryText)
+            .then(response => res.send(response.rows))
+            .catch(error => res.sendStatus(500));
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// This sends notifications to twilio
 router.post('/notifyTwilio', (req, res) => {
     if (req.isAuthenticated) {
         console.log('touchdown on /notifyTwilio');

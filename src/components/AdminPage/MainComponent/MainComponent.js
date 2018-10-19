@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import './MainComponent.css';
 
+import TwilioComponent from './TwilioComponent/TwilioComponent';
+
 class MainComponent extends Component {
     constructor() {
         super();
@@ -36,6 +38,7 @@ class MainComponent extends Component {
     render() {
         return (
             <div id="adminView">
+            <TwilioComponent />
                 <Grid container>
                     <Grid item xs={12} sm={6} md={4}>
                         <Paper className="paper">
