@@ -4,9 +4,8 @@ class TableComponent extends Component {
   render() {
       return (
         <div className="viewContainer">
-            <div>
-            <img src="https://via.placeholder.com/300x300?text=Table+Component" alt="graph" />
-        </div>
+          <h4>Town Hall Placeholder</h4>
+            <img src="https://via.placeholder.com/300x500?text=Town+Hall" alt="townHall" />
         </div>
       );
   }

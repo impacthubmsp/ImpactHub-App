@@ -52,10 +52,18 @@ html, body{
 }
 .subColumnHalf{
     display: inline-block;
-    width: 47.5%;
+    width: 50%;
 
 }
-.miniPaper{
-   
+tr:nth-child(even) {
+    background: #CCC
 }
+tr:nth-child(odd) {
+    background: #FFF
+}
+#townHallContainer{
+    height: 50vh;
+    overflow: scroll;
+}
+
 

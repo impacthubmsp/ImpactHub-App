@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import GraphComponent from './GraphComponent/GraphComponent';
 import GroupLoginComponent from './GroupLoginComponent/GroupLoginComponent';
-import TableComponent from './TableComponent/TableComponent';
 import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
 import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
 import CSVComponent from './CSVComponent/CSVComponent';
+import TownHallComponent from '../TownHallComponent/TownHallComponent';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import './MainComponent.css';
@@ -41,32 +41,38 @@ class MainComponent extends Component {
                     <div className={classNames("masonry-layout_column", "leftColumn")}>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <h2>Placeholder for Twilio</h2>
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
                                 <CurrentMemberVSVisitor />
                             </Paper>
                         </div>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <TableComponent />
+                                <TownHallComponent/>
                             </Paper>
                         </div>
                     </div>
                     <div className={classNames("masonry-layout_column", "centerColumn")}>
-                        <div className="masonry-layout_panel">
-                            <Paper className={classNames("paper", "subColumnHalf")}>
-                                <GroupLoginComponent />
-                            </Paper>
-                            <div className={classNames("masonry-layout_column", "subColumnHalf")}>
-                                <Paper className={classNames("paper", "miniPaper")}>
-                                    <CSVComponent/>
+                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
+                            <div className="masonry-layout_panel">
+                                <Paper className="paper">
+                                    <h2>Placeholder for Twilio</h2>
                                 </Paper>
-                                <Paper className={classNames("paper", "miniPaper")}>
+                            </div>
+                            <div className="masonry-layout_panel">
+                                <Paper className={classNames("paper")}>
+                                    <GroupLoginComponent />
+                                </Paper>
+                            </div>
+                        </div>
+                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
+                            <div className="masonry-layout_panel">
+                                <Paper className="paper">
+                                    <CSVComponent />
+                                </Paper>
+                            </div>
+                            <div className="masonry-layout_panel">
+                                <Paper className="paper">
                                     <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder"/>
+                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder" />
                                 </Paper>
                             </div>
                         </div>
@@ -99,7 +105,7 @@ class MainComponent extends Component {
                         </div>
                     </div>
                 </div>
-            </div>)
+            </div >)
 
     }
 }

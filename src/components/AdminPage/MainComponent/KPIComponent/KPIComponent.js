@@ -23,11 +23,6 @@ class KPIComponent extends Component {
                     <div id="peakCheckInTimes" className="kpidiv">
 
                     </div>
-                    <div id="currentGuests">
-                        <h3>Current Number of Guests:
-                            
-                        </h3>
-                    </div>
                     <div id="peakFrequency" className="kpidiv">
                         <h3>Peak Frequency</h3>
                         <h4>This Week:</h4>
