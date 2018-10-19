@@ -104,3 +104,12 @@ li a:hover {
     height: 60px;
 }
 
+.dialogContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.modolImg {
+    width: 150px;
+    height: 150px;
+}
+

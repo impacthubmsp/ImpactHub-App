@@ -10,6 +10,70 @@ import axios from 'axios';
 import moment from 'moment';
 import Avatar from '@material-ui/core/Avatar'
 import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { ArrowBack, Check } from '@material-ui/icons';
+import { ListSubheader } from '../../../../node_modules/@material-ui/core';
+
+const styles = theme => ({
+    root: {
+        position: 'relative',
+        display: 'flex',
+        justify: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+
+    },
+    container: {
+        position: 'absolute',
+        top: '40%',
+        width: '500px'
+    },
+    toggleContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        margin: `${theme.spacing.unit}px 0`,
+        background: theme.palette.background.default,
+        size: 'large'
+      },
+      button: {
+        background: 'white',
+        borderRadius: 3,
+        color: 'black',
+        fontSize: 30,
+        height: '100px',
+        width: '200px',
+        webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
+        border: '1px solid darkgrey',
+      },
+      rooot: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+      },
+      listItemText:{
+        fontSize:'3em',//Insert your required size
+      },
+      secondaryItemText:{
+        fontSize:'2em',//Insert your required size
+        display: 'inline',
+      }
+});
+
 
 const members = [];
 
@@ -20,7 +84,10 @@ function getMembers() {
         member.map((member)=>{
             members.push({
                 label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
-                value: member.cobot_id + member.name
+                value: member.cobot_id + member.name,
+                img_url: member.img_url,
+                company: member.company,
+                name: member.name
             })
             return members;
            })
@@ -45,11 +112,12 @@ class MemberComponent extends Component {
         //Whis will be used for axios request.
         this.state = {
             single: '',
-            purpose: null,
+            purpose: 'Work',
             day: null,
             time: null,
             checked_in: true,
-            membersCheckedIn: []
+            membersCheckedIn: [],
+            open: false,
         }
         this.baseState = this.state 
     }
@@ -71,6 +139,9 @@ class MemberComponent extends Component {
             this.resetForm()
         }else{
             this.checkStatus(this.state.single.value)
+            this.setState({
+                open: true
+            })
         }
       };
 
@@ -110,11 +181,16 @@ class MemberComponent extends Component {
         }
     }
 
-    handleVisit = (value)  => {
+    handleClose = () => {
+        this.setState({ open: false });
+        this.resetForm();
+      };
+
+    handleVisit = (event, purpose)  => 
         this.setState({
-            purpose: value,
+            purpose
         })
-    }
+    
 
     handlePut = () => {
         axios.put('/api/memb',  this.state)
@@ -123,42 +199,69 @@ class MemberComponent extends Component {
       }).catch(error => {
         console.log('You got an error');
       })
+      this.handleClose()
     }
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
+        this.handleClose()
     }
 
     resetForm = () => {
-        console.log(this.state);
         this.setState(this.baseState)
         this.getCheckedIn();
       }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
-
+        const { classes, fullScreen } = this.props;
+        const { purpose } = this.state;
         let button;
-
+        let visit;
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" size="large" style={{fontSize: "2em"}} onClick={this.handlePost}>
+            <Check></Check>
             Check-In
         </Button>
+        visit = <div>
+                <Typography variant="h2">
+                Purpose:
+                </Typography>
+                <DialogActions>
+                <div className={classes.toggleContainer}>
+                <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
+                <ToggleButton value="Work" className={classes.button}>
+                Work
+                </ToggleButton>
+                <ToggleButton value="Event" className={classes.button} >
+                Event
+                </ToggleButton>
+                </ToggleButtonGroup>
+                </div>
+
+
+                </DialogActions>
+            </div>
+
         } else {
-            button = <Button variant="contained" color="primary" onClick={this.handlePut}>
+            button = <Button variant="contained" color="primary"  size="large" style={{fontSize: "2em"}} onClick={this.handlePut}>
+            <Check></Check>
             Checkout
         </Button>;
         }
         console.log(this.state);
         
         return (
-            <Grid item xs={6} sm={6} md={6} lg={6}>
+            <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
+            <Paper className={classes.container}>
                 <div>
                     {/* Form for members */}
                     <div>
-                        <div>
-                            Member Login
-                        </div>
+                    <div style={{ marginLeft: '25px' }}>
+                        <Typography variant="h3">
+                            Are you a Member?
+                        </Typography>
+                    </div>
                         <div>
                             <List component="nav">
                                 {/* Component for selecting name & drop-down menu */}
@@ -167,64 +270,82 @@ class MemberComponent extends Component {
                                     className="container"
                                     classNamePrefix="input"
                                     isClearable
-                                    noOptionsMessage={() => 'Start by typing your member name'}
+                                    noOptionsMessage={() => 'Start by typing your name'}
                                     backspaceRemovesValue
                                     options={members}
                                     value={this.state.single}
                                     onChange={this.handleChange('single')}
-                                    placeholder="Name"
+                                    placeholder="Full Name"
                                      />
                                 </ListItem>
-                                <Divider />
+                                 <div >
+                                    <Dialog
+                                    fullScreen={fullScreen}
+                                    onExit={this.resetForm}
+                                    open={this.state.open}
+                                    onClose={this.handleClose}
+                                    aria-labelledby="responsive-dialog-title"
+                                    
+                                    >
+                                    <div className='dialogContainer'>
+                                    <Toolbar>
+                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
+                                            position: 'absolute',
+                                            top:'0', 
+                                            right:'0',
+                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
+                                        <div className="xButton">
+                                        <CloseIcon onClick={this.handleClose} />
+                                        </div>
+                                    </IconButton>
+                                    </Toolbar>
+                                    {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
+                                    <Typography variant="h1">
+                                        Is this you?
+                                    </Typography>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                         <div className={classes.rooot}>
+                                        <ListItem>
+                                        <Avatar style={{width:'150px', height:'150px'}}><img className="modolImg" src={this.state.single.img_url}/>
+                                        </Avatar> 
+                                             <ListItemText 
+                                            classes={{primary:classes.listItemText, secondary:classes.secondaryItemText}}
+                                            inset={true} primary={this.state.single.name} secondary={this.state.single.company} />
+                                        </ListItem>
+                                        </div> 
+                                        </DialogContentText>
+                                    </DialogContent>
+                                        {visit}
+                                   
+                                    </div>
+                                    {button}
+                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} style={{fontSize: "2em"}} onClick={this.handleClose}>
+                                    <ArrowBack></ArrowBack> Back
+                                    </Button>
+                                    </Dialog>
+                                </div>
 
-                                <ListItem>
-                                    <div>These are checkin options.</div>
-                                </ListItem>
 
                                 {/* Buttons for selecting the type of work */}
-                                <ListItem>
-                                    {/* will appear on dom after the user has been selected.*/}
-                                    <Button variant="contained" color="primary" onClick={() => this.handleVisit('Work')} value={this.state.purpose}>
-                                        Work
-                                    </Button>
-                                    <Button variant="contained" color="primary"onClick={() => this.handleVisit('Event')} value={this.state.purpose}>
-                                        Event
-                                    </Button>
-                                  {/* <Button variant="contained" color="primary" onClick={this.handlePost}>
-                                             Check-In
-                                         </Button>: <Button variant="contained" color="primary" onClick={this.handlePut}>
-                                        Checkout
-                                    </Button>  */}
-                                    {button}
-                                    
-                                    <Button variant="contained" color="secondary" onClick={this.resetForm}>
-                                        Cancel
-                                    </Button>
-
-                                </ListItem>
-                                <Divider/>
-
-                                {/* will be used to check the user out if they are checked in. */}
-                                <ListItem>
-                                    Button for testing out the checkout feature.
-                                </ListItem>
-                                <ListItem>
-
-                                    {/* <Button variant="contained" color="primary" onClick={this.handlePut}>
-                                        Checkout
-                                    </Button> */}
-
-                                </ListItem>
+                                {/* will appear on dom after the user has been selected.*/}
                             </List>
 
                         </div>
                     </div>
                 </div>
+                </Paper>
             </Grid>
         );
     }
 }
 
+MemberComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+    fullScreen: PropTypes.bool.isRequired,
+};
+const MemberWithStyle = withStyles(styles)(MemberComponent)
+
 // this allows us to use <App /> in index.js
-export default connect()(MemberComponent);
+export default connect()(MemberWithStyle);
 
