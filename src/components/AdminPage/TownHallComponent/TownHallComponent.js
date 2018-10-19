@@ -7,29 +7,6 @@ import moment from 'moment';
 import Avatar from '@material-ui/core/Avatar'
 import ListItemText from '@material-ui/core/ListItemText';
 
-const members = [];
-
-function getMembers() {
-    axios.get('/api/memb/list')
-    .then((response) =>{
-        let member = response.data;
-        member.map((member)=>{
-            members.push({
-                label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
-                value: member.cobot_id + member.name
-            })
-            return members;
-           })
-    })
-}
-
-// get list of member array and their checked-in status
-
-members.map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-  }));
-
 
 
 class TownHallComponent extends Component {
@@ -52,7 +29,6 @@ class TownHallComponent extends Component {
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
-        getMembers()
         this.getCheckedIn()
     }
 
@@ -75,7 +51,7 @@ class TownHallComponent extends Component {
         //if user is not checked in button will remain checked in
 
       getCheckedIn() {
-        axios.get('/api/memb/checkedin')
+        axios.get('/api/memb/townhall')
         .then((response) =>{
           console.log(response.data); 
           this.setState({
@@ -84,25 +60,6 @@ class TownHallComponent extends Component {
         }).catch((error)=>{
             console.log('error', error);
         })
-    }
-
-    //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
-
-    checkStatus (selectedMember) {
-        console.log('in selectedMember', selectedMember);
-        for(let user of this.state.membersCheckedIn){
-            let combineUserInfo = `${user.cobot_id}${user.name}`;
-            if(combineUserInfo === selectedMember){
-                this.setState({
-                    checked_in: false
-                })
-            }
-            else{
-                this.setState({
-                    checked_in: true
-                })
-            }
-        }
     }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
@@ -118,8 +75,8 @@ class TownHallComponent extends Component {
                         </div>
                             <List component="nav">
                                 {/* Component for selecting name & drop-down menu */}
-                                {members.map((member, i)=>{
-                                    return(<ListItem key={i}><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem>)
+                                {this.state.membersCheckedIn.map((member, i)=>{
+                                    return(<ListItem key={i}><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url} alt="profile"/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem>)
                                 })
                                 }
                             </List>
