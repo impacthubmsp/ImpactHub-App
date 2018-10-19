@@ -24,7 +24,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
-import ListSubheader from '@material-ui/core/ListSubheader';
 
 const styles = theme => ({
     root: {
@@ -143,7 +142,8 @@ class MemberComponent extends Component {
         });
         if(this.state.single === null || this.state.single === ''){
             this.resetForm()
-        }else{
+        }
+        else{
             this.checkStatus(this.state.single.value)
             this.setState({
                 open: true
@@ -224,23 +224,24 @@ class MemberComponent extends Component {
         const { purpose } = this.state;
         let button;
         let visit;
+
         if (this.state.checked_in) {
             button = <Button variant="contained" color="primary" onClick={this.handlePost} textDense={true} className={classes.font}>
             <Check></Check>
             Check-In
         </Button>
         visit = <div>
-                <Typography variant="h2">
+                <Typography variant="h3">
                 Purpose:
                 </Typography>
                 <DialogActions>
                 <div className={classes.toggleContainer}>
                 <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
                 <ToggleButton value="Work" className={classes.button}>
-                Work
+                {this.state.purpose === 'Work' ? <Check></Check> : ''}Work
                 </ToggleButton>
                 <ToggleButton value="Event" className={classes.button} >
-                Event
+                {this.state.purpose === 'Event' ? <Check></Check> : ''}Event
                 </ToggleButton>
                 </ToggleButtonGroup>
                 </div>
@@ -294,20 +295,21 @@ class MemberComponent extends Component {
                                     
                                     >
                                     <div className='dialogContainer'>
-                                    <Toolbar>
+                                    {/* <Toolbar>
+                                  
+                                    </Toolbar> */}
+                                    <DialogContent>
                                     <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
                                           position: "absolute",
                                           top: "0",
                                           right: "0",
-                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
+                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+                                            padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
                                         </IconButton>
-                                    </Toolbar>
-                                    {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
-                                    <Typography variant="h1">
+                                    <Typography variant="h1" align="center">
                                         Is this you?
                                     </Typography>
-                                    <DialogContent>
                                         <DialogContentText>
                                          <div className={classes.rooot}>
                                         <ListItem>
