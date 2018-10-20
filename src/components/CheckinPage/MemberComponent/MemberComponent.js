@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -20,11 +19,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
-import { ListSubheader } from '../../../../node_modules/@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -38,7 +35,8 @@ const styles = theme => ({
     container: {
         position: 'absolute',
         top: '40%',
-        width: '500px'
+        width: '500px',
+        
     },
     toggleContainer: {
         display: 'flex',
@@ -52,9 +50,9 @@ const styles = theme => ({
         background: 'white',
         borderRadius: 3,
         color: 'black',
-        fontSize: 30,
-        height: '100px',
-        width: '200px',
+        fontSize: 40,
+        height: '80px',
+        width: '250px',
         webkitBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
@@ -66,17 +64,27 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
       },
       listItemText:{
-        fontSize:'3em',//Insert your required size
+        fontSize:'2em',
       },
       secondaryItemText:{
-        fontSize:'2em',//Insert your required size
+        fontSize:'1.5em',
         display: 'inline',
+      },
+      font: {
+        fontSize: '2em',
+        height: '100px',
+        width: '500px',
+        margin: 'auto'
+      },
+      checkoutContainer: {
+          height: '150px'
       }
 });
 
-
+//Global array of all the members
 const members = [];
 
+//Gets member and pushes to array m
 function getMembers() {
     axios.get('/api/memb/list')
     .then((response) =>{
@@ -87,7 +95,8 @@ function getMembers() {
                 value: member.cobot_id + member.name,
                 img_url: member.img_url,
                 company: member.company,
-                name: member.name
+                name: member.name,
+                id: member.cobot_id
             })
             return members;
            })
@@ -127,7 +136,13 @@ class MemberComponent extends Component {
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
         this.getCheckedIn()
+      
+       
     }
+
+    // componentDidUpdate(){
+    //     window.location.reload()
+    // }
 
     handleChange = name => async value => {
         await this.setState({
@@ -137,8 +152,9 @@ class MemberComponent extends Component {
         });
         if(this.state.single === null || this.state.single === ''){
             this.resetForm()
-        }else{
-            this.checkStatus(this.state.single.value)
+        }
+        else{
+            this.checkStatus(this.state.single.id)
             this.setState({
                 open: true
             })
@@ -151,6 +167,7 @@ class MemberComponent extends Component {
         //if user is not checked in button will remain checked in
 
       getCheckedIn() {
+        
         axios.get('/api/memb/checkedin')
         .then((response) =>{
           console.log(response.data); 
@@ -163,12 +180,12 @@ class MemberComponent extends Component {
     }
 
     //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
-
+    //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again.
     checkStatus (selectedMember) {
         console.log('in selectedMember', selectedMember);
         for(let user of this.state.membersCheckedIn){
-            let combineUserInfo = `${user.cobot_id}${user.name}`;
-            if(combineUserInfo === selectedMember){
+            console.log(user.cobot_id, selectedMember);
+            if(user.cobot_id === selectedMember){
                 this.setState({
                     checked_in: false
                 })
@@ -214,27 +231,29 @@ class MemberComponent extends Component {
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
+        
         const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
         let button;
         let visit;
+
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" size="large" style={{fontSize: "2em"}} onClick={this.handlePost}>
+            button = <Button variant="contained" color="primary" onClick={this.handlePost} textDense={true} className={classes.font}>
             <Check></Check>
             Check-In
         </Button>
         visit = <div>
-                <Typography variant="h2">
+                <Typography variant="h3">
                 Purpose:
                 </Typography>
                 <DialogActions>
                 <div className={classes.toggleContainer}>
                 <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
                 <ToggleButton value="Work" className={classes.button}>
-                Work
+                {this.state.purpose === 'Work' ? <Check></Check> : ''}Work
                 </ToggleButton>
                 <ToggleButton value="Event" className={classes.button} >
-                Event
+                {this.state.purpose === 'Event' ? <Check></Check> : ''}Event
                 </ToggleButton>
                 </ToggleButtonGroup>
                 </div>
@@ -244,10 +263,16 @@ class MemberComponent extends Component {
             </div>
 
         } else {
-            button = <Button variant="contained" color="primary"  size="large" style={{fontSize: "2em"}} onClick={this.handlePut}>
+            visit = 
+            <div className={classes.checkoutContainer}>
+            </div>
+            button =
+            <Button variant="contained" color="primary" onClick={this.handlePut} textDense={true} className={classes.font} >
             <Check></Check>
             Checkout
-        </Button>;
+                </Button>
+           
+            ;
         }
         console.log(this.state);
         
@@ -288,22 +313,21 @@ class MemberComponent extends Component {
                                     
                                     >
                                     <div className='dialogContainer'>
-                                    <Toolbar>
+                                    {/* <Toolbar>
+                                  
+                                    </Toolbar> */}
+                                    <DialogContent>
                                     <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
-                                            position: 'absolute',
-                                            top:'0', 
-                                            right:'0',
-                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}>
-                                        <div className="xButton">
+                                          position: "absolute",
+                                          top: "0",
+                                          right: "0",
+                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+                                            padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
-                                        </div>
-                                    </IconButton>
-                                    </Toolbar>
-                                    {/* <DialogTitle id="responsive-dialog-title">{"Is this you?"}</DialogTitle> */}
-                                    <Typography variant="h1">
+                                        </IconButton>
+                                    <Typography variant="h1" align="center">
                                         Is this you?
                                     </Typography>
-                                    <DialogContent>
                                         <DialogContentText>
                                          <div className={classes.rooot}>
                                         <ListItem>
@@ -317,18 +341,16 @@ class MemberComponent extends Component {
                                         </DialogContentText>
                                     </DialogContent>
                                         {visit}
-                                   
-                                    </div>
-                                    {button}
-                                    <Button variant="contained" color="secondary" size="large" fullwidth={true} style={{fontSize: "2em"}} onClick={this.handleClose}>
+                                        <div className={classes.font}>
+                                            {button}
+                                    <Button variant="contained" color="secondary" textDense={true} fullwidth={true} onClick={this.handleClose} className={classes.font}>
                                     <ArrowBack></ArrowBack> Back
                                     </Button>
+                                    </div>
+                                    </div>
+                                  
                                     </Dialog>
                                 </div>
-
-
-                                {/* Buttons for selecting the type of work */}
-                                {/* will appear on dom after the user has been selected.*/}
                             </List>
 
                         </div>

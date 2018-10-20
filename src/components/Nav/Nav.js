@@ -36,6 +36,7 @@ class Nav extends Component {
 
   pushToCheckin = () => {
     this.props.history.push('/checkin');
+    window.location.reload()
   }
 
   render() {

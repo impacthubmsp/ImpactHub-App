@@ -40,6 +40,7 @@
     "redux-saga": "^0.16.0",
     "sweetalert2": "^7.28.7",
     "sweetalert2-react-content": "^1.0.1",
+    "sweetalert": "^2.1.0",
     "twilio": "^3.23.1"
   },
   "scripts": {

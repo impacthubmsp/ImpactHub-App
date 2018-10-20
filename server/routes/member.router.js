@@ -42,7 +42,7 @@ router.get('/checkedin', (req, res) => {
 
     // let name = memberStatus.single.value.slice(32)
     // queries for checked in or checked out members
-    const queryText = `SELECT DISTINCT ON (cobot_id) * FROM checkin WHERE member = true AND day = CURRENT_DATE AND checked_in = TRUE;`;
+    const queryText = `SELECT * FROM checkin WHERE member = true AND day = CURRENT_DATE AND checked_in = TRUE;`;
     pool.query(queryText)
         .then(response => res.send(response.rows))
         .catch(error => res.sendStatus(500));
@@ -52,7 +52,7 @@ router.get('/townhall', (req, res) => {
 
     // let name = memberStatus.single.value.slice(32)
     // queries for checked in or checked out members
-    const queryText = `SELECT "checkin"."cobot_id", "checkin"."name", "members"."company", "members"."img_url"
+    const queryText = `SELECT DISTINCT ON ("checkin"."cobot_id") "checkin"."cobot_id", "checkin"."name", "members"."company", "members"."img_url"
                         FROM "checkin" 
                         JOIN "members" ON "checkin"."cobot_id" = "members"."cobot_id"
                         WHERE "member" = true AND "day" = CURRENT_DATE AND "checked_in" = TRUE;`;
