@@ -47,6 +47,7 @@ class CurrentMemberVSVisitor extends Component {
             alert ('Today\'s visitors could not be obtained');
         })
     }
+    // put functions here that should happen on page load
     componentDidMount(){
         this.getCurrentMembers();
         this.getTodaysVisitors();
@@ -83,7 +84,7 @@ class CurrentMemberVSVisitor extends Component {
 
                     data={data}
                 />}
-                <h4>{this.state.currentGuests} current guests</h4>
+                <h4>{(this.state.currentVisitors + this.state.currentMembers)} current guests</h4>
             </div>
         );
     }
