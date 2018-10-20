@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
+import axios from 'axios';
 
 
 
@@ -7,16 +8,49 @@ class CurrentMemberVSVisitor extends Component {
     constructor() {
         super();
         this.state = {
-            currentVisitors: 10,
-            currentMembers: 20,
-            currentGuests: 30
+            currentVisitors: null,
+            currentMembers: '10',
+            currentGuests:''//(this.state.currentVisitors + this.state.currentMembers),
         }
 
     }
 
-    //function to setState with result of API call here
-
-
+    //gets the amount of members currently in the space from the database and sets state value
+    getCurrentMembers = () => {
+        console.log('in getCurrentMembers');
+        axios({
+            method: 'GET',
+            url:'/api/admin/currentMemberCount',
+        }).then((response)=>{
+            console.log(response.data);
+            this.setState({
+                currentMembers: Number(response.data[0].sum),
+            })
+        }).catch((error)=>{
+                console.log(error, 'Error getting current members');
+                alert('Current members could\'t be obtained');
+        })
+    }
+    //gets the amount of guests in the space from the database and sets the state value
+    getTodaysVisitors = () => {
+        console.log('in getTodaysVisitors');
+        axios({
+            method: 'GET',
+            url:'/api/admin/todayGuestCount',
+        }).then((response)=>{
+            console.log(response.data.sum);
+            this.setState({
+                currentVisitors: Number(response.data[0].sum),
+            })
+        }).catch((error)=> {
+            console.log(error, 'Error getting today\'s visitors');
+            alert ('Today\'s visitors could not be obtained');
+        })
+    }
+    componentDidMount(){
+        this.getCurrentMembers();
+        this.getTodaysVisitors();
+    }
     render() {
         const data = {
             labels: [
@@ -35,7 +69,7 @@ class CurrentMemberVSVisitor extends Component {
                 ]
             }]
         };
-        const dataHere = this.state.currentVisitors;
+        const dataHere = this.state.currentMembers;
         return (
             <div className="viewContainer">
                 {dataHere && < Pie
