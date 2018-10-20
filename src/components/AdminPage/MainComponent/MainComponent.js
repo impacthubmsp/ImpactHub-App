@@ -12,6 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import './MainComponent.css';
 
+import TwilioComponent from './TwilioComponent/TwilioComponent';
+
 class MainComponent extends Component {
     constructor() {
         super();
@@ -37,6 +39,7 @@ class MainComponent extends Component {
     render() {
         return (
             <div id="adminView">
+            <TwilioComponent />
                 <div className="masonry-layout">
                     <div className={classNames("masonry-layout_column", "leftColumn")}>
                         <div className="masonry-layout_panel">
