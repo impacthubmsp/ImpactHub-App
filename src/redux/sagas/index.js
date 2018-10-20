@@ -5,7 +5,7 @@ import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+
 
 export default function* rootSaga() {
   yield all([
@@ -32,7 +32,7 @@ const successPost = ()=>{
 }
 const failPost = () => {
   toast.fire({
-    type: 'warning',
+    type: 'error',
     title: 'Sign in unsuccessful',
     text:'Did you select your reason for visiting?'
   })
@@ -65,6 +65,7 @@ function* getMember(action) {
   try{ 
     const response = yield call(axios.get, '/api/memb')
     console.log(response);
+  
     // const result = yield call(axios.get, '/api/memb/list')
     // console.log(result);
     // const responseAction = {type: 'SET_MEMBERS', payload: result.data}
@@ -80,9 +81,10 @@ function* postMember(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/memb', action.payload)
+    yield successPost();
   }catch(err){
     console.log('Error', err);
-    
+    failPost();
   };
 
 }

@@ -22,9 +22,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Tooltip from '@material-ui/core/Tooltip';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+
 const styles = {
     root: {
         position: 'relative',
@@ -41,13 +39,8 @@ const styles = {
 
     }
 }
-const MySwal = withReactContent(Swal);
-const toast = Swal.mixin({
-    toast: true,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 2000
-  });
+
+ 
 class VisitorComponent extends Component {
     constructor() {
         super()
