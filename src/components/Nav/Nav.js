@@ -24,7 +24,7 @@ class Nav extends Component {
       this.props.history.push('/home');
     }
   }
-
+ 
   logout = () => {
     this.props.dispatch(triggerLogout());
     console.log('logout function');
