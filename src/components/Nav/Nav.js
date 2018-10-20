@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { triggerLogout } from '../../redux/actions/loginActions';
-
+import { USER_ACTIONS } from '../../redux/actions/userActions';
 import MainAppBar from "./MainAppBar/MainAppBar"
 
 const mapStateToProps = state => ({
@@ -24,7 +24,7 @@ class Nav extends Component {
       this.props.history.push('/home');
     }
   }
-
+ 
   logout = () => {
     this.props.dispatch(triggerLogout());
     console.log('logout function');
