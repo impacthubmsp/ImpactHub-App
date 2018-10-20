@@ -30,14 +30,12 @@ const styles = theme => ({
         justify: 'center',
         flexDirection: 'column',
         alignItems: 'center',
-        fontFamily: 'Arial, Helvetica, sans-serif'
 
     },
     container: {
         position: 'absolute',
         top: '40%',
         width: '500px',
-        fontFamily: 'Arial, Helvetica, sans-serif'
         
     },
     toggleContainer: {
@@ -46,8 +44,7 @@ const styles = theme => ({
         justifyContent: 'flex-start',
         margin: `${theme.spacing.unit}px 0`,
         background: theme.palette.background.default,
-        size: 'large',
-        fontFamily: 'Arial, Helvetica, sans-serif'
+        size: 'large'
       },
       button: {
         background: 'white',
@@ -60,29 +57,24 @@ const styles = theme => ({
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         border: '1px solid darkgrey',
-        fontFamily: 'Arial, Helvetica, sans-serif'
       },
       rooot: {
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-        fontFamily: 'Arial, Helvetica, sans-serif'
       },
       listItemText:{
         fontSize:'2em',
-        fontFamily: 'Arial, Helvetica, sans-serif'
       },
       secondaryItemText:{
         fontSize:'1.5em',
         display: 'inline',
-        fontFamily: 'Arial, Helvetica, sans-serif'
       },
       font: {
         fontSize: '2em',
         height: '100px',
         width: '500px',
-        margin: 'auto',
-        fontFamily: 'Arial, Helvetica, sans-serif'
+        margin: 'auto'
       },
       checkoutContainer: {
           height: '150px'
@@ -188,7 +180,7 @@ class MemberComponent extends Component {
     }
 
     //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
-    //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again. 
+    //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again.
     checkStatus (selectedMember) {
         console.log('in selectedMember', selectedMember);
         for(let user of this.state.membersCheckedIn){
@@ -251,7 +243,7 @@ class MemberComponent extends Component {
             Check-In
         </Button>
         visit = <div>
-                <Typography variant="h4" style={{fontFamily: "Arial, Helvetica, sans-serif"}}>
+                <Typography variant="h3">
                 Purpose:
                 </Typography>
                 <DialogActions>
@@ -291,8 +283,8 @@ class MemberComponent extends Component {
                     {/* Form for members */}
                     <div>
                     <div style={{ marginLeft: '25px' }}>
-                        <Typography variant="h3" style={{fontFamily: "Arial, Helvetica, sans-serif"}}>
-                            Are you a member?
+                        <Typography variant="h3">
+                            Are you a Member?
                         </Typography>
                     </div>
                         <div>
@@ -309,7 +301,6 @@ class MemberComponent extends Component {
                                     value={this.state.single}
                                     onChange={this.handleChange('single')}
                                     placeholder="Full Name"
-                                    style={{fontFamily: "Arial, Helvetica, sans-serif"}}
                                      />
                                 </ListItem>
                                  <div >
@@ -334,7 +325,7 @@ class MemberComponent extends Component {
                                             padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
                                         </IconButton>
-                                    <Typography variant="h2" align="center" style={{fontFamily: "Arial, Helvetica, sans-serif"}}>
+                                    <Typography variant="h1" align="center">
                                         Is this you?
                                     </Typography>
                                         <DialogContentText>
