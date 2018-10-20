@@ -9,12 +9,12 @@ class GraphComponent extends Component {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         datasets: [{
           label: "Members",
-          backgroundColor: ["#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF", "#35DDFF"],
+          backgroundColor: ["#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb"],
           data: [10, 40, 20, 50, 20]
         },
         {
           label: "Visitors",
-          backgroundColor: ["#c45850", "#c45850", "#c45850", "#c45850", "#c45850"],
+          backgroundColor: ["#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91"],
           data: [5, 10, 10, 30, 5]
         }]
       },

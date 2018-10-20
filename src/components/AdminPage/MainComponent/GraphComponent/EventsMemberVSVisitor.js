@@ -9,12 +9,12 @@ class EventsMemberVSVisitor extends Component {
         labels: ["Date1", "Date2", "Date3", "Date4", "Date5", "Date6", "Date7",],
         datasets: [{
           label: "Members",
-          backgroundColor: ["#00FFFF", "#00FFFF", "#00FFFF", "#00FFFF", "#00FFFF", "#00FFFF", "#00FFFF"],
+          backgroundColor: ["#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb"],
           data: [10, 40, 20, 50, 20, 30, 40]
         },
         {
           label: "Visitors",
-          backgroundColor: ["#e6e6fa", "#e6e6fa", "#e6e6fa", "#e6e6fa", "#e6e6fa", "#e6e6fa", "#e6e6fa"],
+          backgroundColor: ["#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91"],
           data: [10, 40, 20, 50, 20, 30, 40]
         }]
       }

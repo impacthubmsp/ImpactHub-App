@@ -60,12 +60,12 @@ class VisitorAddInfo extends Component {
             datasets: [{
                 data: [this.state.visitorsAddInfo, (this.state.totalVisitors - this.state.visitorsAddInfo)],
                 backgroundColor: [
-                '#b03060',
-                '#ffd700'
+                '#a5d6a7',
+                '#78909c'
                 ],
                 hoverBackgroundColor: [
-                '#b03060',
-                '#ffd700'
+                '#a5d6a7',
+                '#78909c'
                 ]
             }]
         };

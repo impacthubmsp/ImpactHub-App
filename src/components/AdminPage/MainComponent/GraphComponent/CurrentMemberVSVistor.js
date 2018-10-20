@@ -61,12 +61,12 @@ class CurrentMemberVSVisitor extends Component {
             datasets: [{
                 data: [this.state.currentVisitors, this.state.currentMembers],
                 backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB'
+                    '#ffab91',
+                    '#b2dfdb'
                 ],
                 hoverBackgroundColor: [
-                    '#FF6384',
-                    '#36A2EB'
+                    '#ffab91',
+                    '#b2dfdb'
                 ]
             }]
         };
