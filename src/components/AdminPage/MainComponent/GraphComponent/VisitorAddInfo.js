@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
+import axios from 'axios';
 
 
 
@@ -9,11 +10,42 @@ class VisitorAddInfo extends Component {
         this.state = {
             visitorsNoAddInfo: 40,
             visitorsAddInfo: 20,
+            totalVisitors: null,
         }
 
     }
     
-    //function to setState with result of API call here
+    //function to setState with the number of total visitors (as recorded in the database)
+    getTotalVisitors = () => {
+        console.log('in getTotalVisitors');
+        axios({
+            method: 'GET',
+            url:'/api/admin/totalVisitors',
+        }).then((response)=>{
+            console.log(response.data);
+            this.setState({
+                currentMembers: Number(response.data[0].count),
+            })
+        }).catch((error)=>{
+                console.log(error, 'Error getting total visitors');
+                alert('Total visitors could\'t be obtained');
+        })
+    }
+    //function to setState with the number of visitors who indicated they were interested in additional information
+    getInterestedVisitor = () => {
+        console.log('in getInterestedVisitor');
+        axios({
+            method: 'GET',
+            url: '/api/admin/visitorsInterestedInMoreInfo',
+        }).then((response)=>{
+            console.log(response.data);
+            this.setState({
+                visitorsAddInfo: Number(response.data[0].count),
+            })
+        }).catch((error)=>{
+            console.log(error, 'Error getting number of visitors interested in additional info')
+        })
+    }
     
 
     render(){
