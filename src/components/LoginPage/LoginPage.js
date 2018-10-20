@@ -104,6 +104,7 @@ class LoginPage extends Component {
           </div>
           <div style={{margin:'10px'}}>
             <Button
+            onClick={this.login()}
               value="Log In"
             >
               Login
