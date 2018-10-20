@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContactRow from './ContactRow/ContactRow.js';
 import axios from 'axios';
+import CSVComponent from '../CSVComponent/CSVComponent';
 
 class NewContactComponent extends Component {
     constructor() {
@@ -56,6 +57,9 @@ class NewContactComponent extends Component {
                             })}
                         </tbody>
                     </table>
+                    {/* Component that allows user to download visitor data */}
+                    <hr />
+                    <CSVComponent />
                 </div>
             </div>
         );
