@@ -10,10 +10,12 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ViewQuilt from '@material-ui/icons/ViewQuilt';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   root: {
     width: '100%',
+
   },
   grow: {
     flexGrow: 1,
@@ -137,20 +139,23 @@ class MainAppBar extends React.Component {
             <div className={classes.sectionDesktop}>
 
               {/* Admin Link */}
-              <IconButton className={classes.navLink} color="inherit" onClick={this.props.admin}>
-                <ViewQuilt />
-              </IconButton>
-
+              <Tooltip title="Admin Page">
+                <IconButton className={classes.navLink} color="inherit" onClick={this.props.admin}>
+                  <ViewQuilt />
+                </IconButton>
+              </Tooltip>
               {/* Checkin Link */}
-              <IconButton className={classes.navLink} color="inherit" onClick={this.props.checkin}>
-              <HowToReg />
-              </IconButton>
-
+              <Tooltip title="Check-in Page">
+                <IconButton className={classes.navLink} color="inherit" onClick={this.props.checkin}>
+                  <HowToReg />
+                </IconButton>
+              </Tooltip>
               {/* Logout */}
-              <IconButton className={classes.navLink} color="inherit" onClick={this.props.logout}>
-              <ExitToApp />
-              </IconButton>
-
+              <Tooltip title="Log Out">
+                <IconButton className={classes.navLink} color="inherit" onClick={this.props.logout}>
+                  <ExitToApp />
+                </IconButton>
+              </Tooltip>
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">

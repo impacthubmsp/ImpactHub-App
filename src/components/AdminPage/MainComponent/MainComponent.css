@@ -5,12 +5,6 @@ html, body{
     width: 10vw;
     height: 10vw;
 }
-#callBellCellForm{
-    height: auto;
-    width: auto;
-    background-color: transparent;
-    
-}
 #groupCheck-InForm{
     height: auto;
     width: auto;
@@ -18,16 +12,58 @@ html, body{
 }
 .paper{
     text-align: center;
-    display: inline-flex;
-    padding: 2vw;
+    padding: 1vh;
     margin: 8px;
+    
 }
 #adminView{
     background-color: #b0bec5;
     height: 100%;
-    width: 100vw;
-    padding: 2vh;
+    width: 100%;
 }
 .viewContainer{
-    display: inline-flex;
+   /* display: inline-flex; */
+   overflow: scroll;
 }
+.masonry-layout_column{
+    display: inline-block;
+
+}
+.leftColumn{
+    width: 25%;
+    float: left;
+}
+.centerColumn{
+    width: 50%;
+    float: center;
+    text-align: center;
+}
+.rightColumn{
+    width: 25%;
+    float: right;
+}
+.masonry-layout_panel {
+    break-inside: avoid;
+    padding: 5px;
+}
+.masonry-layout__panel-content {
+    padding: 10px;
+    border-radius: 10px;
+}
+.subColumnHalf{
+    display: inline-block;
+    width: 50%;
+
+}
+tr:nth-child(even) {
+    background: #CCC
+}
+tr:nth-child(odd) {
+    background: #FFF
+}
+#townHallContainer{
+    height: 50vh;
+    overflow: scroll;
+}
+
+

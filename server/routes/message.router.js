@@ -37,7 +37,7 @@ router.post('/sendMessage', (req, res) => {
 // this gets the current twilio settings from DB
 router.get('/getTwilioSettings', (req, res) => {
     console.log('touchdown /getTwilioSettings');
-    
+
     if (req.isAuthenticated) {
         // queries for single entries of member and returns each member
         const queryText = `SELECT * FROM "twilioLogin";`
@@ -66,6 +66,41 @@ router.post('/notifyTwilio', (req, res) => {
             })
             .then(message => console.log(message.sid))
             .done();
+
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// Will delete all the rows in "twilioLogin" then replace with new person
+router.post('/changeAdminTwilio', (req, res) => {
+    if (req.isAuthenticated) {
+        // queries for single entries of member and returns each member
+        const queryText = `DELETE FROM "twilioLogin";`
+        pool.query(queryText)
+            .then(response => res.send(response.rows)).then(
+                () => {
+                    const queryText = `INSERT INTO "twilioLogin" ("admin_name", "phone_number")
+                     VALUES ($1, $2);`
+                    pool.query(queryText, [req.body.admin_name, req.body.phone_number])
+                }
+            )
+            .catch(error => res.sendStatus(500));
+
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// This sends notifications to twilio
+router.delete('/clearTwilio', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log('touchdown on /clearTwilio');
+        // queries for single entries of member and returns each member
+        const queryText = `DELETE FROM "twilioLogin";`
+        pool.query(queryText)
+            .then(message => console.log(message.sid))
+            .catch(error => res.sendStatus(500));
 
     } else {
         res.sendStatus(403);

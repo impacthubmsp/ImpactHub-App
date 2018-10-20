@@ -10,7 +10,6 @@ class AdminPage extends Component {
       <div>
 
         <Nav history={this.props.history} />
-        /ADMIN
           <MainComponent />
       </div>
     );

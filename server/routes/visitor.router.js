@@ -62,6 +62,22 @@ router.post('/group', (req, res) => {
     }
 });
 
+//GET route is for displaying the last five visitors who indicated they wanted info
+router.get('/', (req, res)=>{
+    if (req.isAuthenticated()){
+        const queryText = `SELECT "name","phone", "email"
+                            FROM "mailinglist"
+                            WHERE "email" IS NOT NULL
+                            LIMIT 5;`;
+        pool.query(queryText)
+            .then(response => res.send(response.rows))
+            .catch(error => res.sendStatus(500));
+
+    }else{
+        res.sendStatus(401);
+    }
+});
+
 
 
 module.exports = router;

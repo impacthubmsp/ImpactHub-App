@@ -11,6 +11,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import deepOrange from '@material-ui/core/colors/deepOrange'
 
+
 // Initializing to an empty object, but here is where you could
 // preload your redux state with initial values (from localStorage, perhaps)
 const preloadedState = {};
@@ -35,6 +36,7 @@ sagaMiddleware.run(rootSaga);
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
+    fontFamily:['Voltaire', 'sansserif'],
   },
   palette: {
     primary: {
