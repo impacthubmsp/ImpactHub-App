@@ -138,6 +138,7 @@ class MemberComponent extends Component {
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
         this.getCheckedIn()
+      
        
     }
 
