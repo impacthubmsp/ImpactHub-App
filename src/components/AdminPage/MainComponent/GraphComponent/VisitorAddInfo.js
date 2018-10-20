@@ -8,8 +8,7 @@ class VisitorAddInfo extends Component {
     constructor() {
         super();
         this.state = {
-            visitorsNoAddInfo: 40,
-            visitorsAddInfo: 20,
+            visitorsAddInfo: null,
             totalVisitors: null,
         }
 
@@ -24,7 +23,7 @@ class VisitorAddInfo extends Component {
         }).then((response)=>{
             console.log(response.data);
             this.setState({
-                currentMembers: Number(response.data[0].count),
+                totalVisitors: Number(response.data[0].sum),
             })
         }).catch((error)=>{
                 console.log(error, 'Error getting total visitors');
@@ -46,6 +45,10 @@ class VisitorAddInfo extends Component {
             console.log(error, 'Error getting number of visitors interested in additional info')
         })
     }
+    componentDidMount(){
+        this.getInterestedVisitor();
+        this.getTotalVisitors();
+    }
     
 
     render(){
@@ -55,7 +58,7 @@ class VisitorAddInfo extends Component {
                 'Declined Additional Info'
             ],
             datasets: [{
-                data: [this.state.visitorsNoAddInfo, this.state.visitorsAddInfo],
+                data: [this.state.visitorsAddInfo, (this.state.totalVisitors - this.state.visitorsAddInfo)],
                 backgroundColor: [
                 '#b03060',
                 '#ffd700'

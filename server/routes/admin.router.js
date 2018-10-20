@@ -96,7 +96,7 @@ router.get('/today', (req, res) => {
 //GET route will return the total number of visitors who have visited the space
 router.get('/totalVisitors', (req, res) => {
     if (req.isAuthenticated()) {
-        const queryText = `SELECT COUNT ("visitor")
+        const queryText = `SELECT SUM ("quantity")
                             FROM "checkin"
                             WHERE "visitor" = true;`
         pool.query(queryText).then((results) => {
