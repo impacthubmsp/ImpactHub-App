@@ -104,10 +104,7 @@ class VisitorComponent extends Component {
         this.handleMailChimp();
         //fix reset feature, not resetting interest
         this.resetForm();
-        toast.fire({
-            type: 'success',
-            title: 'Signed in successfully',
-          })
+        
     }
     handleMailChimp = () => {
         //  If the user is interested, then post to mailchimp
