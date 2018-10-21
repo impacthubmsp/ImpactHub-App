@@ -5,12 +5,14 @@ import GraphComponent from './GraphComponent';
 import EventsMemberVSVisitor from './EventsMemberVSVisitor';
 import CurrentMemberVSVistor from './CurrentMemberVSVistor'
 import classNames from 'classnames';
+import GraphModalAppBarComponent from './GraphModalAppBarComponent';
 
 class GraphModalComponent extends Component {
 
     render() {
         return (
             <div>
+                <GraphModalAppBarComponent />
                 <div>
                     <div className="subColumnHalf">
                         <div className="masonry-layout_panel">

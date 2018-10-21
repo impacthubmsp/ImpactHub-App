@@ -56,10 +56,6 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
-  },
-  // Appbar is set to have a slight transparency, so it will be less prominent over the layout.
-  AppBar: {
-    opacity: '0.5',
   }
 });
 
@@ -134,7 +130,7 @@ class MainAppBar extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar className={classes.AppBar} position="static">
-          <Toolbar>
+          <Toolbar variant="dense">
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
 
