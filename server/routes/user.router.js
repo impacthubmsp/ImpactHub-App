@@ -3,10 +3,13 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
+const nodemailer = require("nodemailer");
 const router = express.Router();
 const Chance = require('chance');
 const chance = new Chance();
+
+
+
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from database
@@ -27,6 +30,51 @@ router.post('/register', (req, res, next) => {
     .then(() => { res.sendStatus(201); })
     .catch((err) => { next(err); });
 });
+
+
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        type: 'OAuth2',
+        user: process.env.my_gmail_username,
+        clientId: process.env.my_oauth_client_id,
+        clientSecret: process.env.my_oauth_client_secret,
+        refreshToken: process.env.my_oauth_refresh_token,
+        accessToken: process.env.my_oauth_access_token
+    }
+  });
+
+
+  const mail = {
+    from: "sender@server.com",
+    to: "vang.lais05@gmail.com",
+    subject: "Password Reset",
+    text: "Reset Password",
+    // html: emailHtml
+  }
+  
+  transporter.sendMail(mail, function(err, info) {
+    if (err) {
+        console.log(err);
+    } else {
+        // see https://nodemailer.com/usage
+        console.log("info.messageId: " + info.messageId);
+        console.log("info.envelope: " + info.envelope);
+        console.log("info.accepted: " + info.accepted);
+        console.log("info.rejected: " + info.rejected);
+        console.log("info.pending: " + info.pending);
+        console.log("info.response: " + info.response);
+    }
+    transporter.close();
+  });
+
+
+
+
+
 
 // Existing user is reseting password, assumes username is an e-mail
 router.put('/resetpw', (req, res) => {

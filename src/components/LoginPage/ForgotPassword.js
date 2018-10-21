@@ -91,7 +91,6 @@ class ForgotPassword extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle>Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Enter your email address we will send you a link to reset your password.
