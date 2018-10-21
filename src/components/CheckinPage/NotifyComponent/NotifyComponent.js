@@ -24,8 +24,8 @@ class NotifyComponent extends Component {
         super();
         this.state = {
             currentAdmin: {
-                admin_name: "",
-                phone_number: "",
+                admin_name: [],
+                phone_number: [],
             }
         }
     }
@@ -41,12 +41,17 @@ class NotifyComponent extends Component {
             url: 'api/message/getTwilioSettings',
         }).then((response) => {
             console.log('current admin is: ', response.data[0]);
-            this.setState({
-                currentAdmin: {
-                    admin_name: response.data[0].admin_name,
-                    phone_number: response.data[0].phone_number,
-                }
-            })
+            if(response.data[0] === undefined) {
+                return;
+            }
+            else {
+                this.setState({
+                    currentAdmin: {
+                        admin_name: response.data[0].admin_name,
+                        phone_number: response.data[0].phone_number,
+                    }
+                })
+            }
         }).catch(function (error) {
             console.log(error, "sendNotification didnt work");
         });
@@ -57,10 +62,10 @@ class NotifyComponent extends Component {
     sendNotification = () => {
 
         switch (this.state.currentAdmin.phone_number) {
-            case undefined:
+            case 0:
                 swal(
-                    'Error!',
-                    'There is no admin logged in at this time.',
+                    'Sorry!',
+                    'No admin on-call at this time.',
                     'error',
                 )
                 return;
