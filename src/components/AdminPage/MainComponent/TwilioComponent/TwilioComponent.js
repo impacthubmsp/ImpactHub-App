@@ -150,7 +150,7 @@ class TwilioComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="viewContainer">
                 <div>
                     {this.displayCurrentReciever()}
                 </div>
