@@ -50,9 +50,8 @@ router.get('/getTwilioSettings', (req, res) => {
 });
 
 // This sends notifications to twilio
-router.post('/notifyTwilio', (req, res) => {
+router.post('/notifyTwilio/:adminPhone', (req, res) => {
     if (req.isAuthenticated) {
-        console.log('touchdown on /notifyTwilio');
 
         const accountSid = process.env.TwilioSID;
         const authToken = process.env.TwilioAuth;
@@ -61,10 +60,10 @@ router.post('/notifyTwilio', (req, res) => {
         client.messages
             .create({
                 body: 'Someone needs you at the front desk!',
-                from: '+16125090746',
-                to: '+12146776670'
+                from: process.env.TwilioPhoneNumber,
+                to: req.params.adminPhone,
             })
-            .then(message => console.log(message.sid))
+            .then(message => console.log('twilio notification sent'))
             .done();
 
     } else {
