@@ -11,7 +11,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import AdminPage from './components/AdminPage/AdminPage';
 import CheckinPage from './components/CheckinPage/CheckinPage';
-
+import LogOut from './components/LogOut/LogOut';
 import './styles/main.css';
 
 const App = () => (
@@ -26,6 +26,10 @@ const App = () => (
         <Route
           path="/register"
           component={RegisterPage}
+        />
+        <Route
+          path="/logout"
+          component={LogOut}
         />
         <Route
           path="/admin"
