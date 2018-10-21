@@ -82,7 +82,7 @@ class VisitorAddInfo extends Component {
                     }}
                 />
                 <h5>{this.state.totalVisitors} total visitors</h5>
-                <h5>{(this.state.visitorsAddInfo / (this.state.totalVisitors)) *100}% of visitors are interested in more information</h5>
+                <h5>{((this.state.visitorsAddInfo / (this.state.totalVisitors)) * 100).toFixed(2)}% of visitors are interested in more information</h5>
             </div>
         );
     }

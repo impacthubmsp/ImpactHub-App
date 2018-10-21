@@ -1,5 +1,61 @@
 import React, { Component } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+
+const options = {
+  options: {
+    scales: {
+      yAxes: [{stacked:true}]
+    }
+  }
+};
+
+const monthlyData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  datasets: [
+    {
+      label: 'Members',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: '#b2dfdb',
+      borderColor: '#b2dfdb',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [65, 59, 80, 81, 56, 55, 40, 50, 45, 89, 87, 30]
+    },
+    {
+      label: 'Visitors',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: '#ffab91',
+      borderColor: '#ffab91',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [20,78, 76, 34, 89, 73, 34, 89, 23, 134, 67, 78]
+    }
+  ]
+};
 
 class GraphComponent extends Component {
   constructor() {
@@ -42,20 +98,6 @@ class GraphComponent extends Component {
     }
   }
   // Renders graph displayed based on variable selected from dropdown
- /*  graphToDisplay = () => {
-    switch (this.state.viewGraph) {
-      case 'today':
-      //return ({todaysAttendance})
-      case 'week':
-      //return ({weeksAttendance})
-      case 'month':
-      //return ({monthsAttenance})
-      default:
-        return (<div><GraphComponent /></div>)
-    }
-  } */
-
-  // GET route for graph data will be here
 
 
 
@@ -67,23 +109,20 @@ class GraphComponent extends Component {
           <option>This Week</option>
           <option>This Month</option>
         </select>
-        <Bar
-          data={this.state.dailyAttendanceData}
+          <Line id="monthLine" data={monthlyData} 
           options={{
             title: {
               display: true,
-              text: 'Check-in Traffic',
+              text: 'Visits by Month',
               fontSize: 25
             },
             legend: {
               position: 'top'
             },
             scales: {
-              xAxes: [{ stacked: true }],
               yAxes: [{ stacked: true }]
             }
-          }}
-        />
+          }} />
 
       </div>
     );
