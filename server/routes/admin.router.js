@@ -125,7 +125,23 @@ router.get('/visitorsInterestedInMoreInfo', (req, res) => {
         res.sendStatus(403);
     }
 });
-
+//GET route will return the number of visitors who vistited the spaces, grouped by purpose
+router.get ('/visitorsPurpose', (req, res)=> {
+    if (req.isAuthenticated()){
+        const queryText = `SELECT "purpose", COUNT ("name")
+                            FROM "checkin"
+                            WHERE "visitor" = true
+                            GROUP BY purpose;`;
+        pool.query(queryText).then((results) => {
+            res.send(results.rows)
+        }).catch((error) =>{
+            console.log('error obtaining the purposes of visitors in the space', error)
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
 
 
 module.exports = router;

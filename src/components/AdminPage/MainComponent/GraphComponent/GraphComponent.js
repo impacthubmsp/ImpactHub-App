@@ -76,7 +76,7 @@ class GraphComponent extends Component {
       ]
     };
     const weeklyData = {
-      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       datasets: [
         {
           label: 'Members',

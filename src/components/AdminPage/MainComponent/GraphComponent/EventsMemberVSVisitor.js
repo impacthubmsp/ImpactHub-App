@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
+import VisitorReason from './VisitorReasonComponent'
 
 class EventsMemberVSVisitor extends Component {
   constructor() {
     super();
     this.state = {
-      dailyAttendanceData: {
-        labels: ["Date1", "Date2", "Date3", "Date4", "Date5", "Date6", "Date7",],
-        datasets: [{
-          label: "Members",
-          backgroundColor: ["#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb"],
-          data: [10, 40, 20, 50, 20, 30, 40]
-        },
-        {
-          label: "Visitors",
-          backgroundColor: ["#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91"],
-          data: [10, 40, 20, 50, 20, 30, 40]
-        }]
-      }
+      memberEventData: [],
+      visitorEventData: [],
+      eventLabels: [],
     }
   }
   // GET route for graph data will be here
@@ -25,10 +16,24 @@ class EventsMemberVSVisitor extends Component {
 
 
   render() {
+    const eventAttendance = {
+      labels: this.state.eventLabels,
+      datasets: [{
+        label: "Members",
+        backgroundColor: ["#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb", "#b2dfdb"],
+        data: this.state.memberEventData,
+      },
+      {
+        label: "Visitors",
+        backgroundColor: ["#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91", "#ffab91"],
+        data: this.state.visitorEventData,
+      }]
+    };
+
     return (
       <div className="viewContainer">
         <Bar
-          data={this.state.dailyAttendanceData}
+          data={eventAttendance}
           options={{
             title: {
               display: true,
@@ -44,6 +49,7 @@ class EventsMemberVSVisitor extends Component {
             }
           }}
         />
+        <VisitorReason/>
       </div>
     );
   }
