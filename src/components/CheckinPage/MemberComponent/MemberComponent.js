@@ -284,7 +284,7 @@ class MemberComponent extends Component {
                     <div>
                     <div style={{ marginLeft: '25px' }}>
                         <Typography variant="h3">
-                            Are you a Member?
+                            Are you a member?
                         </Typography>
                     </div>
                         <div>
@@ -325,7 +325,7 @@ class MemberComponent extends Component {
                                             padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
                                         </IconButton>
-                                    <Typography variant="h1" align="center">
+                                    <Typography variant="h2" align="center">
                                         Is this you?
                                     </Typography>
                                         <DialogContentText>

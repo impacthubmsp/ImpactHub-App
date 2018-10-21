@@ -143,7 +143,7 @@ class VisitorComponent extends Component {
                             <List >
                                 <ListItem>
                                     <TextField
-                                        style={{ height: '80px'}}
+                                        style={{ height: '94px'}}
                                         
                                         id="input-with-icon-textfield"
                                         label="Full Name"
