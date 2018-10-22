@@ -4,6 +4,7 @@ import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class RegisterPage extends Component {
           alignContent: 'right'
 
         }}>
-          <h1>Register User</h1>
+          <Typography variant="h3">Register User</Typography>
           <div style={{ margin: '10px' }}>
             <TextField
               type="text"

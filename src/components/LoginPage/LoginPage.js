@@ -6,7 +6,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import { Typography } from '@material-ui/core';
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -79,7 +79,7 @@ class LoginPage extends Component {
           borderRadius: '2px',
           alignContent: 'right'
         }}>
-          <h1>Login</h1>
+          <Typography variant="h3">Login</Typography>
           <div style={{ margin: '10px' }}>
             <TextField
               type="text"
