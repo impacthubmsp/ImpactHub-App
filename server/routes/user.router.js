@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 const router = express.Router();
 const Chance = require('chance');
 const chance = new Chance();
-
+const url = require('url');
 
 
 // Handles Ajax request for user information if user is authenticated
@@ -39,7 +39,28 @@ router.put('/resetpw', (req, res) => {
   let queryText = `UPDATE "person" SET "token" = $1 WHERE "username" = $2;`;
   pool.query(queryText, [token, username]).then((result) => {
     console.log(`http://localhost:3000/reset/${token}`); // TODO: Node mailer goes here && remove this line of code!!!!
-    let link = `http://localhost:3000/reset/${token}`
+    let resetLink = `http://localhost:3000/#/reset/${token}`;
+    let url = `<a target="_blank" href="${resetLink}">Reset Password</a>`;
+
+    const emailHtml = `<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#000000">
+        <link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia|Voltaire" rel="stylesheet">
+    
+        <title>Impact Hub MSP</title>
+      </head>
+      <body>
+       
+      <p>
+      Click the link below to reset your password.
+      ${url}
+      </p>
+      </body>
+    </html>`
+
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -60,8 +81,8 @@ router.put('/resetpw', (req, res) => {
       from: "sender@server.com",
       to: username,
       subject: "Password Reset",
-      text: "Reset Password" + link,
-      // html: emailHtml
+      text: "Reset Password" + resetLink,
+      html: emailHtml
     }
     
     transporter.sendMail(mail, function(err, info) {

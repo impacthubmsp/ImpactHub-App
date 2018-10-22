@@ -1,9 +1,9 @@
 const membersReducer = (state = [], action) => {
     switch(action.type){
-        case 'SET_MEMBERS':
+        case 'SET_MEMBERLIST':
         return action.payload;
     default:
-        return state;
+        return null;
     }
 }
 
