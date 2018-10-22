@@ -112,22 +112,30 @@ router.put('/resetpw', (req, res) => {
 // when token is generated add it to mail. 
 // create token
 // put new toekn in db table
-// send email that has link localhost/3000/#/reset/(newtoken)
 //send res.sendStatus(200)
 //new pw view 
 //send pw 
 
+const email= [];
+checkEmail = () => {
+  axios({
+    url: '/',
+    method: 'GET'
+}).then((response) => {
+    const query = 'SELECT * FROM person;';
+    pool.query(query).then(() => {
+        //To-do limit the amount of data coming back
+        for (let person of response.data) {
+        email.push(person);
+        }
+        res.sendStatus(200);
+    })
+}).catch((error) => {
+    console.log('error in member get look here: ', error);
+})
 
 
-
-
-
-
-
-
-
-
-
+}
 
 router.post('/create', (req, res) => {
   // This route should be protected. Only an Admin should
@@ -148,6 +156,8 @@ router.post('/create', (req, res) => {
   }
 });
 
+
+
 router.put('/newpassword', (req, res) => {
   const password = encryptLib.encryptPassword(req.body.password);
   // Should probably validate e-mail or check token length. Limit to one?
@@ -159,7 +169,6 @@ router.put('/newpassword', (req, res) => {
     res.sendStatus(500);
   })
 });
-
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route

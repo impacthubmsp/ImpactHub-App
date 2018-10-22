@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import {Input, Grid, FormControl, Button} from '@material-ui/core';
-
+import swal from 'sweetalert';
+import axios from 'axios';
 
 
 
@@ -28,11 +29,6 @@ class LoginPage extends Component {
     this.props.dispatch(clearError());
   }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('admin');
-    }
-  }
 
 
   handleInputChangeFor = propertyName => (event) => {
@@ -40,6 +36,52 @@ class LoginPage extends Component {
       [propertyName]: event.target.value,
     });
   }
+
+
+
+  setPassword = (event) => {
+    console.log('in setPassword');
+
+    event.preventDefault();
+
+    if (this.state.newPassword === '') {
+        swal('Please enter a new password' ,
+         {icon:'warning'})
+    
+    }
+    else if (this.state.newPassword !== '' && this.state.confirmPassword === '') {
+        swal('Please Confirm Password' ,
+         {icon:'warning'})
+    
+    }
+    else if (this.state.newPassword !== this.state.confirmPassword) {
+        swal('Passwords Do not Match' ,
+         {icon:'warning'})
+    }
+    else {
+        const body = {
+            inviteCode: this.state.inviteCode,
+            password: this.state.newPassword,
+        }
+
+        axios.put('/api/user/newpassword', this.state)
+            .then((response) => {
+                
+                if (response.status === 201) {
+                    this.props.history.replace('/home');
+                    swal('Password Reset Successful' , 
+                    {icon:'success'})
+                } else {
+                    swal('Unable to reset password. Please Try again.',
+                        { icon: 'warning' })
+                }
+            })
+            .catch((error) => {
+            swal('Unable to reset password.',
+                    { icon: 'warning' })
+            });
+    }
+} //end setPassword
 
   renderAlert() {
     if (this.props.login.message !== '') {
@@ -56,22 +98,26 @@ class LoginPage extends Component {
   }
 
   render() {
+    console.log(this.state);
+    
     return (
       <div>
       <div >
         {this.renderAlert()}
-        <form onSubmit={this.login}>
+        <form onSubmit={this.sendPost}>
           <h1>Reset Password</h1>
           <Grid container>
             <Grid item xs={12}>
               <FormControl style={{ width: '80%', marginBottom: '10px' }}>
-                <Input
-                  name="newPassword"
-                  value={this.state.username}
-                  onChange={this.handleInputChangeFor('newPassword')}
+              <Input
+                  fullWidth
+                  id="password"
                   placeholder="New Password"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('newPassword')}
                   inputProps={{
-                    'aria-label': 'newPassword',
+                    'aria-label': 'Password',
                   }}
                   fullwidth
                 />
@@ -84,7 +130,7 @@ class LoginPage extends Component {
                   placeholder="Confirm Password"
                   type={this.state.showPassword ? 'text' : 'password'}
                   value={this.state.password}
-                  onChange={this.handleInputChangeFor('password')}
+                  onChange={this.handleInputChangeFor('confirmpassword')}
                   inputProps={{
                     'aria-label': 'Password',
                   }}
