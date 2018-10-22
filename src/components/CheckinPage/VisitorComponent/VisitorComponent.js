@@ -140,7 +140,7 @@ class VisitorComponent extends Component {
                             marginTop: '10px'
                         }}>
                             <Typography variant="h3" >
-                                Are you a visitor?
+                                Are you a Visitor?
                             </Typography>
                         </div>
                         <div style={{ padding: '0 30px 0 30px' }}>
