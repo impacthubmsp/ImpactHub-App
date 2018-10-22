@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import {Input, Grid, FormControl, Button} from '@material-ui/core';
-import ForgotPassword from './ForgotPassword';
+
 
 
 
@@ -18,8 +18,8 @@ class LoginPage extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: '',
+      newPassword: '',
+      conFirmpassword: '',
     };
   }
 
@@ -34,15 +34,6 @@ class LoginPage extends Component {
     }
   }
 
-  login = (event) => {
-    event.preventDefault();
-
-    if (this.state.username === '' || this.state.password === '') {
-      this.props.dispatch(formError());
-    } else {
-      this.props.dispatch(triggerLogin(this.state.username, this.state.password));
-    }
-  }
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -70,17 +61,17 @@ class LoginPage extends Component {
       <div >
         {this.renderAlert()}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <h1>Reset Password</h1>
           <Grid container>
             <Grid item xs={12}>
               <FormControl style={{ width: '80%', marginBottom: '10px' }}>
                 <Input
-                  name="username"
+                  name="newPassword"
                   value={this.state.username}
-                  onChange={this.handleInputChangeFor('username')}
-                  placeholder="Email Address"
+                  onChange={this.handleInputChangeFor('newPassword')}
+                  placeholder="New Password"
                   inputProps={{
-                    'aria-label': 'username',
+                    'aria-label': 'newPassword',
                   }}
                   fullwidth
                 />
@@ -90,7 +81,7 @@ class LoginPage extends Component {
                 <Input
                   fullWidth
                   id="password"
-                  placeholder="Password"
+                  placeholder="Confirm Password"
                   type={this.state.showPassword ? 'text' : 'password'}
                   value={this.state.password}
                   onChange={this.handleInputChangeFor('password')}
@@ -112,14 +103,12 @@ class LoginPage extends Component {
                 style={{ margin: '20px' }}
               >
 
-                Log In
+                Submit
             </Button>
-            <Link to="/register">Register</Link>
               <Grid item xs={12}>
               </Grid>
             </Grid>
           </Grid>
-          <ForgotPassword/>
         </form>
       </div>
     </div>

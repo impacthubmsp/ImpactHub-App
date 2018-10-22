@@ -22,6 +22,7 @@
     "i": "^0.3.6",
     "mailchimp-api-v3": "^1.12.0",
     "moment": "^2.22.2",
+    "moment-range": "^4.0.1",
     "nodemailer": "^4.6.8",
     "npm": "^6.4.1",
     "passport": "^0.4.0",

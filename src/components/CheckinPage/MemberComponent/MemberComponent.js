@@ -136,8 +136,6 @@ class MemberComponent extends Component {
         this.props.dispatch({ type: 'FETCH_MEMBERS'})
         getMembers()
         this.getCheckedIn()
-      
-       
     }
 
     // componentDidUpdate(){
@@ -221,6 +219,7 @@ class MemberComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
+        
         this.handleClose()
     }
 
@@ -234,6 +233,7 @@ class MemberComponent extends Component {
         
         const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
+        console.log(this.state.checked_in)
         let button;
         let visit;
 
