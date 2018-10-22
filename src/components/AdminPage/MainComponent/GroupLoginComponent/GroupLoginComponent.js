@@ -8,6 +8,8 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import Input from '@material-ui/core/Input';
+
 const toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -114,7 +116,11 @@ class GroupLoginComponent extends Component {
                         <Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button>
                         <Button id="memberVisitBTN" className="purposeBTN" onClick={() => this.handleBTNclick('memberVisit')}>Visiting a Member</Button>
                         <Button id="otherBTN" className="purposeBTN" onClick={() => this.handleBTNclick('other')}>Other</Button> */}
-                    <ToggleButtonGroup value={purpose} exclusive onChange={this.handleBTNclick} style={{ padding: 0 }}>
+                    <ToggleButtonGroup
+                        value={purpose}
+                        exclusive
+                        onChange={this.handleBTNclick}
+                        style={{ padding: 0 }}>
                         <ToggleButton value="tour">
                             Tour
                             </ToggleButton>
@@ -130,17 +136,21 @@ class GroupLoginComponent extends Component {
                     </ToggleButtonGroup>
                     <Divider />
                     <br />
-                    <label>Number of People in the Group </label>
-                    <br />
-                    <input
+                    <Typography>Number of People in the Group </Typography>
+                    <Input
                         className="groupInput"
                         name="quantity"
                         type="number"
                         placeholder="e.g. 10"
                         style={{ width: "50px" }}
-                        onChange={this.setGroupDetailsFromInput}></input>
-                    <br />
-                    <Button variant="contained" type="submit" value="Submit" onClick={this.sendGroupToDatabase}>Submit</Button>
+                        onChange={this.setGroupDetailsFromInput} />
+                    <div style={{ padding: '15px' }}>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            value="Submit"
+                            onClick={this.sendGroupToDatabase}>Submit</Button>
+                    </div>
                     {/* </form> */}
                 </div>
             </div>
