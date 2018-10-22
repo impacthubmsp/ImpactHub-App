@@ -31,8 +31,14 @@ router.post('/register', (req, res, next) => {
     .catch((err) => { next(err); });
 });
 
-
-
+router.put('/resetpw', (req, res, next) => {
+// when token is generated add it to mail. 
+// create token
+// put new toekn in db table
+// send email that has link localhost/3000/#/reset/(newtoken)
+//send res.sendStatus(200)
+//new pw view 
+//send pw 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -70,7 +76,7 @@ router.post('/register', (req, res, next) => {
     }
     transporter.close();
   });
-
+});
 
 
 

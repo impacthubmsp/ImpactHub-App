@@ -17,18 +17,11 @@ class Nav extends Component {
 
   // componentDidUpdate runs after props and state have changed.
   //If we arent loading the user call AND we dont have a user, kick us out to home
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      console.log('HERE');
-      this.props.history.push('/home');
-    }
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-  }
+
  
   logout = () => {
     this.props.dispatch(triggerLogout());
     console.log('logout function');
-    this.props.history.push('/home');
   }
 
 
