@@ -83,27 +83,25 @@ class RegisterPage extends Component {
           
         }}>
           <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+          <div style={{margin:'10px'}}>
+            <TextField
+              type="text"
+              name="username"
+              value={this.state.username}
+              label="Username"
+              fullWidth
+              onChange={this.handleInputChangeFor('username')}
+            />
           </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+          <div style={{margin:'10px'}}>
+            <TextField
+              type="password"
+              name="password"
+              label="Password"
+              fullWidth
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
           </div>
           <div>
             <input
