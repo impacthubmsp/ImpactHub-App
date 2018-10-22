@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,27 +18,29 @@ const styles = {
 };
 
 
-function DenseAppBar(props) {
-  const { classes } = props;
+class GraphModalAppBarComponent extends Component {
+  render() {
+    const { classes } = this.props;
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="sticky">
-        <Toolbar variant="dense">
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                <ArrowBack />
+    return (
+      <div className={classes.root}>
+        <AppBar>
+          <Toolbar variant="dense">
+            <IconButton onClick={this.props.closeBar} className={classes.menuButton} color="inherit" aria-label="Menu">
+              <ArrowBack />
             </IconButton>
-          <Typography variant="h6" color="inherit">
-            Back
+            <Typography variant="h6" color="inherit">
+              Back
           </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-DenseAppBar.propTypes = {
+GraphModalAppBarComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DenseAppBar);
+export default withStyles(styles)(GraphModalAppBarComponent);
