@@ -22,7 +22,6 @@ class LoginPage extends Component {
     };
   }
 
-
   componentDidMount() {
     // starts request for server to check that we are logged in
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
