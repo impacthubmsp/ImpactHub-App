@@ -11,7 +11,7 @@ CREATE TABLE "person" (
 CREATE TABLE "checkin" (
 	"id" serial NOT NULL,
 	"day" DATE DEFAULT CURRENT_DATE,
-	"time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"time" TIME DEFAULT CURRENT_TIMESTAMP,
 	"name" varchar(250) NOT NULL,
 	"quantity" integer  DEFAULT 1,
 	"member" BOOLEAN  DEFAULT false,

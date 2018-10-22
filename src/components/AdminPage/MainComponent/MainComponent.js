@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import GraphComponent from './GraphComponent/GraphComponent';
 import GroupLoginComponent from './GroupLoginComponent/GroupLoginComponent';
 import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
-import VisitorAddInfo from './GraphComponent/VisitorAddInfo';
-import EventsMemberVSVisitor from './GraphComponent/EventsMemberVSVisitor';
-import CSVComponent from './CSVComponent/CSVComponent';
 import TownHallComponent from '../TownHallComponent/TownHallComponent';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import './MainComponent.css';
+import TwilioComponent from './TwilioComponent/TwilioComponent';
+import GraphMasterComponent from './GraphComponent/GraphMasterComponent';
 
 class MainComponent extends Component {
     constructor() {
@@ -51,41 +49,20 @@ class MainComponent extends Component {
                         </div>
                     </div>
                     <div className={classNames("masonry-layout_column", "centerColumn")}>
-                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
-                            <div className="masonry-layout_panel">
-                                <Paper className="paper">
-                                    <h2>Placeholder for Twilio</h2>
-                                </Paper>
+                            <div className="subColumnHalf">
+                                <div className="masonry-layout_panel">
+                                    <Paper className="paper">
+                                        <TwilioComponent />
+                                    </Paper>
+                                </div>
                             </div>
-                            <div className="masonry-layout_panel">
-                                <Paper className={classNames("paper")}>
-                                    <GroupLoginComponent />
-                                </Paper>
+                            <div className="subColumnHalf">
+                                <div className="masonry-layout_panel">
+                                    <Paper className={classNames("paper")}>
+                                        <GroupLoginComponent />
+                                    </Paper>
+                                </div>
                             </div>
-                        </div>
-                        <div className={classNames("masonry-layout_column", "subColumnHalf")}>
-                            <div className="masonry-layout_panel">
-                                <Paper className="paper">
-                                    <CSVComponent />
-                                </Paper>
-                            </div>
-                            <div className="masonry-layout_panel">
-                                <Paper className="paper">
-                                    <h2>Test Thang</h2>
-                                    <img src="https://via.placeholder.com/250x330?text=Table+Component" alt="placeholder" />
-                                </Paper>
-                            </div>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <GraphComponent />
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <EventsMemberVSVisitor />
-                            </Paper>
-                        </div>
                     </div>
                     <div className={classNames("masonry-layout_column", "rightColumn")}>
                         <div className="masonry-layout_panel">
@@ -100,7 +77,7 @@ class MainComponent extends Component {
                         </div>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <VisitorAddInfo />
+                                <GraphMasterComponent />
                             </Paper>
                         </div>
                     </div>
