@@ -4,6 +4,7 @@ import { all, takeEvery, call,
 import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 
 export default function* rootSaga() {
@@ -17,15 +18,34 @@ export default function* rootSaga() {
     // watchIncrementAsync()
   ]);
 }
-
+const toast = Swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 2000
+});
+const successPost = ()=>{
+  toast.fire({
+    type: 'success',
+    title: 'Signed in successfully',
+  })
+}
+const failPost = () => {
+  toast.fire({
+    type: 'error',
+    title: 'Sign in unsuccessful',
+    text:'Did you select your reason for visiting?'
+  })
+}
 
 function* postVisitor(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/visi', action.payload)
+    yield successPost();
   }catch(err){
     console.log('Error', err);
-    
+    failPost();
   };
 
 }
@@ -45,6 +65,7 @@ function* getMember(action) {
   try{ 
     const response = yield call(axios.get, '/api/memb')
     console.log(response);
+  
     // const result = yield call(axios.get, '/api/memb/list')
     // console.log(result);
     // const responseAction = {type: 'SET_MEMBERS', payload: result.data}
@@ -60,9 +81,10 @@ function* postMember(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/memb', action.payload)
+    yield successPost();
   }catch(err){
     console.log('Error', err);
-    
+    failPost();
   };
 
 }

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -20,7 +22,7 @@ class LoginPage extends Component {
     };
   }
 
-  
+
   componentDidMount() {
     // starts request for server to check that we are logged in
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -68,39 +70,50 @@ class LoginPage extends Component {
     return (
       <div>
         {this.renderAlert()}
-        <form onSubmit={this.login}>
+        <Paper style={{
+          width: '30%',
+          height: '250px',
+          margin: '20px auto',
+          marginTop:'10%',
+          padding: '25px',
+          borderRadius: '2px',
+          alignContent:'right'
+          
+        }}>
           <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Log In"
+          <div style={{margin:'10px'}}>
+            <TextField
+              type="text"
+              name="username"
+              value={this.state.username}
+              label="Username"
+              fullWidth
+              onChange={this.handleInputChangeFor('username')}
             />
-            <Link to="/register">Register</Link>
           </div>
-        </form>
+          <div style={{margin:'10px'}}>
+            <TextField
+              type="password"
+              name="password"
+              label="Password"
+              fullWidth
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
+
+          </div>
+          <div style={{margin:'10px'}}>
+            <Button
+            onClick={this.login()}
+              value="Log In"
+            >
+              Login
+            </Button>
+            <Button>
+              <Link to="/register">Register</Link>
+            </Button>
+          </div>
+        </Paper>
       </div>
     );
   }
