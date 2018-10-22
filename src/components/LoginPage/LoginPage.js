@@ -37,7 +37,7 @@ class LoginPage extends Component {
   }
 
   login = (event) => {
-    event.preventDefault();
+   
 
     if (this.state.username === '' || this.state.password === '') {
       this.props.dispatch(formError());
@@ -74,14 +74,13 @@ class LoginPage extends Component {
           width: '30%',
           height: '250px',
           margin: '20px auto',
-          marginTop:'10%',
+          marginTop: '10%',
           padding: '25px',
           borderRadius: '2px',
-          alignContent:'right'
-          
+          alignContent: 'right'
         }}>
           <h1>Login</h1>
-          <div style={{margin:'10px'}}>
+          <div style={{ margin: '10px' }}>
             <TextField
               type="text"
               name="username"
@@ -91,7 +90,7 @@ class LoginPage extends Component {
               onChange={this.handleInputChangeFor('username')}
             />
           </div>
-          <div style={{margin:'10px'}}>
+          <div style={{ margin: '10px' }}>
             <TextField
               type="password"
               name="password"
@@ -100,13 +99,11 @@ class LoginPage extends Component {
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
             />
-
           </div>
-          <div style={{margin:'10px'}}>
+          <div style={{ margin: '10px' }}>
             <Button
-            onClick={this.login()}
-              value="Log In"
-            >
+              onClick={this.login}
+              value="Log In">
               Login
             </Button>
             <Button>

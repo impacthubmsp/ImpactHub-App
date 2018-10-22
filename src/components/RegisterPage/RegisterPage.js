@@ -17,7 +17,6 @@ class RegisterPage extends Component {
   }
 
   registerUser = (event) => {
-    event.preventDefault();
 
     if (this.state.username === '' || this.state.password === '') {
       this.setState({
@@ -76,14 +75,14 @@ class RegisterPage extends Component {
           width: '30%',
           height: '250px',
           margin: '20px auto',
-          marginTop:'10%',
+          marginTop: '10%',
           padding: '25px',
           borderRadius: '2px',
-          alignContent:'right'
-          
+          alignContent: 'right'
+
         }}>
           <h1>Register User</h1>
-          <div style={{margin:'10px'}}>
+          <div style={{ margin: '10px' }}>
             <TextField
               type="text"
               name="username"
@@ -93,7 +92,7 @@ class RegisterPage extends Component {
               onChange={this.handleInputChangeFor('username')}
             />
           </div>
-          <div style={{margin:'10px'}}>
+          <div style={{ margin: '10px' }}>
             <TextField
               type="password"
               name="password"
@@ -103,13 +102,16 @@ class RegisterPage extends Component {
               onChange={this.handleInputChangeFor('password')}
             />
           </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
+          <div style={{ margin: '10px' }}>
+            <Button
+              onClick={this.registerUser}
               value="Register"
-            />
-            <Link to="/home">Cancel</Link>
+            >
+              Register
+            </Button>
+            <Button>
+              <Link to="/home">Cancel</Link>
+            </Button>
           </div>
         </Paper>
       </div>
