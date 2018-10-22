@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -69,7 +72,16 @@ class RegisterPage extends Component {
     return (
       <div>
         {this.renderAlert()}
-        <form onSubmit={this.registerUser}>
+        <Paper style={{
+          width: '30%',
+          height: '250px',
+          margin: '20px auto',
+          marginTop:'10%',
+          padding: '25px',
+          borderRadius: '2px',
+          alignContent:'right'
+          
+        }}>
           <h1>Register User</h1>
           <div>
             <label htmlFor="username">
@@ -101,7 +113,7 @@ class RegisterPage extends Component {
             />
             <Link to="/home">Cancel</Link>
           </div>
-        </form>
+        </Paper>
       </div>
     );
   }

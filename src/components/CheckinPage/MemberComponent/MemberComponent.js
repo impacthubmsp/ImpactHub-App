@@ -36,7 +36,7 @@ const styles = theme => ({
         position: 'absolute',
         top: '40%',
         width: '500px',
-        
+       
     },
     toggleContainer: {
         display: 'flex',
@@ -282,7 +282,7 @@ class MemberComponent extends Component {
                 <div>
                     {/* Form for members */}
                     <div>
-                    <div style={{ marginLeft: '25px' }}>
+                    <div style={{ marginLeft: '25px',marginTop:'10px' }}>
                         <Typography variant="h3">
                             Are you a Member?
                         </Typography>
