@@ -5,19 +5,22 @@ import GraphComponent from './GraphComponent';
 import EventsMemberVSVisitor from './EventsMemberVSVisitor';
 import CurrentMemberVSVistor from './CurrentMemberVSVistor'
 import classNames from 'classnames';
-import GraphModalAppBarComponent from './GraphModalAppBarComponent';
 
 class GraphModalComponent extends Component {
+
+    closeAppBar = () => {
+        this.props.closeAppBar()
+
+    }
 
     render() {
         return (
             <div>
-                <GraphModalAppBarComponent />
-                <div>
+                <div className="modalContent">
                     <div className="subColumnHalf">
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                    <VisitorAddInfo />
+                                <VisitorAddInfo />
                             </Paper>
                         </div>
                     </div>
