@@ -5,7 +5,7 @@ import axios from 'axios';
 class VisitorReason extends Component {
     constructor() {
         super();
-        this.state = {
+        this.state = { // setting all state variables to zero, will be replaced by values from the database if there are any matching the field 
             tour: 0,
             guest: 0,
             event: 0,
@@ -22,11 +22,10 @@ class VisitorReason extends Component {
         }).then((response)=>{
             console.log(response.data);
             for (let i =0; i < response.data.length; i++){
-                this.setState({
-                    [response.data[i].purpose]: Number(response.data[i].count) 
+                this.setState({ 
+                    [response.data[i].purpose]: Number(response.data[i].count) // sets state of the appropriate variable to the number of entries in the database with corresponding purpose
                 })
             }
-            
         }).catch((error)=>{
                 console.log(error, 'Error getting visitors\' purposes');
                 alert('Visitors\' purposes could\'t be obtained');

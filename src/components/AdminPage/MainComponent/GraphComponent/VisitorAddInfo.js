@@ -8,8 +8,8 @@ class VisitorAddInfo extends Component {
     constructor() {
         super();
         this.state = {
-            visitorsAddInfo: null,
-            totalVisitors: null,
+            visitorsAddInfo: null, // will be set by function with the number of visitors who indicated they wanted additional info by filling out their email and phone number
+            totalVisitors: null, //will be set by function with the total number of visitors in the database
         }
 
     }
@@ -52,13 +52,14 @@ class VisitorAddInfo extends Component {
     
 
     render(){
+        //declaring the variable for the data that goes into the pie chart
         const data = {
             labels: [
                 'Wanted Additional Info',
                 'Declined Additional Info'
             ],
             datasets: [{
-                data: [this.state.visitorsAddInfo, (this.state.totalVisitors - this.state.visitorsAddInfo)],
+                data: [this.state.visitorsAddInfo, (this.state.totalVisitors - this.state.visitorsAddInfo)], // visitors who indicated they wanted add info, then the total number of visitors minus the visitors who wanted info to get the number of visitors who didn't want info
                 backgroundColor: [
                 '#a5d6a7',
                 '#78909c'
@@ -81,8 +82,8 @@ class VisitorAddInfo extends Component {
                         }
                     }}
                 />
-                <h5>{this.state.totalVisitors} total visitors</h5>
-                <h5>{((this.state.visitorsAddInfo / (this.state.totalVisitors)) * 100).toFixed(2)}% of visitors are interested in more information</h5>
+                <h5>{this.state.totalVisitors} total visitors</h5> {/*total visitors since database began collecting data*/}
+                <h5>{((this.state.visitorsAddInfo / (this.state.totalVisitors)) * 100).toFixed(2)}% of visitors are interested in more information</h5> {/*percent interest since database began collecting data*/} */}
             </div>
         );
     }

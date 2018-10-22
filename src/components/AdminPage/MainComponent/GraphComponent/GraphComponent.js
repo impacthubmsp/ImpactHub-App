@@ -20,6 +20,17 @@ class GraphComponent extends Component {
     
     }
   }
+  //function to get number of visits per hour today
+
+  //function to get number of visits per day last 7 days
+
+  //function to get the number of visits per day this month
+
+  //function to get the number of visits per month this year
+  
+  componentDidMount(){
+
+  }
   // Renders graph displayed based on variable selected from dropdown
   handleChange = (event) => {
     this.setState({

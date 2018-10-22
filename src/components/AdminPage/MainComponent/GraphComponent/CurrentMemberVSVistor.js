@@ -84,7 +84,7 @@ class CurrentMemberVSVisitor extends Component {
 
                     data={data}
                 />}
-                <h4>{(this.state.currentVisitors + this.state.currentMembers)} current guests</h4>
+                <h4>{(this.state.currentVisitors + this.state.currentMembers)} current guests</h4> {/*Adding visitors and members together to get the total number of people in the space*/} 
             </div>
         );
     }

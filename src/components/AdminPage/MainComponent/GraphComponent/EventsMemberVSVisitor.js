@@ -11,9 +11,11 @@ class EventsMemberVSVisitor extends Component {
       eventLabels: [],
     }
   }
-  // GET route for graph data will be here
+ /* function to get event attendance for last seven events, each broken down by member and visitor */
 
+  componentDidMount(){
 
+  }
 
   render() {
     const eventAttendance = {
