@@ -6,6 +6,8 @@ import Swal from 'sweetalert2'
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 const toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -64,12 +66,12 @@ class GroupLoginComponent extends Component {
     }
 
     //sets the value of purpose for visiting in state, which is sent to the database on form submit
-    handleBTNclick = (event,purpose) => {
+    handleBTNclick = (event, purpose) => {
         this.setState({
             purpose
         })
         console.log(this.state);
-        
+
     }
 
     //"depress" purpose button that has been selected
@@ -87,19 +89,26 @@ class GroupLoginComponent extends Component {
                     {/* Form to Check-in Each Guest*/}
                     {/* <form id="groupCheck-InForm" onSubmit={this.sendGroupToDatabase}> */}
                     <h2>Group Check-in</h2>
-                    <label>Group Name</label>
-                    <br />
-                    *optional
-                    <br />
-                    <input
+
+                    <Typography>
+                        Group Name
+                        <br />
+                        *optional
+                    </Typography>
+
+                    <TextField
                         className="groupInput"
                         name="name"
-                        placeholder="e.g. Junior Innovators League"
-                        style={{ width: "240px" }}
-                        onChange={this.setGroupDetailsFromInput}></input>
-                    <br />
-                    <label>Reason for Visiting</label>
-                    <br />
+                        placeholder="e.g. Jr. Innovators League"
+                        style={{ width: "180px" }}
+                        onChange={this.setGroupDetailsFromInput} />
+
+                    <div style={{ marginTop: '20px' }}>
+                        <Divider />
+                        <Typography>Reason for Visiting</Typography>
+
+                    </div>
+
                     {/*Buttons set the state for purpose of visit*/}
                     {/* <Button id="tourBTN" className="purposeBTN" onClick={() => this.handleBTNclick('tour')}>Tour</Button>
                         <Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button>
@@ -117,8 +126,9 @@ class GroupLoginComponent extends Component {
                             </ToggleButton>
                         <ToggleButton value="other">
                             Other
-                            </ToggleButton> 
+                            </ToggleButton>
                     </ToggleButtonGroup>
+                    <Divider />
                     <br />
                     <label>Number of People in the Group </label>
                     <br />
