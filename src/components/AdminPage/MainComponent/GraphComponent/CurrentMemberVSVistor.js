@@ -8,9 +8,8 @@ class CurrentMemberVSVisitor extends Component {
     constructor() {
         super();
         this.state = {
-            currentVisitors: null,
-            currentMembers: '10',
-            currentGuests:''//(this.state.currentVisitors + this.state.currentMembers),
+            currentVisitors: 8, //settings these with default values for presentation
+            currentMembers: 25, //setting these with default values for presentation
         }
 
     }
@@ -49,8 +48,9 @@ class CurrentMemberVSVisitor extends Component {
     }
     // put functions here that should happen on page load
     componentDidMount(){
-        this.getCurrentMembers();
-        this.getTodaysVisitors();
+        //these functions are commented out for the sake of the presentation UNDO WHEN OVER
+        //this.getCurrentMembers();
+        //this.getTodaysVisitors();
     }
     render() {
         const data = {

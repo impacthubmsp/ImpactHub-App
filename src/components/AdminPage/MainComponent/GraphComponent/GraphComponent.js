@@ -30,6 +30,7 @@ class GraphComponent extends Component {
   //function to get the number of visits per month this year
 
   componentDidMount(){
+    //functions to get data from database are commented out here for presentation UNDO WHEN DONE
 
   }
   // Renders graph displayed based on variable selected from dropdown

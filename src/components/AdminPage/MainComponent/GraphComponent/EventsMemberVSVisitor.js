@@ -15,7 +15,7 @@ class EventsMemberVSVisitor extends Component {
  /* function to get event attendance for last seven events, each broken down by member and visitor */
 
   componentDidMount(){
-
+    //function to get attendance data is commented out for presentation's sake UNDO WHEN DONE
   }
 
   render() {
