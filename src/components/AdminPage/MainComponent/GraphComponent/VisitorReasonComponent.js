@@ -66,7 +66,7 @@ class VisitorReason extends Component {
                         title: {
                             display: true,
                             text: 'Visitors\' Purpose in the Space',
-                            fontSize: 18
+                            fontSize: 25
                         }
                     }}
 
