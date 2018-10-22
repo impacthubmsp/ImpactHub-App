@@ -152,6 +152,7 @@ class MemberComponent extends Component {
         if(this.state.single === null || this.state.single === ''){
             this.resetForm()
         }else{
+            console.log(this.state.single.id)
             this.checkStatus(this.state.single.id)
             this.setState({
                 open: true
@@ -178,11 +179,7 @@ class MemberComponent extends Component {
                 this.setState({
                     checked_in: false
                 })
-            }
-            else{
-                this.setState({
-                    checked_in: true
-                })
+                break;
             }
         }
     }
@@ -273,7 +270,7 @@ class MemberComponent extends Component {
                     <div>
                     <div style={{ marginLeft: '25px' }}>
                         <Typography variant="h3">
-                            Are you a Member?
+                            Are you a member?
                         </Typography>
                     </div>
                         <div>
@@ -314,7 +311,7 @@ class MemberComponent extends Component {
                                             padding: '0',}}>
                                         <CloseIcon onClick={this.handleClose} />
                                         </IconButton>
-                                    <Typography variant="h1" align="center">
+                                    <Typography variant="h2" align="center">
                                         Is this you?
                                     </Typography>
                                         <DialogContentText>

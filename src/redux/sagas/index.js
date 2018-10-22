@@ -87,9 +87,9 @@ function* postMember(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/memb', action.payload)
-    const response = getMembersCheckedIn()
-    const responseAction = {type: 'SET_MEMBERLIST', payload: response.data}
-    yield dispatch(responseAction)
+    // const response = yield getMembersCheckedIn()
+    // const responseAction = {type: 'SET_MEMBERLIST', payload: response.data}
+    yield dispatch ({type: 'FETCH_MEMBERLIST'})
     yield successPost();
   }catch(err){
     console.log('Error', err);
