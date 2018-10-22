@@ -5,11 +5,12 @@ import axios from 'axios';
 class VisitorReason extends Component {
     constructor() {
         super();
-        this.state = { // setting all state variables to zero, will be replaced by values from the database if there are any matching the field 
-            tour: 0,
-            guest: 0,
-            event: 0,
-            other: 0,
+        this.state = { //currently changed these values to dummy data for presentation-- change back to zero when presentation is over
+            // setting all state variables to zero, will be replaced by values from the database if there are any matching the field 
+            tour: 190,
+            guest: 88,
+            event: 200,
+            other: 56,
         }
 
     }
@@ -32,7 +33,8 @@ class VisitorReason extends Component {
         })
     }
     componentDidMount(){
-        this.getVisitorPurposes();
+        //commented out the function below for the sake of the presentatio UNDO WHEN OVER
+        //this.getVisitorPurposes();
     }
     render(){
         const data = {
