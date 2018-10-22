@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
+import axios from 'axios';
 
 
 
@@ -7,14 +8,14 @@ class GraphComponent extends Component {
   
   constructor() {
     super();
-    this.state = {
+    this.state = { // populated with dummy data for the presentation; setState functions are not put in componentDidMount
       graphToShow: 'today',
-      memberVisitToday: [],
-      visitorVisitToday: [],
-      memberVisitThisWeek: [],
-      visitorVisitThisWeek: [],
-      memberVisitThisMonth: [],
-      visitorVisitThisMonth: [],
+      memberVisitToday: [3, 4, 23, 10, 4, 0, 1, 6, 8, 0, 0, 13, 0, 0, 0],
+      visitorVisitToday: [0, 0, 4, 5, 7, 10, 0, 0, 4, 5, 15, 17, 0, 0, 0],
+      memberVisitThisWeek: [25, 30, 40, 27, 20, 3, 0],
+      visitorVisitThisWeek: [6, 12, 10, 8, 3, 8, 0],
+      memberVisitThisMonth: [25, 30, 40, 45, 89, 0, 0, 48, 34, 45, 46, 54, 0, 0, 23, 34, 45, 34, 12, 0, 0, 34, 45, 44, 45, 34, 0, 0, 47, 34, 23],
+      visitorVisitThisMonth: [6, 12, 10, 8, 0, 0, 0, 2, 12, 13, 17, 9, 0, 0, 9, 3, 12, 5, 9, 0, 0, 15, 15, 13, 12, 18, 0, 0, 12, 13, 13],
       memberVisitByMonth: [65, 59, 80, 81, 56, 55, 40, 50, 45, 89, 87, 30],
       visitorVisitByMonth: [29, 78, 76, 34, 89, 73, 34, 89, 23, 134, 67, 78],
     
@@ -27,7 +28,7 @@ class GraphComponent extends Component {
   //function to get the number of visits per day this month
 
   //function to get the number of visits per month this year
-  
+
   componentDidMount(){
 
   }
@@ -38,7 +39,8 @@ class GraphComponent extends Component {
       })
 }
   render() {
-    const showGraph=this.state.graphToShow;
+    const showGraph=this.state.graphToShow; //establishes a variable for which iteration of the traffic graph to show
+    //data for today's hourly check-in traffic
     const dailyData = {
       labels: ['7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm', '9:00pm'],
       datasets: [
@@ -86,6 +88,7 @@ class GraphComponent extends Component {
         }
       ]
     };
+    //data for this week's traffic by day 
     const weeklyData = {
       labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       datasets: [
@@ -133,6 +136,7 @@ class GraphComponent extends Component {
         }
       ]
     };
+    //data for this month's traffic by day
     const monthlyData = {
       labels: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       datasets: [
@@ -180,6 +184,7 @@ class GraphComponent extends Component {
         }
       ]
     };
+    //data for this year's traffic by month
     const yearlyData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
@@ -187,8 +192,8 @@ class GraphComponent extends Component {
           label: 'Members',
           fill: true,
           lineTension: 0.1,
-          backgroundColor: '#b2dfdb',
-          borderColor: '#b2dfdb',
+          backgroundColor: '#b2dfdb', // background color for member data
+          borderColor: '#b2dfdb', // border line color for member data
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
@@ -208,8 +213,8 @@ class GraphComponent extends Component {
           label: 'Visitors',
           fill: true,
           lineTension: 0.1,
-          backgroundColor: '#ffab91',
-          borderColor: '#ffab91',
+          backgroundColor: '#ffab91', // background color for visitors
+          borderColor: '#ffab91', // border line color for visitors
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
@@ -235,6 +240,7 @@ class GraphComponent extends Component {
           <option value="thisMonth"> This Month </option>
           <option value="thisYear">This Year</option>
         </select>
+        {/* Graph for today's traffic; only renders if today is selected on dropdown*/}
         {showGraph==='today' && <Line id="todayLine" data={dailyData}
           options={{
             title: {
@@ -249,6 +255,7 @@ class GraphComponent extends Component {
               yAxes: [{ stacked: true }]
             }
           }} />}
+        {/* Graph for this week's traffic; only renders if "this week" is selected on dropdown*/}
         {showGraph=="thisWeek" && <Line id="weekLine" data={weeklyData}
           options={{
             title: {
@@ -263,6 +270,7 @@ class GraphComponent extends Component {
               yAxes: [{ stacked: true }]
             }
           }} />}
+        {/* Graph for this month's traffic; only renders if "this month" is selected on dropdown*/}
         {showGraph==='thisMonth' && <Line id="monthLine" data={monthlyData}
           options={{
             title: {
@@ -277,6 +285,7 @@ class GraphComponent extends Component {
               yAxes: [{ stacked: true }]
             }
           }} />}
+        {/* Graph for this year's traffic; only renders if "this year" is selected on dropdown*/}
         {showGraph==='thisYear' && <Line id="yearLine" data={yearlyData}
           options={{
             title: {
