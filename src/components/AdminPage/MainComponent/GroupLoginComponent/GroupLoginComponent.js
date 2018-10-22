@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './GroupLoginComponent.css';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import Swal from 'sweetalert2'
+
+const toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  });
 
 class GroupLoginComponent extends Component {
     constructor() {
@@ -27,16 +35,24 @@ class GroupLoginComponent extends Component {
         })
     }
     //write a function here that sends local state to database on form submit
-    sendGroupToDatabase = () => {
+    sendGroupToDatabase = (event) => {
+        event.preventDefault();
         axios({
             method: 'POST',
             url: '/api/visi/group',
             data: this.state
         }).then((response)=>{
+            toast.fire({
+                type: 'success',
+                title: 'Signed in Successfully'
+              });
             console.log('Group visit successfully added to database', response);
         }).catch((error)=>{
             console.log('an error has occurred while trying to send group visit data to the database', error);
-            alert('Error submitting group visit data')
+            toast.fire({
+                type: 'error',
+                title: 'Sign in Unsuccessful'
+              })
         })
     }
 
