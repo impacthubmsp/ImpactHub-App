@@ -20,14 +20,6 @@ class KPIComponent extends Component {
         return (
             <div>
                 <div className="dashboardContainer">
-                    <div id="peakCheckInTimes" className="kpidiv">
-
-                    </div>
-                    <div id="peakFrequency" className="kpidiv">
-                        <h3>Peak Frequency</h3>
-                        <h4>This Week:</h4>
-                        <h4>This Month:</h4>
-                    </div>
                     <div id="visitorsThisMonth" className="kpidiv">
                         <h3>Visitors This Month</h3>
                         <h4>{this.state.visitorQuantMonth}</h4>
@@ -43,6 +35,7 @@ class KPIComponent extends Component {
                     <div>
 
                     </div>
+
                 </div>
             </div>
         );
