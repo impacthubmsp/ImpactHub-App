@@ -12,7 +12,7 @@ import Input from '@material-ui/core/Input';
 
 const toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'top',
     showConfirmButton: false,
     timer: 3000
 });
@@ -91,13 +91,11 @@ class GroupLoginComponent extends Component {
                     {/* Form to Check-in Each Guest*/}
                     {/* <form id="groupCheck-InForm" onSubmit={this.sendGroupToDatabase}> */}
                     <h2>Group Check-in</h2>
-
                     <Typography>
                         Group Name
                         <br />
                         *optional
                     </Typography>
-
                     <TextField
                         className="groupInput"
                         name="name"
@@ -108,9 +106,7 @@ class GroupLoginComponent extends Component {
                     <div style={{ marginTop: '20px' }}>
                         <Divider />
                         <Typography>Reason for Visiting</Typography>
-
                     </div>
-
                     {/*Buttons set the state for purpose of visit*/}
                     {/* <Button id="tourBTN" className="purposeBTN" onClick={() => this.handleBTNclick('tour')}>Tour</Button>
                         <Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button>

@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import MaskedInput from 'react-text-mask';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+function TextMaskCustom(props) {
+    const { inputRef, ...other } = props;
+
+    return (
+        <MaskedInput
+            {...other}
+            ref={inputRef}
+            mask={['1', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+            placeholderChar={'\u2000'}
+            showMask
+        />
+    );
+}
+
 
 
 class TwilioComponent extends Component {
@@ -103,7 +122,7 @@ class TwilioComponent extends Component {
             });
         }
     }
-    
+
     // Calls both clearTwilio Functions
     clearTwilio = () => {
         this.clearTwilioAxios();
@@ -154,19 +173,35 @@ class TwilioComponent extends Component {
                 <div>
                     {this.displayCurrentReciever()}
                 </div>
-                <hr />
+                <hr style={{marginTop:'10px', }}/>
                 Set Admin
                     <br />
-                <form onSubmit={this.changeAdminTwilio}>
-                    {this.state.newTwilioSetting.admin_name}<br />
-                    Name
-                    <input type="tel" onChange={this.handleAdminNameChange} defaultValue={this.state.newTwilioSetting.admin_name} />
+                {/* <form onSubmit={this.changeAdminTwilio}> */}
+                {/* {this.state.newTwilioSetting.admin_name}<br /> */}
+                <div style={{ margin: '20px' }}>
+                    <InputLabel htmlFor="Name">Name</InputLabel>
+                    <Input
+                        type="tel"
+                        onChange={this.handleAdminNameChange}
+                        defaultValue={this.state.newTwilioSetting.admin_name} />
+                    {/* {this.state.newTwilioSetting.phone_number} */}
+                </div>
+                <div style={{ margin: '20px' }}>
+                    <InputLabel  htmlFor="Phone">Phone</InputLabel>
+                    <Input
+                        //type="number"
+                        onChange={this.handlePhoneNumberChange}
+                        defaultValue={this.state.newTwilioSetting.phone_number}
+                        inputComponent={TextMaskCustom}
+                        label="Phone"
+                    />
+                </div>
+                <div style={{ margin: '20px' }}>
+                    <Button color='primary' variant='raised' onClick={this.changeAdminTwilio}>
+                        Submit
+                  </Button>
+                </div>
 
-                    {this.state.newTwilioSetting.phone_number}<br />
-                    Phone
-                    <input type="number" onChange={this.handlePhoneNumberChange} defaultValue={this.state.newTwilioSetting.phone_number} />
-                    <input type="submit" />
-                </form>
             </div>
         );
     }

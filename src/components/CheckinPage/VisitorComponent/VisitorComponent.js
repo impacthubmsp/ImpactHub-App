@@ -77,6 +77,7 @@ class VisitorComponent extends Component {
             purpose: value
         })
     }
+
     handleInfo = (event) => {
         //change data base to TIME from TIMESTAMP
         this.setState({
@@ -85,6 +86,7 @@ class VisitorComponent extends Component {
             time: moment().format("LTS")
         })
     }
+
     handleClickAway = () => {
         this.setState({
             open: false,
@@ -98,8 +100,8 @@ class VisitorComponent extends Component {
         this.handleMailChimp();
         //fix reset feature, not resetting interest
         this.resetForm();
-
     }
+
     handleMailChimp = () => {
         //  If the user is interested, then post to mailchimp
         if (this.state.interest === true) {
@@ -148,7 +150,6 @@ class VisitorComponent extends Component {
                                 <ListItem>
                                     <TextField
                                         style={{ height: '80px' }}
-
                                         id="input-with-icon-textfield"
                                         label="Full Name"
                                         name="name"
@@ -167,11 +168,16 @@ class VisitorComponent extends Component {
                                 <Divider />
                             </List>
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    <ListItemText secondary="What brings you in today?" />
+                                <List component="div" style={{marginLeft:'25px'}}>
+                                    <ListItemText inset secondary="What brings you in today?" />
+                                    <br />
                                     <FormControlLabel
                                         control={
-                                            <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0, margin: '0 0 0 20px' }}>
+                                            <ToggleButtonGroup
+                                                value={purpose}
+                                                exclusive
+                                                onChange={this.handleAlignment}
+                                                style={{ padding: 0, margin: '0 0 0 60px' }}>
                                                 <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }} >
                                                     Guest
                                                 </ToggleButton>
@@ -187,6 +193,7 @@ class VisitorComponent extends Component {
                                     //    label="What brings you in today?"
                                     />
                                     {/* Select Interest in membership */}
+                                    <br />
                                     <ListItem divider>
                                         {/* Checkbox for selecting interest */}
                                         <FormControlLabel
@@ -243,7 +250,8 @@ class VisitorComponent extends Component {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={this.handlePost}>
+                                            onClick={this.handlePost}
+                                            fullWidth={true}>
                                             Submit
                                     </Button>
                                     </ListItem>
