@@ -45,7 +45,7 @@ class ForgotPassword extends Component {
     event.preventDefault();
     console.log('email submitted');
 
-    axios.get('/api/user/' + this.state.email)
+    axios.get('/api/password/' + this.state.email)
         .then((response) => {
             console.log('response finding email:', response);
             this.handleClose();

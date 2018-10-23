@@ -68,7 +68,7 @@ handleClickShowPassword = () => {
         token: this.state.code,
       };
 
-        axios.put('/api/user/newpassword', body)
+        axios.put('/api/password/newpassword', body)
             .then((response) => {
                 
                 if (response.status === 200) {
