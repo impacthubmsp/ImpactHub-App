@@ -7,6 +7,12 @@ class KPIComponent extends Component {
             peakCheckInTimes: [],
             peakDayOfWeek: [],
             visitorQuantMonth: 10,
+            visitsThisYear: '10,000',
+            visitsLastMonth: '1,125',
+            visitsThisMonth: '1,002',
+            aveVisitsPerDayYear: '45',
+            aveVisitsPerDayMonth: '55',
+            aveVisitsPerDayLastYear: '38',
 
         }
     }
@@ -20,20 +26,26 @@ class KPIComponent extends Component {
         return (
             <div>
                 <div className="dashboardContainer">
-                    <div id="visitorsThisMonth" className="kpidiv">
-                        <h3>Visitors This Month</h3>
-                        <h4>{this.state.visitorQuantMonth}</h4>
+                    <div>
+                        <h3>Visit Highlights</h3>
                     </div>
                     <div id="visitorsThisMonth" className="kpidiv">
-                        <h3>Visitors Last Month</h3>
-                        <h4>{this.state.visitorQuantMonth}</h4>
+                        <h4>Total Visits This Year</h4>
+                        <h5>{this.state.visitsThisYear}</h5>
                     </div>
                     <div id="visitorsThisMonth" className="kpidiv">
-                        <h3>Visitors This Year</h3>
-                        <h4>{this.state.visitorQuantMonth}</h4>
+                        <h4>Total Visits Last Month</h4>
+                        <h5>{this.state.visitsLastMonth}</h5>
+                    </div>
+                    <div id="visitorsThisMonth" className="kpidiv">
+                        <h4>Total Visits This Month</h4>
+                        <h5>{this.state.visitsThisMonth}</h5>
                     </div>
                     <div>
-
+                        <h4>Average Visits Per Day</h4>
+                        <h5>This Year: {this.state.aveVisitsPerDayYear}</h5>
+                        <h5>This This Month: {this.state.aveVisitsPerDayMonth}</h5>
+                        <h5>Last Year: {this.state.aveVisitsPerDayLastYear}</h5>
                     </div>
 
                 </div>

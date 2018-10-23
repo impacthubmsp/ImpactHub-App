@@ -10,7 +10,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import swal from 'sweetalert';
 
 
@@ -46,41 +45,28 @@ class ForgotPassword extends Component {
     event.preventDefault();
     console.log('email submitted');
 
-    axios({
-      method: 'PUT',
-      url: '/api/user/resetpw',
-      data: {username: this.state.email}
-  }).then((response) => {
-      alert('Please check your e-mail! (including your spam folder)');
-      this.props.history.push('/home'); 
-  }).catch((error) => {
-      console.log(error);
-      alert('Something went wrong');
-  });
+    axios.get('/api/user/' + this.state.email)
+        .then((response) => {
+            console.log('response finding email:', response);
+            this.handleClose();
+            swal('Password Reset Email Sent',
+                { icon: 'success' })
+        })
+        .catch((error) => {
+            if (error.status === 404) {
+                swal('Email Address Not Found',
+                    { icon: 'warning' })
+            }
 
+            else {
+                swal('Email Address Not Found',
+                    { icon: 'warning' })
+            }
+            console.log('error finding email in database:', error);
 
-    // axios.put('/api/user/resetpw/' + this.state.email)
-    //   .then((response) => {
-    //     console.log('response finding email:', response);
-    //     this.handleClose();
-    //     swal('Password Reset Email Sent. Please check your e-mail!',
-    //       { icon: 'success' })
-    //   })
-    //   .catch((error) => {
-    //     if (error.status === 404) {
-    //       swal('Email Address Not Found',
-    //         { icon: 'warning' })
-    //     }
-
-    //     else {
-    //       swal('Email Address Not Found',
-    //         { icon: 'warning' })
-    //     }
-    //     console.log('error finding email in database:', error);
-
-    //   });
+        });
     this.handleClose();
-  }
+}
 
   render() {
     return (
@@ -91,7 +77,6 @@ class ForgotPassword extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle>Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Enter your email address we will send you a link to reset your password.
