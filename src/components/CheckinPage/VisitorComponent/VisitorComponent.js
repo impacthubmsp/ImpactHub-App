@@ -168,7 +168,7 @@ class VisitorComponent extends Component {
                                 <Divider />
                             </List>
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                                <List component="div" style={{marginLeft:'25px'}}>
+                                <List component="div" style={{ marginLeft: '25px' }}>
                                     <ListItemText inset secondary="What brings you in today?" />
                                     <br />
                                     <FormControlLabel

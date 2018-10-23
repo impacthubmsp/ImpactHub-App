@@ -90,7 +90,9 @@ class GroupLoginComponent extends Component {
                 <div className="viewContainer" >
                     {/* Form to Check-in Each Guest*/}
                     {/* <form id="groupCheck-InForm" onSubmit={this.sendGroupToDatabase}> */}
-                    <h2>Group Check-in</h2>
+                    <div style={{marginBottom:'35px'}}>
+                    <Typography variant="h5"> Group Check-in</Typography>
+                    </div>
                     <Typography>
                         Group Name
                         <br />
@@ -143,6 +145,7 @@ class GroupLoginComponent extends Component {
                     <div style={{ padding: '15px' }}>
                         <Button
                             variant="contained"
+                            color="primary"
                             type="submit"
                             value="Submit"
                             onClick={this.sendGroupToDatabase}>Submit</Button>

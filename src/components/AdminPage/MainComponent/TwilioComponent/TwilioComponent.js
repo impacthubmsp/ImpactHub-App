@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import MaskedInput from 'react-text-mask';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import { Typography } from '@material-ui/core';
 function TextMaskCustom(props) {
     const { inputRef, ...other } = props;
 
@@ -20,7 +21,12 @@ function TextMaskCustom(props) {
     );
 }
 
-
+const toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000
+});
 
 class TwilioComponent extends Component {
     constructor() {
@@ -77,7 +83,9 @@ class TwilioComponent extends Component {
                 return (
                     // If loggedIn === false, then this will display
                     <div>
-                        Please set a phone number
+                        <Typography variant="h6">
+                        Please Set a Phone Number
+                        </Typography>
                     </div>
                 )
         }
@@ -92,14 +100,10 @@ class TwilioComponent extends Component {
         // If the form is not filled out, then this will return an error sweetalert
         if (newTwilio.admin_name === undefined ||
             newTwilio.phone_number === undefined) {
-            swal({
-                icon: "error",
+            toast.fire({
+                type: "error",
                 title: "Invalid Entry",
                 text: "Please enter a name and phone number.",
-                buttons: {
-                    cancel: false,
-                    confirm: "Try Again"
-                }
             });
         }
         // If the form is filled out, this will send the axios request
@@ -112,13 +116,15 @@ class TwilioComponent extends Component {
                 console.log(response);
             }).then(() => {
                 // After admin is changed re-call the getTwilio settings to update dom
-                swal({
+                toast.fire({
                     text: "Admin Changed",
-                    icon: "success",
+                    type: "success",
                 });
                 this.getTwilioSettings();
             }).catch(function (error) {
                 console.log(error, "sendNewTwilio didnt work");
+                toast.fire({type:"error",
+            title:"Server Error"})
             });
         }
     }
@@ -127,9 +133,9 @@ class TwilioComponent extends Component {
     clearTwilio = () => {
         this.clearTwilioAxios();
         this.clearTwilioState();
-        swal({
+        toast.fire({
             text: "Admin Cleared",
-            icon: "success",
+            type: "success",
         });
     }
     // Axios request for deleting the current admin
@@ -173,12 +179,12 @@ class TwilioComponent extends Component {
                 <div>
                     {this.displayCurrentReciever()}
                 </div>
-                <hr style={{marginTop:'10px', }}/>
+                <hr style={{marginTop:'15px', marginBottom:'25px' }}/>
                 Set Admin
                     <br />
                 {/* <form onSubmit={this.changeAdminTwilio}> */}
                 {/* {this.state.newTwilioSetting.admin_name}<br /> */}
-                <div style={{ margin: '20px' }}>
+                <div style={{ margin: '50px 20px 20px 20px' }}>
                     <InputLabel htmlFor="Name">Name</InputLabel>
                     <Input
                         type="tel"
@@ -186,7 +192,7 @@ class TwilioComponent extends Component {
                         defaultValue={this.state.newTwilioSetting.admin_name} />
                     {/* {this.state.newTwilioSetting.phone_number} */}
                 </div>
-                <div style={{ margin: '20px' }}>
+                <div style={{ margin: '20px 20px 40px 20px' }}>
                     <InputLabel  htmlFor="Phone">Phone</InputLabel>
                     <Input
                         //type="number"
@@ -197,7 +203,7 @@ class TwilioComponent extends Component {
                     />
                 </div>
                 <div style={{ margin: '20px' }}>
-                    <Button color='primary' variant='raised' onClick={this.changeAdminTwilio}>
+                    <Button color='primary' variant='contained' onClick={this.changeAdminTwilio}>
                         Submit
                   </Button>
                 </div>
