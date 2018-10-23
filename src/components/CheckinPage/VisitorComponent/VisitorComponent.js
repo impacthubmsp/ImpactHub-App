@@ -36,11 +36,12 @@ const styles = {
         left: '40px',
         width: '500px',
         margin: '0 0 40px 0',
+        minHeight: '190px'
 
     }
 }
 
- 
+
 class VisitorComponent extends Component {
     constructor() {
         super()
@@ -76,6 +77,7 @@ class VisitorComponent extends Component {
             purpose: value
         })
     }
+
     handleInfo = (event) => {
         //change data base to TIME from TIMESTAMP
         this.setState({
@@ -84,21 +86,22 @@ class VisitorComponent extends Component {
             time: moment().format("LTS")
         })
     }
+
     handleClickAway = () => {
         this.setState({
             open: false,
             purpose: null
         });
     };
-    
+
     handlePost = () => {
         this.props.dispatch({ type: 'POST_VISITOR', payload: this.state })
         // send user to mailchimp if interested
         this.handleMailChimp();
         //fix reset feature, not resetting interest
         this.resetForm();
-        
     }
+
     handleMailChimp = () => {
         //  If the user is interested, then post to mailchimp
         if (this.state.interest === true) {
@@ -134,12 +137,15 @@ class VisitorComponent extends Component {
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
                 <ClickAwayListener onClickAway={this.handleClickAway}>
                     <Paper className={classes.container}>
-                        <div style={{ marginLeft: '25px' }}>
+                        <div style={{
+                            marginLeft: '25px',
+                            marginTop: '10px'
+                        }}>
                             <Typography variant="h3" >
-                                Are you a visitor?
+                                Are you a Visitor?
                             </Typography>
                         </div>
-                        <div style={{ padding: '0 30px 0 30px'}}>
+                        <div style={{ padding: '0 30px 0 30px' }}>
                             <List >
                                 <ListItem>
                                     <TextField
@@ -163,27 +169,34 @@ class VisitorComponent extends Component {
                                 <Divider />
                             </List>
                             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    <ListItemText secondary="What brings you in today?"  />
+                                <List component="div" style={{ marginLeft: '25px' }}>
+                                    <ListItemText inset secondary="What brings you in today?" />
+                                    <br />
                                     <FormControlLabel
                                         control={
-                                            <ToggleButtonGroup value={purpose} exclusive onChange={this.handleAlignment} style={{ padding: 0, margin: '0 0 0 20px'}}>
+                                            <ToggleButtonGroup
+                                                value={purpose}
+                                                exclusive
+                                                onChange={this.handleAlignment}
+                                                style={{ padding: 0, margin: '0 0 0 40px' }}>
                                                 <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }} >
                                                     Guest
                                                 </ToggleButton>
-                                                <ToggleButton value="event" style={{ border: '1px solid darkgrey'  }}>
+                                                <ToggleButton value="event" style={{ border: '1px solid darkgrey' }}>
                                                     Event
                                                 </ToggleButton>
-                                                <ToggleButton value="tour" style={{ border: '1px solid darkgrey'}}>
+                                                <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
                                                     Tour
                                                 </ToggleButton>
-                                            </ToggleButtonGroup>
+                                            </ToggleButtonGroup>  
                                         }
                                     //       labelPlacement="start"
                                     //    label="What brings you in today?"
                                     />
+                                     <Divider style={{marginTop:'15px' }}/>
                                     {/* Select Interest in membership */}
-                                    <ListItem divider>
+                                    <br />
+                                    <ListItem style={{marginTop:'10px'}} divider>
                                         {/* Checkbox for selecting interest */}
                                         <FormControlLabel
                                             control={
@@ -192,7 +205,7 @@ class VisitorComponent extends Component {
                                                 />
                                             }
                                             label="Are you interested in more information about membership options?"
-                                           
+
                                         />
                                         {/* Accompanying text for selecting interest */}
                                         {/* <ListItemText primary="Are you interested in more information about membership options?" /> */}
@@ -239,7 +252,8 @@ class VisitorComponent extends Component {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={this.handlePost}>
+                                            onClick={this.handlePost}
+                                            fullWidth={true}>
                                             Submit
                                     </Button>
                                     </ListItem>

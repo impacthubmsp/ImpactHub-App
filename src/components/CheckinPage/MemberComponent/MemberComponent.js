@@ -36,7 +36,7 @@ const styles = theme => ({
         position: 'absolute',
         top: '40%',
         width: '500px',
-        
+
     },
     toggleContainer: {
         display: 'flex',
@@ -45,8 +45,8 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px 0`,
         background: theme.palette.background.default,
         size: 'large'
-      },
-      button: {
+    },
+    button: {
         background: 'white',
         borderRadius: 3,
         color: 'black',
@@ -57,28 +57,28 @@ const styles = theme => ({
         mozBoxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         boxShadow: '0px 6px 5px 1px rgba(0,0,0,0.75)',
         border: '1px solid darkgrey',
-      },
-      rooot: {
+    },
+    rooot: {
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-      },
-      listItemText:{
-        fontSize:'2em',
-      },
-      secondaryItemText:{
-        fontSize:'1.5em',
+    },
+    listItemText: {
+        fontSize: '2em',
+    },
+    secondaryItemText: {
+        fontSize: '1.5em',
         display: 'inline',
-      },
-      font: {
+    },
+    font: {
         fontSize: '2em',
         height: '100px',
         width: '500px',
         margin: 'auto'
-      },
-      checkoutContainer: {
-          height: '150px'
-      }
+    },
+    checkoutContainer: {
+        height: '150px'
+    }
 });
 
 //Global array of all the members
@@ -87,20 +87,20 @@ const members = [];
 //Gets member and pushes to array m
 function getMembers() {
     axios.get('/api/memb/list')
-    .then((response) =>{
-        let member = response.data;
-        member.map((member)=>{
-            members.push({
-                label: <ListItem><Avatar style={{width:'60px', height:'60px'}}><img className="avatar" src={member.img_url}/></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem> ,
-                value: member.cobot_id + member.name,
-                img_url: member.img_url,
-                company: member.company,
-                name: member.name,
-                id: member.cobot_id
+        .then((response) => {
+            let member = response.data;
+            member.map((member) => {
+                members.push({
+                    label: <ListItem><Avatar style={{ width: '60px', height: '60px' }}><img className="avatar" src={member.img_url} /></Avatar> <ListItemText primary={member.name} secondary={member.company} /></ListItem>,
+                    value: member.cobot_id + member.name,
+                    img_url: member.img_url,
+                    company: member.company,
+                    name: member.name,
+                    id: member.cobot_id
+                })
+                return members;
             })
-            return members;
-           })
-    })
+        })
 }
 
 // get list of member array and their checked-in status
@@ -108,14 +108,14 @@ function getMembers() {
 members.map(suggestion => ({
     value: suggestion.label,
     label: suggestion.label,
-  }));
+}));
 
 
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     user: state.user,
     checkedMembers: state.members,
-  });
+});
 
 class MemberComponent extends Component {
 
@@ -132,52 +132,72 @@ class MemberComponent extends Component {
             checked_in: true,
             open: false,
         }
-        this.baseState = this.state 
+        this.baseState = this.state
     }
 
 
-    componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_MEMBERS'})
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_MEMBERS' })
         getMembers()
-        this.props.dispatch({type: 'FETCH_MEMBERSLIST'}) 
+        this.getCheckedIn()
+
+
+        this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
     }
 
 
     handleChange = name => async value => {
         await this.setState({
-          [name]: value,
-          day: moment().format("L"),
-          time: moment().format("LTS")
+            [name]: value,
+            day: moment().format("L"),
+            time: moment().format("LTS")
         });
-        if(this.state.single === null || this.state.single === ''){
+        if (this.state.single === null || this.state.single === '') {
             this.resetForm()
-        }else{
+        } else {
             console.log(this.state.single.id)
             this.checkStatus(this.state.single.id)
             this.setState({
                 open: true
             })
         }
-      };
+    };
 
-       //change checked in to status of user if they are already checked if not then button will remain checked-in
-        //based on user selected we will compare it to members that are checked in
-        //if user is checked in button will changed to checkout 
-        //if user is not checked in button will remain checked in
+    //change checked in to status of user if they are already checked if not then button will remain checked-in
+    //based on user selected we will compare it to members that are checked in
+    //if user is checked in button will changed to checkout 
+    //if user is not checked in button will remain checked in
 
+    getCheckedIn() {
+
+        axios.get('/api/memb/checkedin')
+            .then((response) => {
+                console.log(response.data);
+                this.setState({
+                    membersCheckedIn: response.data
+                })
+            }).catch((error) => {
+                console.log('error', error);
+            })
+    }
 
 
     //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
     //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again.
-    checkStatus (selectedMember) {
+    checkStatus(selectedMember) {
         console.log('in selectedMember', selectedMember);
         let membersCheckedIn = this.props.checkedMembers;
         console.log(membersCheckedIn)
-        for(let user of membersCheckedIn){
+        for (let user of membersCheckedIn) {
             console.log(user.cobot_id, selectedMember);
-            if(user.cobot_id === selectedMember){
+            if (user.cobot_id === selectedMember) {
                 this.setState({
                     checked_in: false
+                })
+            }
+            else {
+                this.setState({
+                    checked_in: true
                 })
                 break;
             }
@@ -187,34 +207,34 @@ class MemberComponent extends Component {
     handleClose = () => {
         this.setState({ open: false });
         this.resetForm();
-      };
+    };
 
-    handleVisit = (event, purpose)  => 
+    handleVisit = (event, purpose) =>
         this.setState({
             purpose
         })
-    
+
 
     handlePut = () => {
-        axios.put('/api/memb',  this.state)
-      .then(response => {
-        console.log('Member checked-out', response);
-      }).catch(error => {
-        console.log('You got an error');
-      })
-      this.handleClose()
+        axios.put('/api/memb', this.state)
+            .then(response => {
+                console.log('Member checked-out', response);
+            }).catch(error => {
+                console.log('You got an error');
+            })
+        this.handleClose()
     }
 
     handlePost = () => {
-        this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
-        
+        this.props.dispatch({ type: 'POST_MEMBER', payload: this.state })
+
         this.handleClose()
     }
 
     resetForm = () => {
         this.setState(this.baseState)
-        this.props.dispatch({type: 'FETCH_MEMBERSLIST'})
-      }
+        this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
+    }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
@@ -226,124 +246,136 @@ class MemberComponent extends Component {
         let visit;
 
         if (this.state.checked_in) {
-            button = <Button variant="contained" color="primary" onClick={this.handlePost} textDense={true} className={classes.font}>
-            <Check></Check>
-            Check-In
+            button = <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handlePost}
+                textDense={true}
+                className={classes.font}>
+                <Check></Check>
+                Check-In
         </Button>
-        visit = <div>
-                <Typography variant="h3">
-                Purpose:
+            visit = <div>
+                <Typography variant="h4">
+                    Purpose:
                 </Typography>
                 <DialogActions>
-                <div className={classes.toggleContainer}>
-                <ToggleButtonGroup   value={purpose} exclusive onChange={this.handleVisit}>
-                <ToggleButton value="Work" className={classes.button}>
-                {this.state.purpose === 'Work' ? <Check></Check> : ''}Work
+                    <div className={classes.toggleContainer}>
+                        <ToggleButtonGroup value={purpose} exclusive onChange={this.handleVisit}>
+                            <ToggleButton value="Work" className={classes.button}>
+                                {this.state.purpose === 'Work' ? <Check></Check> : ''}Work
                 </ToggleButton>
-                <ToggleButton value="Event" className={classes.button} >
-                {this.state.purpose === 'Event' ? <Check></Check> : ''}Event
+                            <ToggleButton value="Event" className={classes.button} >
+                                {this.state.purpose === 'Event' ? <Check></Check> : ''}Event
                 </ToggleButton>
-                </ToggleButtonGroup>
-                </div>
+                        </ToggleButtonGroup>
+                    </div>
 
 
                 </DialogActions>
             </div>
 
         } else {
-            visit = 
-            <div className={classes.checkoutContainer}>
-            </div>
+            visit =
+                <div className={classes.checkoutContainer}>
+                </div>
             button =
-            <Button variant="contained" color="primary" onClick={this.handlePut} textDense={true} className={classes.font} >
-            <Check></Check>
-            Checkout
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handlePut}
+                    textDense={true}
+                    className={classes.font} >
+                    <Check></Check>
+                    Checkout
                 </Button>
-           
-            ;
+
+                ;
         }
-        
-        
+
+
+
+
         return (
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
-            <Paper className={classes.container}>
-                <div>
-                    {/* Form for members */}
+                <Paper className={classes.container}>
                     <div>
-                    <div style={{ marginLeft: '25px' }}>
-                        <Typography variant="h3">
-                            Are you a member?
-                        </Typography>
-                    </div>
                         <div>
-                            <List component="nav">
-                                {/* Component for selecting name & drop-down menu */}
-                                <ListItem divider>
-                                    <Select
-                                    className="container"
-                                    classNamePrefix="input"
-                                    isClearable
-                                    noOptionsMessage={() => 'Start by typing your name'}
-                                    backspaceRemovesValue
-                                    options={members}
-                                    value={this.state.single}
-                                    onChange={this.handleChange('single')}
-                                    placeholder="Full Name"
-                                     />
-                                </ListItem>
-                                 <div >
-                                    <Dialog
-                                    fullScreen={fullScreen}
-                                    onExit={this.resetForm}
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
-                                    aria-labelledby="responsive-dialog-title"
-                                    
-                                    >
-                                    <div className='dialogContainer'>
-                                    {/* <Toolbar>
+                            <div style={{ marginLeft: '25px', marginTop: '10px' }}>
+                                <Typography variant="h3">
+                                    Are you a Member?
+                        </Typography>
+                            </div>
+                            <div>
+                                <List component="nav">
+                                    {/* Component for selecting name & drop-down menu */}
+                                    <ListItem divider>
+                                        <Select
+                                            className="container"
+                                            classNamePrefix="input"
+                                            isClearable
+                                            noOptionsMessage={() => 'Start by typing your name'}
+                                            backspaceRemovesValue
+                                            options={members}
+                                            value={this.state.single}
+                                            onChange={this.handleChange('single')}
+                                            placeholder="Full Name"
+                                        />
+                                    </ListItem>
+                                    <div >
+                                        <Dialog
+                                            fullScreen={fullScreen}
+                                            onExit={this.resetForm}
+                                            open={this.state.open}
+                                            onClose={this.handleClose}
+                                            aria-labelledby="responsive-dialog-title"
+
+                                        >
+                                            <div className='dialogContainer'>
+                                                {/* <Toolbar>
                                   
                                     </Toolbar> */}
-                                    <DialogContent>
-                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
-                                          position: "absolute",
-                                          top: "0",
-                                          right: "0",
-                                            fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-                                            padding: '0',}}>
-                                        <CloseIcon onClick={this.handleClose} />
-                                        </IconButton>
-                                    <Typography variant="h2" align="center">
-                                        Is this you?
-                                    </Typography>
-                                        <DialogContentText>
-                                         <div className={classes.rooot}>
-                                        <ListItem>
-                                        <Avatar style={{width:'150px', height:'150px'}}><img className="modolImg" src={this.state.single.img_url}/>
-                                        </Avatar> 
-                                             <ListItemText 
-                                            classes={{primary:classes.listItemText, secondary:classes.secondaryItemText}}
-                                            inset={true} primary={this.state.single.name} secondary={this.state.single.company} />
-                                        </ListItem>
-                                        </div> 
-                                        </DialogContentText>
-                                    </DialogContent>
-                                        {visit}
-                                        <div className={classes.font}>
-                                            {button}
-                                    <Button variant="contained" color="secondary" textDense={true} fullwidth={true} onClick={this.handleClose} className={classes.font}>
-                                    <ArrowBack></ArrowBack> Back
-                                    </Button>
-                                    </div>
-                                    </div>
-                                  
-                                    </Dialog>
-                                </div>
-                            </List>
+                                                <DialogContent>
+                                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close" style={{
+                                                        position: "absolute",
+                                                        top: "0",
+                                                        right: "0",
+                                                        fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+                                                        padding: '0',
+                                                    }}>
+                                                        <CloseIcon onClick={this.handleClose} />
+                                                    </IconButton>
+                                                    <Typography variant="h2" align="center">
+                                                        Is this you?
+                                                    </Typography>
+                                                    <DialogContentText>
+                                                        <div className={classes.rooot}>
+                                                            <ListItem>
+                                                                <Avatar style={{ width: '150px', height: '150px' }}><img className="modolImg" src={this.state.single.img_url} />
+                                                                </Avatar>
+                                                                <ListItemText
+                                                                    classes={{ primary: classes.listItemText, secondary: classes.secondaryItemText }}
+                                                                    inset={true} primary={this.state.single.name} secondary={this.state.single.company} />
+                                                            </ListItem>
+                                                        </div>
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                {visit}
+                                                <div className={classes.font}>
+                                                    {button}
+                                                    <Button variant="contained" color="secondary" textDense={true} fullwidth={true} onClick={this.handleClose} className={classes.font}>
+                                                        <ArrowBack></ArrowBack> Back
+                                                    </Button>
+                                                </div>
+                                            </div>
 
+                                        </Dialog>
+                                    </div>
+                                </List>
+
+                            </div>
                         </div>
                     </div>
-                </div>
                 </Paper>
             </Grid>
         );
