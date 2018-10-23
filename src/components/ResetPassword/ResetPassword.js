@@ -26,23 +26,24 @@ class LoginPage extends Component {
   componentDidMount() {
     this.getInviteCode();
   }
-
+//records pw change and store in state
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }
-
+//gets current url
   getInviteCode = () => {
     this.setState({
       code: window.location.href.slice(30)
     })
 }
 
+//toggle pw protected
 handleClickShowPassword = () => {
   this.setState(state => ({ showPassword: !state.showPassword }));
 };
-
+//checks if pw match then makes a request to update pw to new pw
   setPassword = (event) => {
     console.log('in setPassword');
 

@@ -123,7 +123,7 @@ class MemberComponent extends Component {
         super();
 
         // This will store the user that is selected from the drop-down menu.
-        //Whis will be used for axios request.
+   
         this.state = {
             single: '',
             purpose: 'Work',
@@ -142,7 +142,7 @@ class MemberComponent extends Component {
         this.props.dispatch({type: 'FETCH_MEMBERSLIST'}) 
     }
 
-
+//gets time for whne they check in and runs checkStatus function
     handleChange = name => async value => {
         await this.setState({
           [name]: value,
@@ -160,15 +160,7 @@ class MemberComponent extends Component {
         }
       };
 
-       //change checked in to status of user if they are already checked if not then button will remain checked-in
-        //based on user selected we will compare it to members that are checked in
-        //if user is checked in button will changed to checkout 
-        //if user is not checked in button will remain checked in
-
-
-
     //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
-    //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again.
     checkStatus (selectedMember) {
         console.log('in selectedMember', selectedMember);
         let membersCheckedIn = this.props.checkedMembers;
@@ -183,7 +175,7 @@ class MemberComponent extends Component {
             }
         }
     }
-
+//toggles dialog
     handleClose = () => {
         this.setState({ open: false });
         this.resetForm();
@@ -194,7 +186,7 @@ class MemberComponent extends Component {
             purpose
         })
     
-
+//makes request to update status checkin
     handlePut = () => {
         axios.put('/api/memb',  this.state)
       .then(response => {
@@ -204,13 +196,13 @@ class MemberComponent extends Component {
       })
       this.handleClose()
     }
-
+//sends data to db
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
         
         this.handleClose()
     }
-
+//reset state
     resetForm = () => {
         this.setState(this.baseState)
         this.props.dispatch({type: 'FETCH_MEMBERSLIST'})
