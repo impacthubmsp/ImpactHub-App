@@ -177,7 +177,7 @@ class VisitorComponent extends Component {
                                                 value={purpose}
                                                 exclusive
                                                 onChange={this.handleAlignment}
-                                                style={{ padding: 0, margin: '0 0 0 60px' }}>
+                                                style={{ padding: 0, margin: '0 0 0 40px' }}>
                                                 <ToggleButton value="guest" style={{ border: '1px solid darkgrey' }} >
                                                     Guest
                                                 </ToggleButton>
@@ -187,14 +187,15 @@ class VisitorComponent extends Component {
                                                 <ToggleButton value="tour" style={{ border: '1px solid darkgrey' }}>
                                                     Tour
                                                 </ToggleButton>
-                                            </ToggleButtonGroup>
+                                            </ToggleButtonGroup>  
                                         }
                                     //       labelPlacement="start"
                                     //    label="What brings you in today?"
                                     />
+                                     <Divider style={{marginTop:'15px' }}/>
                                     {/* Select Interest in membership */}
                                     <br />
-                                    <ListItem divider>
+                                    <ListItem style={{marginTop:'10px'}} divider>
                                         {/* Checkbox for selecting interest */}
                                         <FormControlLabel
                                             control={

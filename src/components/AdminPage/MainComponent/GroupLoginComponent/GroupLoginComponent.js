@@ -143,6 +143,7 @@ class GroupLoginComponent extends Component {
                         style={{ width: "50px" }}
                         onChange={this.setGroupDetailsFromInput} />
                     <div style={{ padding: '15px' }}>
+              
                         <Button
                             variant="contained"
                             color="primary"

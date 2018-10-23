@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import Divider from '@material-ui/core/Divider';
 import { Typography } from '@material-ui/core';
 function TextMaskCustom(props) {
     const { inputRef, ...other } = props;
@@ -184,7 +185,7 @@ class TwilioComponent extends Component {
                     <br />
                 {/* <form onSubmit={this.changeAdminTwilio}> */}
                 {/* {this.state.newTwilioSetting.admin_name}<br /> */}
-                <div style={{ margin: '50px 20px 20px 20px' }}>
+                <div style={{ margin: '50px 20px 40px 20px' }}>
                     <InputLabel htmlFor="Name">Name</InputLabel>
                     <Input
                         type="tel"
@@ -202,6 +203,7 @@ class TwilioComponent extends Component {
                         label="Phone"
                     />
                 </div>
+                <Divider />
                 <div style={{ margin: '20px' }}>
                     <Button color='primary' variant='contained' onClick={this.changeAdminTwilio}>
                         Submit
