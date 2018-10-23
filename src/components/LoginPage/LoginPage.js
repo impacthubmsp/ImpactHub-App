@@ -5,8 +5,12 @@ import { triggerLogin, formError, clearError } from '../../redux/actions/loginAc
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
+import {Input, Grid, FormControl, Button} from '@material-ui/core';
+import ForgotPassword from './ForgotPassword';
+
+
+
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -22,17 +26,14 @@ class LoginPage extends Component {
     };
   }
 
-
   componentDidMount() {
-    // starts request for server to check that we are logged in
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch(clearError());
   }
 
   componentDidUpdate() {
-    // if we have a response from the server and the user is logged in, redirect to the /user URL
     if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('/admin');
+      this.props.history.push('admin');
     }
   }
 
@@ -69,49 +70,61 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+      <div >
         {this.renderAlert()}
-        <Paper style={{
-          width: '30%',
-          height: '250px',
-          margin: '20px auto',
-          marginTop: '10%',
-          padding: '25px',
-          borderRadius: '2px',
-          alignContent: 'right'
-        }}>
-          <Typography variant="h3">Login</Typography>
-          <div style={{ margin: '10px' }}>
-            <TextField
-              type="text"
-              name="username"
-              value={this.state.username}
-              label="Username"
-              fullWidth
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </div>
-          <div style={{ margin: '10px' }}>
-            <TextField
-              type="password"
-              name="password"
-              label="Password"
-              fullWidth
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </div>
-          <div style={{ margin: '10px' }}>
+        <form onSubmit={this.login}>
+          <h1>Login</h1>
+          <Grid container>
+            <Grid item xs={12}>
+              <FormControl style={{ width: '80%', marginBottom: '10px' }}>
+                <Input
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                  placeholder="Email Address"
+                  inputProps={{
+                    'aria-label': 'username',
+                  }}
+                  fullwidth
+                />
+              </FormControl>
+              <br />
+              <FormControl style={{ width: '80%' }}>
+                <Input
+                  fullWidth
+                  id="password"
+                  placeholder="Password"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                  inputProps={{
+                    'aria-label': 'Password',
+                  }}
+               
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+            <Link to="/register">Register</Link>
             <Button
-              onClick={this.login}
-              value="Log In">
-              Login
+                size="small"
+                variant="contained"
+                type="submit"
+                name="submit"
+                color="primary"
+                style={{ margin: '20px' }}
+              >
+
+                Log In
             </Button>
-            <Button>
-              <Link to="/register">Register</Link>
-            </Button>
-          </div>
-        </Paper>
+              <Grid item xs={12}>
+              </Grid>
+            </Grid>
+          </Grid>
+          <ForgotPassword/>
+        </form>
       </div>
+    </div>
     );
   }
 }
