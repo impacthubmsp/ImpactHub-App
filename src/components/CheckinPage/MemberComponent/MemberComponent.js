@@ -207,6 +207,7 @@ class MemberComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({type: 'POST_MEMBER', payload: this.state})
+        
         this.handleClose()
     }
 
@@ -220,6 +221,7 @@ class MemberComponent extends Component {
         console.log("this is the array of checked in members:", this.props.checkedMembers, "this is the state: ", this.state);
         const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
+        console.log(this.state.checked_in)
         let button;
         let visit;
 

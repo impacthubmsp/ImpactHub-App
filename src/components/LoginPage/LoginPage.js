@@ -23,6 +23,7 @@ class LoginPage extends Component {
     this.state = {
       username: '',
       password: '',
+      showPassword: false,
     };
   }
 
@@ -52,6 +53,10 @@ class LoginPage extends Component {
       [propertyName]: event.target.value,
     });
   }
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
 
   renderAlert() {
     if (this.props.login.message !== '') {
@@ -105,7 +110,7 @@ class LoginPage extends Component {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-            <Link to="/register">Register</Link>
+            
             <Button
                 size="small"
                 variant="contained"
@@ -117,6 +122,7 @@ class LoginPage extends Component {
 
                 Log In
             </Button>
+            <Link to="/register">Register</Link>
               <Grid item xs={12}>
               </Grid>
             </Grid>

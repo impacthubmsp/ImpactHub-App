@@ -17,6 +17,7 @@ const templateRouter = require('./routes/template.router');
 const mailListRouter = require('./routes/mailList.router');
 const mailChimpRouter = require('./routes/mailChimp.router');
 const messageRouter = require('./routes/message.router');
+const passwordRouter = require('./routes/password.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +38,7 @@ app.use('/api/template', templateRouter);
 app.use('/api/mail', mailListRouter);
 app.use('/api/mailchimp', mailChimpRouter);
 app.use('/api/message', messageRouter);
+app.use('/api/password', passwordRouter)
 // Serve static files
 app.use(express.static('build'));
 
