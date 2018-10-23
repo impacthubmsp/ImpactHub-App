@@ -3,8 +3,12 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
+const nodemailer = require("nodemailer");
 const router = express.Router();
+const Chance = require('chance');
+const chance = new Chance();
+const moment = require('moment');
+
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -26,6 +30,7 @@ router.post('/register', (req, res, next) => {
     .then(() => { res.sendStatus(201); })
     .catch((err) => { next(err); });
 });
+
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route

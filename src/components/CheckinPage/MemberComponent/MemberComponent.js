@@ -112,6 +112,11 @@ members.map(suggestion => ({
 
 
 
+const mapStateToProps = state => ({
+    user: state.user,
+    checkedMembers: state.members,
+});
+
 class MemberComponent extends Component {
 
     constructor() {
@@ -125,7 +130,6 @@ class MemberComponent extends Component {
             day: null,
             time: null,
             checked_in: true,
-            membersCheckedIn: [],
             open: false,
         }
         this.baseState = this.state
@@ -138,11 +142,9 @@ class MemberComponent extends Component {
         this.getCheckedIn()
 
 
+        this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
     }
 
-    // componentDidUpdate(){
-    //     window.location.reload()
-    // }
 
     handleChange = name => async value => {
         await this.setState({
@@ -152,8 +154,8 @@ class MemberComponent extends Component {
         });
         if (this.state.single === null || this.state.single === '') {
             this.resetForm()
-        }
-        else {
+        } else {
+            console.log(this.state.single.id)
             this.checkStatus(this.state.single.id)
             this.setState({
                 open: true
@@ -179,11 +181,14 @@ class MemberComponent extends Component {
             })
     }
 
+
     //check if the person selected is already check in if not then check_in will be toggled to activate checkout button
     //TODO still allows user to check in twice even though they are checked in if already checked in you can-not check in again.
     checkStatus(selectedMember) {
         console.log('in selectedMember', selectedMember);
-        for (let user of this.state.membersCheckedIn) {
+        let membersCheckedIn = this.props.checkedMembers;
+        console.log(membersCheckedIn)
+        for (let user of membersCheckedIn) {
             console.log(user.cobot_id, selectedMember);
             if (user.cobot_id === selectedMember) {
                 this.setState({
@@ -194,6 +199,7 @@ class MemberComponent extends Component {
                 this.setState({
                     checked_in: true
                 })
+                break;
             }
         }
     }
@@ -221,19 +227,21 @@ class MemberComponent extends Component {
 
     handlePost = () => {
         this.props.dispatch({ type: 'POST_MEMBER', payload: this.state })
+
         this.handleClose()
     }
 
     resetForm = () => {
         this.setState(this.baseState)
-        this.getCheckedIn();
+        this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
     }
 
     // This function will be carried into the UsernameComponent, and will be called to update the current user when one is selected from the dropdown.
     render() {
-
+        console.log("this is the array of checked in members:", this.props.checkedMembers, "this is the state: ", this.state);
         const { classes, fullScreen } = this.props;
         const { purpose } = this.state;
+        console.log(this.state.checked_in)
         let button;
         let visit;
 
@@ -284,13 +292,14 @@ class MemberComponent extends Component {
 
                 ;
         }
-        console.log(this.state);
+
+
+
 
         return (
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
                 <Paper className={classes.container}>
                     <div>
-                        {/* Form for members */}
                         <div>
                             <div style={{ marginLeft: '25px', marginTop: '10px' }}>
                                 <Typography variant="h3">
@@ -380,5 +389,5 @@ MemberComponent.propTypes = {
 const MemberWithStyle = withStyles(styles)(MemberComponent)
 
 // this allows us to use <App /> in index.js
-export default connect()(MemberWithStyle);
+export default connect(mapStateToProps)(MemberWithStyle);
 

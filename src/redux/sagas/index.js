@@ -1,6 +1,4 @@
-import { all, takeEvery, call,
-  //  put as dispatch 
-  } from 'redux-saga/effects';
+import { all, takeEvery, call, put as dispatch } from 'redux-saga/effects';
 import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
@@ -13,6 +11,7 @@ export default function* rootSaga() {
     loginSaga(),
     yield takeEvery('POST_VISITOR', postVisitor),
     yield takeEvery('FETCH_MEMBERS', getMember),
+    yield takeEvery('FETCH_MEMBERSLIST', getMembersCheckedIn),
     yield takeEvery('POST_MEMBER', postMember),
     yield takeEvery('ADD_MAILCHIMP', addMailchimp),
     // watchIncrementAsync()
@@ -65,12 +64,19 @@ function* getMember(action) {
   try{ 
     const response = yield call(axios.get, '/api/memb')
     console.log(response);
-  
-    // const result = yield call(axios.get, '/api/memb/list')
-    // console.log(result);
-    // const responseAction = {type: 'SET_MEMBERS', payload: result.data}
-    // console.log(responseAction)
-    // yield dispatch(responseAction)
+  }catch(err){
+    console.log('Error', err);
+  };
+
+}
+
+
+function* getMembersCheckedIn(action) {
+  try{ 
+    const response = yield call(axios.get, '/api/memb/checkedin')
+    const responseAction = {type: 'SET_MEMBERLIST', payload: response.data}
+    yield dispatch(responseAction)
+    console.log(response);
   }catch(err){
     console.log('Error', err);
   };
@@ -81,6 +87,9 @@ function* postMember(action) {
   console.log(action.payload);
   try{ 
     yield call(axios.post, '/api/memb', action.payload)
+    // const response = yield getMembersCheckedIn()
+    // const responseAction = {type: 'SET_MEMBERLIST', payload: response.data}
+    yield dispatch ({type: 'FETCH_MEMBERLIST'})
     yield successPost();
   }catch(err){
     console.log('Error', err);
