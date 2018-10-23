@@ -20,6 +20,7 @@ class LoginPage extends Component {
     this.state = {
       username: '',
       password: '',
+      showPassword: false,
     };
   }
 
@@ -49,6 +50,10 @@ class LoginPage extends Component {
       [propertyName]: event.target.value,
     });
   }
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
 
   renderAlert() {
     if (this.props.login.message !== '') {

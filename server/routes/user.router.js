@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 const router = express.Router();
 const Chance = require('chance');
 const chance = new Chance();
-const url = require('url');
+const moment = require('moment');
 
 
 // Handles Ajax request for user information if user is authenticated
@@ -32,34 +32,67 @@ router.post('/register', (req, res, next) => {
 });
 
 
-router.put('/resetpw', (req, res) => {
-  const username = req.body.username; // e-mail from the form
+router.get('/:emailAddress', (req, res) => {
+  console.log('check for email:', req.params.emailAddress);
+
+  const email = req.params.emailAddress;
+  console.log('email', email);
+
+  const queryText = `SELECT "id" FROM person WHERE "username" = $1;`;
+
+  pool.query(queryText, [email])
+      .then((results) => {
+          console.log('results', results.rows.length);
+          if (results.rows.length >= 1) {
+              //call function to send email
+              resetPersonInviteCode(email);
+              res.sendStatus(200);
+          }
+          else {
+              res.sendStatus(404);
+          }
+      })
+      .catch((error) => {
+          console.log('error finding email:', error);
+          res.sendStatus(404);
+      });
+});
+
+
+
+resetPersonInviteCode =  (email) => {
   const token = chance.hash(); // Create a unique token
   // TODO: Include an expiration 48 hours in the future
-  let queryText = `UPDATE "person" SET "token" = $1 WHERE "username" = $2;`;
-  pool.query(queryText, [token, username]).then((result) => {
-    console.log(`http://localhost:3000/reset/${token}`); // TODO: Node mailer goes here && remove this line of code!!!!
-    let resetLink = `http://localhost:3000/#/reset/${token}`;
+let date = new Date();
+  date = moment().add('days', 2); 
+
+       let resetPasswordCode = token;
+  
+       console.log(date);
+       
+
+  let queryText = `UPDATE "person" SET "token" = $1,"expiration" = $3 WHERE "username" = $2;`;
+  pool.query(queryText, [token, email, date]).then((result) => {
+    console.log(`http://localhost:3000/reset/${resetPasswordCode}`); // TODO: Node mailer goes here && remove this line of code!!!!
+    let resetLink = `http://localhost:3000/#/reset/${resetPasswordCode}`;
     let url = `<a target="_blank" href="${resetLink}">Reset Password</a>`;
 
-    const emailHtml = `<!doctype html>
-    <html lang="en">
+    const emailHtml = `
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml">
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="theme-color" content="#000000">
-        <link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia|Voltaire" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia|Voltaire" rel="stylesheet" />
     
         <title>Impact Hub MSP</title>
       </head>
       <body>
-       
-      <p>
-      Click the link below to reset your password.
-      ${url}
-      </p>
+        <p>Click the link below to reset your password. ${url}</p>
       </body>
-    </html>`
+    </html>
+    `
 
 
     const transporter = nodemailer.createTransport({
@@ -79,7 +112,7 @@ router.put('/resetpw', (req, res) => {
   
     const mail = {
       from: "sender@server.com",
-      to: username,
+      to: email,
       subject: "Password Reset",
       text: "Reset Password" + resetLink,
       html: emailHtml
@@ -87,7 +120,7 @@ router.put('/resetpw', (req, res) => {
     
     transporter.sendMail(mail, function(err, info) {
       if (err) {
-          console.log(err);
+          console.log('here is nodemailer', err);
       } else {
           // see https://nodemailer.com/usage
           console.log("info.messageId: " + info.messageId);
@@ -99,43 +132,11 @@ router.put('/resetpw', (req, res) => {
       }
       transporter.close();
     });
-    res.sendStatus(200);
-  }).catch((error) => {
-    console.log(error);
-    res.sendStatus(500);
+ 
   });
-});
-
-
-
-
-// when token is generated add it to mail. 
-// create token
-// put new toekn in db table
-//send res.sendStatus(200)
-//new pw view 
-//send pw 
-
-const email= [];
-checkEmail = () => {
-  axios({
-    url: '/',
-    method: 'GET'
-}).then((response) => {
-    const query = 'SELECT * FROM person;';
-    pool.query(query).then(() => {
-        //To-do limit the amount of data coming back
-        for (let person of response.data) {
-        email.push(person);
-        }
-        res.sendStatus(200);
-    })
-}).catch((error) => {
-    console.log('error in member get look here: ', error);
-})
-
-
 }
+
+
 
 router.post('/create', (req, res) => {
   // This route should be protected. Only an Admin should
@@ -158,11 +159,15 @@ router.post('/create', (req, res) => {
 
 
 
+
+//post route for new password / resetting password
 router.put('/newpassword', (req, res) => {
+  console.log(req.body);
+  
   const password = encryptLib.encryptPassword(req.body.password);
   // Should probably validate e-mail or check token length. Limit to one?
-  const queryText = `UPDATE "person" SET "password" = $1 WHERE "token" = $2 AND "username" = $3;`;
-  pool.query(queryText, [password, req.body.token, req.body.username]).then((result) => {
+  const queryText = `UPDATE "person" SET "password" = $1 WHERE "token" = $2;`;
+  pool.query(queryText, [password, req.body.token]).then((result) => {
     res.sendStatus(200);
   }).catch((error) => {
     console.log('Error', error);

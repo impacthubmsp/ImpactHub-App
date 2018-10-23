@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
 import {Input, Grid, FormControl, Button} from '@material-ui/core';
 import swal from 'sweetalert';
 import axios from 'axios';
@@ -19,17 +16,16 @@ class LoginPage extends Component {
     super(props);
 
     this.state = {
-      newPassword: '',
-      conFirmpassword: '',
+      password: '',
+      confirmPassword: '',
+      code: '',
+      showPassword: false
     };
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch(clearError());
+    this.getInviteCode();
   }
-
-
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -37,37 +33,45 @@ class LoginPage extends Component {
     });
   }
 
+  getInviteCode = () => {
+    this.setState({
+      code: window.location.href.slice(30)
+    })
+}
 
+handleClickShowPassword = () => {
+  this.setState(state => ({ showPassword: !state.showPassword }));
+};
 
   setPassword = (event) => {
     console.log('in setPassword');
 
     event.preventDefault();
 
-    if (this.state.newPassword === '') {
+    if (this.state.password === '') {
         swal('Please enter a new password' ,
          {icon:'warning'})
     
     }
-    else if (this.state.newPassword !== '' && this.state.confirmPassword === '') {
+    else if (this.state.password !== '' && this.state.confirmPassword === '') {
         swal('Please Confirm Password' ,
          {icon:'warning'})
     
     }
-    else if (this.state.newPassword !== this.state.confirmPassword) {
+    else if (this.state.password !== this.state.confirmPassword) {
         swal('Passwords Do not Match' ,
          {icon:'warning'})
     }
     else {
-        const body = {
-            inviteCode: this.state.inviteCode,
-            password: this.state.newPassword,
-        }
+      const body = {
+        password: this.state.password,
+        token: this.state.code,
+      };
 
-        axios.put('/api/user/newpassword', this.state)
+        axios.put('/api/user/newpassword', body)
             .then((response) => {
                 
-                if (response.status === 201) {
+                if (response.status === 200) {
                     this.props.history.replace('/home');
                     swal('Password Reset Successful' , 
                     {icon:'success'})
@@ -98,13 +102,13 @@ class LoginPage extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.code);
     
     return (
       <div>
       <div >
         {this.renderAlert()}
-        <form onSubmit={this.sendPost}>
+        <form onSubmit={this.setPassword}>
           <h1>Reset Password</h1>
           <Grid container>
             <Grid item xs={12}>
@@ -114,27 +118,25 @@ class LoginPage extends Component {
                   id="password"
                   placeholder="New Password"
                   type={this.state.showPassword ? 'text' : 'password'}
-                  value={this.state.password}
-                  onChange={this.handleInputChangeFor('newPassword')}
+                  onChange={this.handleInputChangeFor('password')}
                   inputProps={{
-                    'aria-label': 'Password',
+                    'aria-label': 'password',
                   }}
                   fullwidth
                 />
               </FormControl>
               <br />
               <FormControl style={{ width: '80%' }}>
-                <Input
+              <Input
                   fullWidth
                   id="password"
-                  placeholder="Confirm Password"
+                  placeholder="New Password"
                   type={this.state.showPassword ? 'text' : 'password'}
-                  value={this.state.password}
-                  onChange={this.handleInputChangeFor('confirmpassword')}
+                  onChange={this.handleInputChangeFor('confirmPassword')}
                   inputProps={{
                     'aria-label': 'Password',
                   }}
-               
+                  fullwidth
                 />
               </FormControl>
             </Grid>

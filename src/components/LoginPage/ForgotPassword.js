@@ -45,31 +45,28 @@ class ForgotPassword extends Component {
     event.preventDefault();
     console.log('email submitted');
 
-    axios({
-      method: 'PUT',
-      url: '/api/user/resetpw',
-      data: {username: this.state.email}
-  }).then((response) => {
-        console.log('response finding email:', response);
-        this.handleClose();
-        swal('Password Reset Email Sent. Please check your e-mail!',
-          { icon: 'success' })
-      })
-      .catch((error) => {
-        if (error.status === 404) {
-          swal('Email Address Not Found',
-            { icon: 'warning' })
-        }
+    axios.get('/api/user/' + this.state.email)
+        .then((response) => {
+            console.log('response finding email:', response);
+            this.handleClose();
+            swal('Password Reset Email Sent',
+                { icon: 'success' })
+        })
+        .catch((error) => {
+            if (error.status === 404) {
+                swal('Email Address Not Found',
+                    { icon: 'warning' })
+            }
 
-        else {
-          swal('Email Address Not Found',
-            { icon: 'warning' })
-        }
-        console.log('error finding email in database:', error);
+            else {
+                swal('Email Address Not Found',
+                    { icon: 'warning' })
+            }
+            console.log('error finding email in database:', error);
 
-      });
+        });
     this.handleClose();
-  }
+}
 
   render() {
     return (
