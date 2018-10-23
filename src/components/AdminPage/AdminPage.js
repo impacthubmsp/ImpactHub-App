@@ -10,14 +10,32 @@ const mapStateToProps = state => ({
 
 class AdminPage extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.userName === null) {
+      this.props.history.push('/home');
+    }
+  }
+
 
   render() {
+    let content;
 
+      if(this.props.user.userName){
+        content = ( <div>
+        <Nav history={this.props.history} />
+          <MainComponent /> 
+          </div>)
+      }
     return (
       <div>
 
-        <Nav history={this.props.history} />
-          <MainComponent />
+      {content}
+        
       </div>
     );
   }
