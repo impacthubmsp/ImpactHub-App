@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import ContactRow from './ContactRow/ContactRow.js';
 import axios from 'axios';
 import CSVComponent from '../CSVComponent/CSVComponent';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 
 class NewContactComponent extends Component {
     constructor() {
@@ -39,24 +44,24 @@ class NewContactComponent extends Component {
             <div>
                 <div className="viewContainer">
                     <h3>Visitors Seeking More Info</h3>
-                    <table>
-                        <thead>
+                    <Table>
+                        <TableHead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                        </TableHead>
+                        <TableBody>
                             {/* This will be where the cards with each garment will be displayed. 
                             cards will be mapped over here and will appear in a grid*/}
                             {this.state.newContacts.map((contact, i)=>{
                                 return(
-                                    <ContactRow key= {i} contact={contact} /> // remember to pass in function here for adding a user to the subscription list so it works with the button on ContactRow Component
+                                    <ContactRow key= {i} contact={contact} />// remember to pass in function here for adding a user to the subscription list so it works with the button on ContactRow Component
                                 );
                             })}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                     {/* Component that allows user to download visitor data */}
                     <hr />
                     <CSVComponent />
