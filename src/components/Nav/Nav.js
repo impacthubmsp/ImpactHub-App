@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -23,12 +22,15 @@ class Nav extends Component {
       console.log('HERE');
       this.props.history.push('/home');
     }
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
  
   logout = () => {
     this.props.dispatch(triggerLogout());
     console.log('logout function');
+    this.props.history.push('/home');
   }
+
 
   pushToAdmin = () => {
     this.props.history.push('/admin');
