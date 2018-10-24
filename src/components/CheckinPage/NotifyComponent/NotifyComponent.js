@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faConciergeBell } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
@@ -27,7 +25,7 @@ const styles = {
         justifyContent: 'center',
     }
 }
-
+   
 
 class NotifyComponent extends Component {
     constructor() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import {Typography} from '@material-ui/core'
 
 
 class CurrentMemberVSVisitor extends Component {
@@ -83,7 +84,7 @@ class CurrentMemberVSVisitor extends Component {
 
                     data={data}
                 />}
-                <h4>{(this.state.currentVisitors + this.state.currentMembers)} current guests</h4> {/*Adding visitors and members together to get the total number of people in the space*/} 
+                <Typography>{(this.state.currentVisitors + this.state.currentMembers)} current guests</Typography> {/*Adding visitors and members together to get the total number of people in the space*/} 
             </div>
         );
     }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ContactRow from './ContactRow/ContactRow.js';
 import axios from 'axios';
-import CSVComponent from '../CSVComponent/CSVComponent';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import {Typography} from '@material-ui/core';
 
 class NewContactComponent extends Component {
     constructor() {
@@ -43,14 +43,17 @@ class NewContactComponent extends Component {
         return (
             <div>
                 <div className="viewContainer">
-                    <h3>Visitors Seeking More Info</h3>
+                    <div style={{ marginBottom: '20px', marginTop: '10px' }}>
+                        <Typography variant="h5">Visitors Seeking More Info</Typography>
+                    </div>
+                    <hr style={{marginTop:'15px'}}/>
                     <Table>
                         <TableHead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                            </tr>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>Phone Number</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {/* This will be where the cards with each garment will be displayed. 
@@ -62,9 +65,6 @@ class NewContactComponent extends Component {
                             })}
                         </TableBody>
                     </Table>
-                    {/* Component that allows user to download visitor data */}
-                    <hr />
-                    <CSVComponent />
                 </div>
             </div>
         );

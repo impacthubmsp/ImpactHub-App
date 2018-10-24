@@ -12,8 +12,8 @@ const styles = theme => ({
     masterGrid: {
       marginTop: "60px",
     },
-    notifyComponent: {
-      marginTop: "-50px",
+    notify:{
+      
     }
 });
 
