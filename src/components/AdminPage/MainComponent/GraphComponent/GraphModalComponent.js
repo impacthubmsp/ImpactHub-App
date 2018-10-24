@@ -8,11 +8,6 @@ import classNames from 'classnames';
 
 class GraphModalComponent extends Component {
 
-    closeAppBar = () => {
-        this.props.closeAppBar()
-
-    }
-
     render() {
         return (
             <div>

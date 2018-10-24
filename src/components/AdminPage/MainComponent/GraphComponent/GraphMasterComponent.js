@@ -58,7 +58,7 @@ class GraphMasterComponent extends Component {
                 >
                     <div style={getModalStyle()} className={classes.paper}>
                         <div>
-                            <GraphModalAppBarComponent closeBar={this.closeAppBar} />
+                            <GraphModalAppBarComponent closeBar={this.handleClose} />
                         </div>
                         <GraphModalComponent closeAppBar={this.handleClose} />
                     </div>

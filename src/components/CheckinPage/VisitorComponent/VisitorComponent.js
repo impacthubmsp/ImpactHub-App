@@ -136,10 +136,10 @@ class VisitorComponent extends Component {
 
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
                 <ClickAwayListener onClickAway={this.handleClickAway}>
-                    <Paper className={classes.container}>
+                    <Paper className={classes.container} style={{paddingTop:'10px'}}>
                         <div style={{
                             marginLeft: '25px',
-                            marginTop: '10px'
+                            marginTop: '10px',
                         }}>
                             <Typography variant="h3" >
                                 Are you a Visitor?

@@ -30,13 +30,11 @@ const styles = theme => ({
         justify: 'center',
         flexDirection: 'column',
         alignItems: 'center',
-
     },
     container: {
         position: 'absolute',
         top: '40%',
         width: '500px',
-
     },
     toggleContainer: {
         display: 'flex',
@@ -313,7 +311,7 @@ class MemberComponent extends Component {
 
         return (
             <Grid item xs={6} sm={6} md={6} lg={6} className={classes.root}>
-                <Paper className={classes.container}>
+                <Paper className={classes.container} style={{paddingTop:'10px'}}>
                     <div>
                         <div>
                             <div style={{ marginLeft: '25px', marginTop: '10px' }}>

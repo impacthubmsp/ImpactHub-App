@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import NotifyComponent from './NotifyComponent/NotifyComponent';
 const styles = theme => ({
     masterGrid: {
+      marginTop: "60px",
     },
     notify:{
       
@@ -22,14 +23,18 @@ class CheckinPage extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div>
-        <Nav history={this.props.history} />
-        <NotifyComponent />
-        <Grid container className={classes.masterGrid} spacing={0}>
-          <VisitorComponent />
-          <MemberComponent />
-          
-        </Grid>
+      <div style={{width:'100%', height:'100%'}}>
+        <div style={{position:'fixed', top:'0%', width:'100%'}} >
+          <Nav history={this.props.history} />
+          <Grid container className={classes.masterGrid} spacing={0}>
+            <VisitorComponent />
+            <MemberComponent />
+          </Grid>
+        </div>
+
+        <div style={{position:'fixed', bottom:'0%', width:'100%',}} >
+          <NotifyComponent className={classes.notifyComponent} />
+        </div>
       </div>
     );
   }

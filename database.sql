@@ -7,7 +7,6 @@ CREATE TABLE "person" (
   OIDS=FALSE
 );
 
-
 CREATE TABLE "checkin" (
 	"id" serial NOT NULL,
 	"day" DATE DEFAULT CURRENT_DATE,
@@ -24,8 +23,6 @@ CREATE TABLE "checkin" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "members" (
 	"id" serial NOT NULL,
 	"name" varchar(250) NOT NULL,
@@ -36,7 +33,6 @@ CREATE TABLE "members" (
 ) WITH (
   OIDS=FALSE
 );
-
 
 CREATE TABLE "mailinglist" (
 	"id" serial NOT NULL,
@@ -61,6 +57,13 @@ CREATE TABLE "mailinglist" (
   OIDS=FALSE
 );
 
+
+CREATE TABLE "twilioLogin" (
+    admin_name character varying(50) PRIMARY KEY,
+    phone_number bigint NOT NULL
+);
+
+CREATE UNIQUE INDEX "twilioLogin_pkey" ON "twilioLogin"(admin_name text_ops);
 
 
 
