@@ -5,7 +5,6 @@ import MaskedInput from 'react-text-mask';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider';
 import { Typography } from '@material-ui/core';
 function TextMaskCustom(props) {
@@ -84,8 +83,8 @@ class TwilioComponent extends Component {
                 return (
                     // If loggedIn === false, then this will display
                     <div>
-                        <Typography variant="h6">
-                        Please Set a Phone Number
+                        <Typography variant="h5">
+                        Set the Call Bell
                         </Typography>
                     </div>
                 )
@@ -176,8 +175,8 @@ class TwilioComponent extends Component {
 
     render() {
         return (
-            <div className="viewContainer">
-                <div>
+            <div className="viewContainer" style={{width: '22vw'}}>
+                 <div style={{marginBottom:'20px', marginTop: '10px'}}>
                     {this.displayCurrentReciever()}
                 </div>
                 <hr style={{marginTop:'15px', marginBottom:'25px' }}/>
@@ -209,7 +208,6 @@ class TwilioComponent extends Component {
                         Submit
                   </Button>
                 </div>
-
             </div>
         );
     }
