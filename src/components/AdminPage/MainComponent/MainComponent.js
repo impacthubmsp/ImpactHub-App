@@ -4,6 +4,7 @@ import NewContactComponent from './NewContactComponent/NewContactComponent';
 import KPIComponent from './KPIComponent/KPIComponent';
 import CurrentMemberVSVisitor from './GraphComponent/CurrentMemberVSVistor';
 import TownHallComponent from '../TownHallComponent/TownHallComponent';
+import CSVComponent from './CSVComponent/CSVComponent';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import './MainComponent.css';
@@ -37,10 +38,11 @@ class MainComponent extends Component {
             <div id="adminView">
                 <div className="masonry-layout">
                     <div className={classNames("masonry-layout_column", "leftColumn")}>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
+                        <div className={classNames("masonry-layout_panel")}>
+                            <Paper className={classNames("paper", "pieHolder")}>
                                 <CurrentMemberVSVisitor />
                                 <GraphMasterComponent />
+                                <CSVComponent />
                             </Paper>
                         </div>
                         <div className="masonry-layout_panel">

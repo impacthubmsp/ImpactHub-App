@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ContactRow from './ContactRow/ContactRow.js';
 import axios from 'axios';
-import CSVComponent from '../CSVComponent/CSVComponent';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
@@ -44,7 +43,10 @@ class NewContactComponent extends Component {
         return (
             <div>
                 <div className="viewContainer">
-                    <Typography variant="h5">Visitors Seeking More Info</Typography>
+                    <div style={{ marginBottom: '20px', marginTop: '10px' }}>
+                        <Typography variant="h5">Visitors Seeking More Info</Typography>
+                    </div>
+                    <hr style={{marginTop:'15px'}}/>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -63,9 +65,6 @@ class NewContactComponent extends Component {
                             })}
                         </TableBody>
                     </Table>
-                    {/* Component that allows user to download visitor data */}
-                    <hr />
-                    <CSVComponent />
                 </div>
             </div>
         );

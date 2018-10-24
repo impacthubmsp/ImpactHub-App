@@ -10,14 +10,14 @@ class GraphComponent extends Component {
     super();
     this.state = { // populated with dummy data for the presentation; setState functions are not put in componentDidMount
       graphToShow: 'today',
-      memberVisitToday: [3, 4, 23, 10, 4, 10, null, null, null, null, null, null, null, null, null],
-      visitorVisitToday: [0, 0, 4, 5, 7, 10, null, null, null, null, null, null, null, null, null],
-      memberVisitThisWeek: [25, 30, 40, 27, null, null, null],
-      visitorVisitThisWeek: [6, 12, 10, 8, null, null, null],
-      memberVisitThisMonth: [25, 30, 40, 45, 89, 0, 0, 48, 34, 45, 46, 54, 0, 0, 23, 34, 45, 34, 12, 0, 0, 34, 45, 44, 45, 34, 0, 0, 47, 34, 23],
-      visitorVisitThisMonth: [6, 12, 10, 8, 0, 0, 0, 2, 12, 13, 17, 9, 0, 0, 9, 3, 12, 5, 9, 0, 0, 15, 15, 13, 12, 18, 0, 0, 12, 13, 13],
-      memberVisitByMonth: [65, 59, 80, 81, 56, 55, 40, 50, 45, 65, null, null],
-      visitorVisitByMonth: [29, 78, 76, 34, 89, 73, 34, 89, 23, 134, null, null],
+      memberVisitToday: [3, 4, 23, 10, 4, 10, 0],
+      visitorVisitToday: [0, 0, 4, 5, 7, 10, 1],
+      memberVisitThisWeek: [25, 30, 40, 27 ],
+      visitorVisitThisWeek: [6, 12, 10, 8],
+      memberVisitThisMonth: [25, 30, 40, 45, 89, 0, 0, 48, 34, 45, 46, 54, 0, 0, 23, 34, 45, 34, 12, 0, 0, 34, 45, 44, 45],
+      visitorVisitThisMonth: [6, 12, 10, 8, 0, 0, 0, 2, 12, 13, 17, 9, 0, 0, 9, 3, 12, 5, 9, 0, 0, 15, 15, 13],
+      memberVisitByMonth: [65, 59, 80, 81, 56, 55, 40, 50, 45, 65],
+      visitorVisitByMonth: [29, 78, 76, 34, 89, 73, 34, 89, 23, 134],
     
     }
   }
@@ -43,7 +43,7 @@ class GraphComponent extends Component {
     const showGraph=this.state.graphToShow; //establishes a variable for which iteration of the traffic graph to show
     //data for today's hourly check-in traffic
     const dailyData = {
-      labels: ['7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm', '9:00pm'],
+      labels: ['7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00pm'],
       datasets: [
         {
           label: 'Members',
@@ -91,7 +91,7 @@ class GraphComponent extends Component {
     };
     //data for this week's traffic by day 
     const weeklyData = {
-      labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
       datasets: [
         {
           label: 'Members',
@@ -139,7 +139,7 @@ class GraphComponent extends Component {
     };
     //data for this month's traffic by day
     const monthlyData = {
-      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31],
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
       datasets: [
         {
           label: 'Members',
@@ -160,7 +160,7 @@ class GraphComponent extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: this.state.memberVisitByMonth
+          data: this.state.memberVisitThisMonth
         },
         {
           label: 'Visitors',
@@ -181,13 +181,13 @@ class GraphComponent extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: this.state.visitorVisitByMonth
+          data: this.state.visitorVisitThisMonth
         }
       ]
     };
     //data for this year's traffic by month
     const yearlyData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
       datasets: [
         {
           label: 'Members',

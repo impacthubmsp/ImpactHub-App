@@ -70,12 +70,12 @@ class TownHallComponent extends Component {
         return (
             <div className="viewContainer">
                 {/* list of members currently present */}
-                <div id="townHallContainer">
+                <div >
                     <div style={{ marginBottom: '20px', marginTop: '10px' }}>
                         <Typography variant="h5">Town Hall</Typography>
                     </div>
                     <hr style={{ marginTop: '15px', marginBottom: '10px' }} />
-                    <List component="nav" className="townHallCardContainer">
+                    <List component="nav" id="townHallContainer">
                         {/* Component for selecting name & drop-down menu */}
                         {this.state.membersCheckedIn.map((member, i) => {
                             return (
