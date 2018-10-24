@@ -185,7 +185,7 @@ class TwilioComponent extends Component {
                 {/* <form onSubmit={this.changeAdminTwilio}> */}
                 {/* {this.state.newTwilioSetting.admin_name}<br /> */}
                 <div style={{ margin: '50px 20px 40px 20px' }}>
-                    <InputLabel htmlFor="Name">Name</InputLabel>
+                    <InputLabel htmlFor="Name">Name: </InputLabel>
                     <Input
                         type="tel"
                         onChange={this.handleAdminNameChange}
@@ -193,7 +193,7 @@ class TwilioComponent extends Component {
                     {/* {this.state.newTwilioSetting.phone_number} */}
                 </div>
                 <div style={{ margin: '20px 20px 40px 20px' }}>
-                    <InputLabel  htmlFor="Phone">Phone</InputLabel>
+                    <InputLabel  htmlFor="Phone">Phone: </InputLabel>
                     <Input
                         //type="number"
                         onChange={this.handlePhoneNumberChange}

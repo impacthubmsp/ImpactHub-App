@@ -22,7 +22,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { ArrowBack, Check } from '@material-ui/icons';
-
+import Swal from 'sweetalert2';
 const styles = theme => ({
     root: {
         position: 'relative',
@@ -79,6 +79,13 @@ const styles = theme => ({
     checkoutContainer: {
         height: '150px'
     }
+});
+
+const toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000
 });
 
 //Global array of all the members
@@ -219,8 +226,16 @@ class MemberComponent extends Component {
         axios.put('/api/memb', this.state)
             .then(response => {
                 console.log('Member checked-out', response);
+                toast.fire({
+                    text: "Checked Out successfully!",
+                    type: "success",
+                })
             }).catch(error => {
                 console.log('You got an error');
+                toast.fire({
+                    type:"error",
+                    text:"Checkout Failed"
+                })
             })
         this.handleClose()
     }
