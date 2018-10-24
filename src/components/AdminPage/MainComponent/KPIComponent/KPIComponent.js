@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
 class KPIComponent extends Component {
     constructor() {
@@ -26,9 +27,10 @@ class KPIComponent extends Component {
         return (
             <div>
                 <div className="dashboardContainer">
-                    <div>
-                        <h3>Visit Highlights</h3>
+                    <div style={{ marginBottom: '20px', marginTop: '10px' }}>
+                        <Typography variant="h5">Visitor Insights</Typography>
                     </div>
+                    <hr style={{ marginTop: '15px', marginBottom: '10px' }} />
                     <div id="visitorsThisMonth" className="kpidiv">
                         <h4>Total Visits This Year</h4>
                         <h5>{this.state.visitsThisYear}</h5>

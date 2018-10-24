@@ -7,6 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import {Typography} from '@material-ui/core';
 
 class NewContactComponent extends Component {
     constructor() {
@@ -43,14 +44,14 @@ class NewContactComponent extends Component {
         return (
             <div>
                 <div className="viewContainer">
-                    <h3>Visitors Seeking More Info</h3>
+                    <Typography variant="h5">Visitors Seeking More Info</Typography>
                     <Table>
                         <TableHead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                            </tr>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>Phone Number</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {/* This will be where the cards with each garment will be displayed. 

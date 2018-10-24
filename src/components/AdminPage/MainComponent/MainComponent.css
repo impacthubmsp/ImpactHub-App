@@ -6,23 +6,24 @@ html, body{
     height: 10vw;
 }
 #groupCheck-InForm{
-    height: auto;
-    width: auto;
     background-color: transparent;
 }
 .paper{
     text-align: center;
     padding: 1vh;
     margin: 8px;
-    
+}
+.paperCards{
+    display: flex;
+    margin: 7px;;
+    width: 95%;
 }
 #adminView{
     height: 100%;
     width: 100%;
 }
 .viewContainer{
-   /* display: inline-flex; */
-   overflow: scroll;
+    overflow: scroll;
 }
 .masonry-layout_column{
     display: inline-block;
@@ -52,16 +53,21 @@ html, body{
 .subColumnHalf{
     display: inline-block;
     width: 50%;
-
 }
 tr:nth-child(even) {
-    background: #CCC
+    background: rgba(204, 204, 204, 0.527)
 }
 tr:nth-child(odd) {
     background: #FFF
 }
 #townHallContainer{
-    height: 90vh;
+    height: 100vh;
     overflow: scroll;
 }
+.middleTwo{
+    height: 60vh;
+    display: inline-flex;
+}
+
+
 

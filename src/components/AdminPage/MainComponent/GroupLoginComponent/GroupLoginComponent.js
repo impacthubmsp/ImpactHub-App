@@ -10,6 +10,7 @@ import { Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Input from '@material-ui/core/Input';
 
+
 const toast = Swal.mixin({
     toast: true,
     position: 'top',
@@ -85,14 +86,13 @@ class GroupLoginComponent extends Component {
     render() {
         const { purpose } = this.state;
         return (
-            <div>
-                {/* Form Container*/}
-                <div className="viewContainer" >
+                <div className="viewContainer" style={{width: '22vw'}}>
                     {/* Form to Check-in Each Guest*/}
                     {/* <form id="groupCheck-InForm" onSubmit={this.sendGroupToDatabase}> */}
-                    <div style={{marginBottom:'35px'}}>
+                    <div style={{marginBottom:'20px', marginTop: '10px'}}>
                     <Typography variant="h5"> Group Check-in</Typography>
                     </div>
+                    <hr style={{marginTop:'15px', marginBottom:'25px' }}/>
                     <Typography>
                         Group Name
                         <br />
@@ -151,8 +151,6 @@ class GroupLoginComponent extends Component {
                             value="Submit"
                             onClick={this.sendGroupToDatabase}>Submit</Button>
                     </div>
-                    {/* </form> */}
-                </div>
             </div>
         );
     }

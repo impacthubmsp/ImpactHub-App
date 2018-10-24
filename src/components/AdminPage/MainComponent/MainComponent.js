@@ -51,15 +51,15 @@ class MainComponent extends Component {
                     </div>
                     <div className={classNames("masonry-layout_column", "centerColumn")}>
                             <div className="subColumnHalf">
-                                <div className="masonry-layout_panel">
-                                    <Paper className="paper">
+                                <div className={classNames("masonry-layout_panel")}>
+                                    <Paper className={classNames("paper", "middleTwo")}>
                                         <TwilioComponent />
                                     </Paper>
                                 </div>
                             </div>
                             <div className="subColumnHalf">
-                                <div className="masonry-layout_panel">
-                                    <Paper className={classNames("paper")}>
+                                <div className={classNames("masonry-layout_panel")}>
+                                    <Paper className={classNames("paper", "middleTwo")}>
                                         <GroupLoginComponent />
                                     </Paper>
                                 </div>

@@ -49,7 +49,7 @@ class GraphMasterComponent extends Component {
 
         return (
             <div>
-                <Button onClick={this.handleOpen}>Data Visualization</Button>
+                <Button onClick={this.handleOpen}>More Data Visualization</Button>
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
