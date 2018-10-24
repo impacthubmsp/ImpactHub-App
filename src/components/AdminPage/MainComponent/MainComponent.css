@@ -61,7 +61,7 @@ tr:nth-child(odd) {
     background: #FFF
 }
 #townHallContainer{
-    height: 50vh;
+    height: 90vh;
     overflow: scroll;
 }
 

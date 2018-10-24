@@ -40,11 +40,12 @@ class MainComponent extends Component {
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
                                 <CurrentMemberVSVisitor />
+                                <GraphMasterComponent />
                             </Paper>
                         </div>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <TownHallComponent/>
+                                <KPIComponent />
                             </Paper>
                         </div>
                     </div>
@@ -63,21 +64,16 @@ class MainComponent extends Component {
                                     </Paper>
                                 </div>
                             </div>
+                            <div className="masonry-layout_panel">
+                                <Paper className="paper">
+                                    <NewContactComponent />
+                                </Paper>
+                            </div>
                     </div>
                     <div className={classNames("masonry-layout_column", "rightColumn")}>
                         <div className="masonry-layout_panel">
                             <Paper className="paper">
-                                <KPIComponent />
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <NewContactComponent />
-                            </Paper>
-                        </div>
-                        <div className="masonry-layout_panel">
-                            <Paper className="paper">
-                                <GraphMasterComponent />
+                                <TownHallComponent/>
                             </Paper>
                         </div>
                     </div>
