@@ -7,8 +7,8 @@ class EventsMemberVSVisitor extends Component {
   constructor() {
     super();
     this.state = {// filling with dummy data for presentation. function to get data from database is disabled in componentDidMount and should be undone after presentation
-      memberEventData: [10, 8, 16, 2, 25],
-      visitorEventData: [10, 23, 45, 24, 30],
+      memberEventData: [8, 8, 16, 18, 25],
+      visitorEventData: [10, 23, 20, 24, 30],
       eventLabels: ['10/01/2018','10/11/2018', '10/17/2018','10/22/2018','10/24/2018'],
     }
   }
