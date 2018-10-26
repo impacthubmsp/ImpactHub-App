@@ -6,15 +6,33 @@ import MemberComponent from './MemberComponent/MemberComponent';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { connect } from 'react-redux';
 import NotifyComponent from './NotifyComponent/NotifyComponent';
+
 const styles = theme => ({
     masterGrid: {
     },
 });
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
 class CheckinPage extends Component {
+  
+
+  componentDidMount() {
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.userName === null) {
+      this.props.history.push('/home');
+    }
+  }
+
   
   render() {
     const { classes } = this.props
@@ -35,5 +53,7 @@ CheckinPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+const CheckinPageWrapper = withStyles(styles)(CheckinPage);
+
 // this allows us to use <App /> in index.js
-export default withStyles(styles)(CheckinPage);
+export default connect(mapStateToProps)(CheckinPageWrapper);
