@@ -107,7 +107,7 @@ router.post('/', (req, res) => {
 
 //checks member in to cobot
 postCheckin = (id) => {
-    if (req.isAuthenticated) {
+   
     axios({
         url: `https://impactdev.cobot.me/api/memberships/${id}/work_sessions`,
         method: 'POST',
@@ -117,14 +117,11 @@ postCheckin = (id) => {
     }).catch((error) => {
         console.log('error in posting check-in, check here: ', error);
     })
-} else {
-    res.sendStatus(403);
-}
-}
+} 
 
 //checks members out of cobot
 memberCheckout = (id) => {
-    if (req.isAuthenticated) {
+
     axios({
         url: `https://impactdev.cobot.me/api/memberships/${id}/check_ins/current`,
         method: 'DELETE',
@@ -134,10 +131,8 @@ memberCheckout = (id) => {
     }).catch((error) => {
         console.log('error in posting check-in, check here: ', error);
     })
-} else {
-    res.sendStatus(403);
 }
-}
+
 //PUT route will switch "checkin.checked-in" from 'true' to 'false'.
 router.put('/', (req, res) => {
     if (req.isAuthenticated) {
