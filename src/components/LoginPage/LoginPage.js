@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
 import {Input, Grid, FormControl, Button} from '@material-ui/core';
 import ForgotPassword from './ForgotPassword';
 
@@ -36,8 +39,8 @@ class LoginPage extends Component {
   }
 
   login = (event) => {
+   
     event.preventDefault();
-
     if (this.state.username === '' || this.state.password === '') {
       this.props.dispatch(formError());
     } else {

@@ -27,7 +27,7 @@ class CSVComponent extends Component {
 
         return (
             <div className="viewContainer">
-                <Button> <CSVLink data={csvData} filename={"visitorData.csv"}>Download Visitor Data CSV</CSVLink></Button>
+                <Button> <CSVLink data={csvData} filename={"visitorData.csv"}>Download Data CSV</CSVLink></Button>
             </div>
         );
     }

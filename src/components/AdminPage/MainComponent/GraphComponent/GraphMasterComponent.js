@@ -49,8 +49,7 @@ class GraphMasterComponent extends Component {
 
         return (
             <div>
-                <Typography gutterBottom>Charts and Graphs</Typography>
-                <Button onClick={this.handleOpen}>Open Modal</Button>
+                <Button onClick={this.handleOpen}>More Data Visualization</Button>
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
@@ -59,7 +58,7 @@ class GraphMasterComponent extends Component {
                 >
                     <div style={getModalStyle()} className={classes.paper}>
                         <div>
-                            <GraphModalAppBarComponent closeBar={this.closeAppBar} />
+                            <GraphModalAppBarComponent closeBar={this.handleClose} />
                         </div>
                         <GraphModalComponent closeAppBar={this.handleClose} />
                     </div>

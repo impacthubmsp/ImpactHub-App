@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 import './GroupLoginComponent.css';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import Swal from 'sweetalert2'
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import Input from '@material-ui/core/Input';
+
+
+const toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000
+});
 
 class GroupLoginComponent extends Component {
     constructor() {
@@ -13,75 +28,132 @@ class GroupLoginComponent extends Component {
         }
     }
     // onChange, the input values are sent to local state
-    setGroupDetailsFromInput = (event) =>{
+    setGroupDetailsFromInput = (event) => {
         console.log('In setGroupDetailsFromInput function');
         this.setState({
             [event.target.name]: event.target.value,
         })
     }
     // the purpose buttons change the local state on click 
-    setGroupDetailsFromButton =(event)=>{
+    setGroupDetailsFromButton = (event) => {
         console.log('In setGroupDetailsFromButton function');
         this.setState({
             [event.target.name]: event.target.value,
         })
     }
     //write a function here that sends local state to database on form submit
-    sendGroupToDatabase = () => {
+    sendGroupToDatabase = (event) => {
+        event.preventDefault();
         axios({
             method: 'POST',
             url: '/api/visi/group',
             data: this.state
-        }).then((response)=>{
+        }).then((response) => {
+            toast.fire({
+                type: 'success',
+                title: 'Signed in Successfully'
+            });
             console.log('Group visit successfully added to database', response);
-        }).catch((error)=>{
+            this.setState({
+                name: '',
+                purpose: '',
+                quantity: '',
+            })
+        }).catch((error) => {
             console.log('an error has occurred while trying to send group visit data to the database', error);
-            alert('Error submitting group visit data')
+            toast.fire({
+                type: 'error',
+                title: 'Sign in Unsuccessful'
+            })
         })
     }
 
     //sets the value of purpose for visiting in state, which is sent to the database on form submit
-    handleBTNclick = (value) => {
+    handleBTNclick = (event, purpose) => {
         this.setState({
-            purpose: value,
+            purpose
         })
+        console.log(this.state);
+
     }
 
     //"depress" purpose button that has been selected
     depressPurposeBTN = () => {
-        
+
     }
 
 
-  render() {
-      return (
-        <div>
-            {/* Form Container*/}
-            <div className="viewContainer" >
-                {/* Form to Check-in Each Guest*/}
-                <form id= "groupCheck-InForm" onSubmit={this.sendGroupToDatabase}>
-                    <h2>Group Check-in</h2>
-                    <label>Group Name</label>
-                    <br/>
-                    *optional
-                    <br/>
-                    <input className="groupInput" name="name" placeholder="e.g. Junior Innovators League" style={{ width:"240px" }} onChange={this.setGroupDetailsFromInput}></input>
-                    <br/>
-                    <label>Reason for Visiting</label>
-                    <br/>
+    render() {
+        const { purpose } = this.state;
+        return (
+                <div className="viewContainer" style={{width: '22vw'}}>
+                    {/* Form to Check-in Each Guest*/}
+                    {/* <form id="groupCheck-InForm" onSubmit={this.sendGroupToDatabase}> */}
+                    <div style={{marginBottom:'20px', marginTop: '10px'}}>
+                    <Typography variant="h5"> Group Check-in</Typography>
+                    </div>
+                    <hr style={{marginTop:'15px', marginBottom:'25px' }}/>
+                    <Typography>
+                        Group Name
+                        <br />
+                        *optional
+                    </Typography>
+                    <TextField
+                        className="groupInput"
+                        name="name"
+                        placeholder="e.g. Jr. Innovators League"
+                        style={{ width: "180px" }}
+                        onChange={this.setGroupDetailsFromInput} />
+
+                    <div style={{ marginTop: '20px' }}>
+                        <Divider />
+                        <Typography>Reason for Visiting</Typography>
+                    </div>
                     {/*Buttons set the state for purpose of visit*/}
-                    <Button id="tourBTN" className="purposeBTN" onClick={() => this.handleBTNclick('tour')}>Tour</Button><Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button><Button id="memberVisitBTN" className="purposeBTN" onClick={() => this.handleBTNclick('memberVisit')}>Visiting a Member</Button><Button id="otherBTN" className="purposeBTN" onClick={() => this.handleBTNclick('other')}>Other</Button>
-                    <br/>
-                    <label>Number of People in the Group </label>
-                    <br/>
-                    <input className="groupInput" name="quantity" type="number" placeholder="e.g. 10" style={{ width:"50px" }} onChange={this.setGroupDetailsFromInput}></input>
-                    <br/>
-                    <Button variant="contained" type="submit" value="Submit">Submit</Button>
-                </form>
+                    {/* <Button id="tourBTN" className="purposeBTN" onClick={() => this.handleBTNclick('tour')}>Tour</Button>
+                        <Button id="eventBTN" className="purposeBTN" onClick={() => this.handleBTNclick('event')}>Event</Button>
+                        <Button id="memberVisitBTN" className="purposeBTN" onClick={() => this.handleBTNclick('memberVisit')}>Visiting a Member</Button>
+                        <Button id="otherBTN" className="purposeBTN" onClick={() => this.handleBTNclick('other')}>Other</Button> */}
+                    <ToggleButtonGroup
+                        value={purpose}
+                        exclusive
+                        onChange={this.handleBTNclick}
+                        style={{ padding: 0 }}>
+                        <ToggleButton value="tour">
+                            Tour
+                            </ToggleButton>
+                        <ToggleButton value="event">
+                            Event
+                            </ToggleButton>
+                        <ToggleButton value="memberVisit">
+                            Visit Member
+                            </ToggleButton>
+                        <ToggleButton value="other">
+                            Other
+                            </ToggleButton>
+                    </ToggleButtonGroup>
+                    <Divider />
+                    <br />
+                    <Typography>Number of People in the Group </Typography>
+                    <Input
+                        className="groupInput"
+                        name="quantity"
+                        type="number"
+                        placeholder="e.g. 10"
+                        style={{ width: "50px" }}
+                        onChange={this.setGroupDetailsFromInput} />
+                    <div style={{ padding: '15px' }}>
+              
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            value="Submit"
+                            onClick={this.sendGroupToDatabase}>Submit</Button>
+                    </div>
             </div>
-        </div>
-      );
-  }
+        );
+    }
 }
 
 export default GroupLoginComponent;

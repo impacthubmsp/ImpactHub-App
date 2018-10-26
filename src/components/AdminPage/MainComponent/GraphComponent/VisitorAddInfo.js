@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import {Typography} from '@material-ui/core';
 
 
 
@@ -82,8 +83,8 @@ class VisitorAddInfo extends Component {
                         }
                     }}
                 />
-                <h5>{this.state.totalVisitors} total visitors</h5> {/*total visitors since database began collecting data*/}
-                <h5>{((this.state.visitorsAddInfo / (this.state.totalVisitors)) * 100).toFixed(2)}% of visitors are interested in more information</h5> {/*percent interest since database began collecting data*/} 
+                <Typography>{this.state.totalVisitors} total visitors</Typography> {/*total visitors since database began collecting data*/}
+                <Typography>{((this.state.visitorsAddInfo / (this.state.totalVisitors)) * 100).toFixed(2)}% of visitors are interested in more information</Typography> {/*percent interest since database began collecting data*/} 
             </div>
         );
     }
