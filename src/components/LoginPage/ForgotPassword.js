@@ -27,20 +27,21 @@ class ForgotPassword extends Component {
     }
   }
 
+  //opens and close dialog
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
+  //opens and close dialog
   handleClose = () => {
     this.setState({ open: false });
   };
-
+//sets data from input to state
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }
-
+//checks if email is in db
   sendEmailAddress = (event) => {
     event.preventDefault();
     console.log('email submitted');

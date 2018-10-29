@@ -1,21 +1,46 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
-import VisitorReason from './VisitorReasonComponent';
 import axios from 'axios';
 
 class EventsMemberVSVisitor extends Component {
   constructor() {
     super();
-    this.state = {// filling with dummy data for presentation. function to get data from database is disabled in componentDidMount and should be undone after presentation
-      memberEventData: [8, 8, 16, 18, 25],
-      visitorEventData: [10, 23, 20, 24, 30],
-      eventLabels: ['10/01/2018','10/11/2018', '10/17/2018','10/22/2018','10/24/2018'],
+    this.state = {
+      memberEventData: [],
+      visitorEventData: [],
+      eventLabels: [],
     }
   }
- /* function to get event attendance for last seven events, each broken down by member and visitor */
+  /* function to get event attendance for last five events, each broken down by member and visitor */
+  getEventsMemberData = () => {
+    console.log('in getEventsMemberData');
+    axios({
+      method: 'GET',
+      url: '/api/admin/recentEventsData',
+    }).then((response) => {
+      console.log(response.data);
+      let data = response.data
+      let memberCount =[];
+      let visitorCount = [];
+      let dates = [];
+      for (let i = 0; i < data.length; i++) {
+        dates.push(data[i].day)
+        memberCount.push(data[i].member_count)
+        visitorCount.push(data[i].visitor_count)
+      }
+      this.setState({
+        memberEventData: memberCount,
+        eventLabels: dates,
+        visitorEventData: visitorCount,
+      })
+    }).catch((error) => {
+      console.log(error, 'Error event data for members', error);
+      alert('Error getting event data for members');
+    })
+  }
 
-  componentDidMount(){
-    //function to get attendance data is commented out for presentation's sake UNDO WHEN DONE
+  componentDidMount() {
+    this.getEventsMemberData();
   }
 
   render() {
@@ -52,7 +77,6 @@ class EventsMemberVSVisitor extends Component {
             }
           }}
         />
-        <VisitorReason/>
       </div>
     );
   }

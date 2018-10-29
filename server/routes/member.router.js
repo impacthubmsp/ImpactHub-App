@@ -4,8 +4,10 @@ const router = express.Router();
 const axios = require('axios');
 
 
-
+//gets list of members from cobot and stores in db
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 router.get('/', (req, res) => {
+    if (req.isAuthenticated) {
     axios({
         url: `https://impactdev.cobot.me/api/memberships`,
         method: 'GET',
@@ -27,9 +29,15 @@ router.get('/', (req, res) => {
     }).catch((error) => {
         console.log('error in member get look here: ', error);
     })
+} else {
+    res.sendStatus(403);
+}
 });
 
+
+//gets list of members from db
 router.get('/list', (req, res) => {
+    if (req.isAuthenticated) {
     // queries for single entries of member and returns each member
     const queryText = `SELECT cobot_id, name, company, img_url FROM (SELECT cobot_id, name, company, img_url, ROW_NUMBER() OVER 
   (PARTITION BY (name) ORDER BY name DESC) AS rn
@@ -38,22 +46,27 @@ router.get('/list', (req, res) => {
     pool.query(queryText)
         .then(response => res.send(response.rows))
         .catch(error => res.sendStatus(500));
+    } else {
+        res.sendStatus(403);
+    }
 });
 
+//gets all checked in members from db
 router.get('/checkedin', (req, res) => {
-
-    // let name = memberStatus.single.value.slice(32)
-    // queries for checked in or checked out members
+    if (req.isAuthenticated) {
     const queryText = `SELECT * FROM checkin WHERE member = true AND day = CURRENT_DATE AND checked_in = TRUE;`;
     pool.query(queryText)
         .then(response => res.send(response.rows))
         .catch(error => res.sendStatus(500));
+    } else {
+        res.sendStatus(403);
+    }
 });
+
 //specifically for townhall view-- needs image url and company name
 router.get('/townhall', (req, res) => {
+    if (req.isAuthenticated) {
 
-    // let name = memberStatus.single.value.slice(32)
-    // queries for checked in or checked out members
     const queryText = `SELECT DISTINCT ON ("checkin"."cobot_id") "checkin"."cobot_id", "checkin"."name", "members"."company", "members"."img_url"
                         FROM "checkin" 
                         JOIN "members" ON "checkin"."cobot_id" = "members"."cobot_id"
@@ -61,6 +74,10 @@ router.get('/townhall', (req, res) => {
     pool.query(queryText)
         .then(response => res.send(response.rows))
         .catch(error => res.sendStatus(500));
+    } else {
+        res.sendStatus(403);
+    }
+        
 });
 
 
@@ -90,7 +107,11 @@ router.post('/', (req, res) => {
         res.sendStatus(403);
     }
 });
+
+//checks member in to cobot
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 postCheckin = (id) => {
+   
     axios({
         url: `https://impactdev.cobot.me/api/memberships/${id}/work_sessions`,
         method: 'POST',
@@ -100,9 +121,12 @@ postCheckin = (id) => {
     }).catch((error) => {
         console.log('error in posting check-in, check here: ', error);
     })
-}
+} 
 
+//checks members out of cobot
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 memberCheckout = (id) => {
+
     axios({
         url: `https://impactdev.cobot.me/api/memberships/${id}/check_ins/current`,
         method: 'DELETE',
@@ -113,9 +137,8 @@ memberCheckout = (id) => {
         console.log('error in posting check-in, check here: ', error);
     })
 }
+
 //PUT route will switch "checkin.checked-in" from 'true' to 'false'.
-//To be used in conjunction with an API call to CoBot.
-//Required minimum req.body object format {checkout:false, name:'', cobot_id:''}
 router.put('/', (req, res) => {
     if (req.isAuthenticated) {
         const membCheckOut = req.body;

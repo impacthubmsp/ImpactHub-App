@@ -10,7 +10,7 @@ const chance = new Chance();
 const moment = require('moment');
 
 
-
+//checks if email sent is similar to users in db
 router.get('/:emailAddress', (req, res) => {
     console.log('check for email:', req.params.emailAddress);
   
@@ -39,7 +39,7 @@ router.get('/:emailAddress', (req, res) => {
 
 
 
-
+//uses nodemailer to send to the email sent from client
   resetPersonInviteCode =  (email) => {
     const token = chance.hash(); // Create a unique token
     // TODO: Include an expiration 48 hours in the future
@@ -122,7 +122,7 @@ router.put('/newpassword', (req, res) => {
     console.log(req.body);
     
     const password = encryptLib.encryptPassword(req.body.password);
-    // Should probably validate e-mail or check token length. Limit to one?
+    // checks the token and compares to db if in db will replace pw with new pw
     const queryText = `UPDATE "person" SET "password" = $1 WHERE "token" = $2;`;
     pool.query(queryText, [password, req.body.token]).then((result) => {
       res.sendStatus(200);

@@ -128,7 +128,7 @@ class MemberComponent extends Component {
         super();
 
         // This will store the user that is selected from the drop-down menu.
-        //Whis will be used for axios request.
+   
         this.state = {
             single: '',
             purpose: 'Work',
@@ -150,7 +150,7 @@ class MemberComponent extends Component {
         this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
     }
 
-
+//gets time for whne they check in and runs checkStatus function
     handleChange = name => async value => {
         await this.setState({
             [name]: value,
@@ -203,7 +203,7 @@ class MemberComponent extends Component {
             }
         }
     }
-
+//toggles dialog
     handleClose = () => {
         this.setState({ open: false });
         this.resetForm();
@@ -232,13 +232,13 @@ class MemberComponent extends Component {
             })
         this.handleClose()
     }
-
+//sends data to db
     handlePost = () => {
         this.props.dispatch({ type: 'POST_MEMBER', payload: this.state })
 
         this.handleClose()
     }
-
+//reset state
     resetForm = () => {
         this.setState(this.baseState)
         this.props.dispatch({ type: 'FETCH_MEMBERSLIST' })
