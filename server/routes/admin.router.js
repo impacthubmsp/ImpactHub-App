@@ -143,5 +143,51 @@ router.get ('/visitorsPurpose', (req, res)=> {
     }
 });
 
+/* 
+aveVisitsPerDayYear: '45',
+aveVisitsPerDayMonth: '55',
+aveVisitsPerDayLastYear: '38',
+ */
+
+router.get ('/visitsThisYear', (req, res)=>{
+    if (req.isAuthenticated()){
+         const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('year', day) = date_part('year', CURRENT_DATE);`;
+         pool.query(queryText).then((results) => {
+            res.send(results.rows)
+        }).catch((error) =>{
+            console.log('error obtaining the purposes of visitors in the space', error)
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+router.get ('/visitsThisMonth', (req, res)=>{
+    if (req.isAuthenticated()){
+         const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('month', day) = date_part('month', CURRENT_DATE);`;
+         pool.query(queryText).then((results) => {
+            res.send(results.rows)
+        }).catch((error) =>{
+            console.log('error obtaining the purposes of visitors in the space', error)
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+router.get ('/visitsLastMonth', (req, res)=>{
+    if (req.isAuthenticated()){
+         const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('month', day) = date_part('month', CURRENT_DATE- interval '1' month);`;
+         pool.query(queryText).then((results) => {
+            res.send(results.rows)
+        }).catch((error) =>{
+            console.log('error obtaining the purposes of visitors in the space', error)
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+
 
 module.exports = router;
