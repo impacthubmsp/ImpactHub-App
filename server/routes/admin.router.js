@@ -26,7 +26,7 @@ router.get('/currentMemberCount', (req, res) => {
     if (req.isAuthenticated()) {
         const queryText = `SELECT SUM ("quantity")
                             FROM "checkin"
-                            WHERE "checked_in" = true AND "member"= true;`;
+                            WHERE "checked_in" = true AND "member"= true AND day =current_date;;`;
         pool.query(queryText).then((results) => {
             res.send(results.rows);
         }).catch((error) => {
@@ -185,6 +185,98 @@ router.get ('/visitsLastMonth', (req, res)=>{
             res.send(results.rows)
         }).catch((error) =>{
             console.log('error obtaining the purposes of visitors in the space', error)
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+
+//GET route returns the number of check-ins by hour for the current day
+router.get ('/visitsEachHourToday', (req, res)=>{
+    if (req.isAuthenticated()){
+        const queryText = `select
+                            date_trunc('hour', time), 
+                            count(1)
+                            from checkin
+                            WHERE day = CURRENT_DATE
+                            group by 1;`;
+        pool.query(queryText).then((results)=> {
+            res.send(results.rows)
+        }).catcy((error)=>{
+            console.log('error getting hourly visit data', error);
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+//GET route returns the number of check-ins by day for the past 7 days
+router.get ('/visitsThisWeek', (req, res)=>{
+    if (req.isAuthenticated()){
+        const queryText = `select
+                            date_trunc('day', day), 
+                            count(1)
+                            from checkin
+                            WHERE day = CURRENT_DATE
+                            group by 1;`;
+        pool.query(queryText).then((results)=> {
+            res.send(results.rows)
+        }).catcy((error)=>{
+            console.log('error getting hourly visit data', error);
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+// GET route returns the number of check-ins by day for the past month
+router.get ('/visitsEachHourToday', (req, res)=>{
+    if (req.isAuthenticated()){
+        const queryText = `select
+                            date_trunc('hour', time), 
+                            count(1)
+                            from checkin
+                            WHERE day = CURRENT_DATE
+                            group by 1;`;
+        pool.query(queryText).then((results)=> {
+            res.send(results.rows)
+        }).catcy((error)=>{
+            console.log('error getting hourly visit data', error);
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+// GET route returns the number of check-ins by month for the past year
+router.get ('/visitsEachHourToday', (req, res)=>{
+    if (req.isAuthenticated()){
+        const queryText = `select
+                            date_trunc('hour', time), 
+                            count(1)
+                            from checkin
+                            WHERE day = CURRENT_DATE
+                            group by 1;`;
+        pool.query(queryText).then((results)=> {
+            res.send(results.rows)
+        }).catcn((error)=>{
+            console.log('error getting hourly visit data', error);
+            res.sendStatus(500);
+        })
+    } else{
+        res.sendStatus(403);
+    }
+});
+
+//GET route returns data from the checkin table
+router.get('/allCheckInData', (req, res) =>{
+    if (req.isAuthenticated()){
+        const queryText = `SELECT * from checkin;`;
+        pool.query(queryText).then((results)=>{
+            res.send(results.rows)
+        }).catch((error)=>{
+            console.log('error obtaining data', error)
             res.sendStatus(500);
         })
     } else{
