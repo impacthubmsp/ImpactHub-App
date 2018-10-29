@@ -23,7 +23,7 @@ class GraphComponent extends Component {
   }
   //function to get number of visits per hour today
   getVisitsEachHourToday = () => {
-    console.log('in getVisitsThisMonth');
+    console.log('in getVisitsEachHourToday');
     axios({
         method: 'GET',
         url:'/api/admin/visitsEachHourToday',
@@ -33,8 +33,8 @@ class GraphComponent extends Component {
             memberVisitToday: response.data,
         })
     }).catch((error)=> {
-        console.log(error, 'Error getting visits this month', error);
-        alert ('Error getting visits this month');
+        console.log(error, 'Error getting visits today', error);
+        alert ('Error getting visits today');
     })
 }
 
