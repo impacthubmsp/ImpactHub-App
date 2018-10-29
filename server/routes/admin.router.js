@@ -149,6 +149,7 @@ aveVisitsPerDayMonth: '55',
 aveVisitsPerDayLastYear: '38',
  */
 
+// GET route returns the number of visits this year according to checkin database
 router.get ('/visitsThisYear', (req, res)=>{
     if (req.isAuthenticated()){
          const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('year', day) = date_part('year', CURRENT_DATE);`;
@@ -162,6 +163,7 @@ router.get ('/visitsThisYear', (req, res)=>{
         res.sendStatus(403);
     }
 });
+//GET route returns the number of visits this month according to the checkin database
 router.get ('/visitsThisMonth', (req, res)=>{
     if (req.isAuthenticated()){
          const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('month', day) = date_part('month', CURRENT_DATE);`;
@@ -175,6 +177,7 @@ router.get ('/visitsThisMonth', (req, res)=>{
         res.sendStatus(403);
     }
 });
+// GET route returns the number of visits last month according to the checkin database
 router.get ('/visitsLastMonth', (req, res)=>{
     if (req.isAuthenticated()){
          const queryText = `SELECT SUM ("quantity") FROM checkin WHERE date_part('month', day) = date_part('month', CURRENT_DATE- interval '1' month);`;
