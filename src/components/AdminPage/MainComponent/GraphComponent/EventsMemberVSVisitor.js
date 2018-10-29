@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
-import VisitorReason from './VisitorReasonComponent';
 import axios from 'axios';
 
 class EventsMemberVSVisitor extends Component {
@@ -52,7 +51,6 @@ class EventsMemberVSVisitor extends Component {
             }
           }}
         />
-        <VisitorReason/>
       </div>
     );
   }
