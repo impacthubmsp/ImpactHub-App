@@ -284,5 +284,25 @@ router.get('/allCheckInData', (req, res) =>{
     }
 });
 
+//GET route returns the five most recent events and the number of members and visitors who attended
+router.get('/recentEventsData', (req, res)=>{
+    if(req.isAuthenticated()){
+        const queryText = `SELECT COUNT("quantity") AS "member_count" ,"day", (SELECT COUNT("quantity") AS "visitor_count" FROM "checkin" WHERE "purpose" iLIKE 'event' AND "visitor" = true)
+                            FROM "checkin"
+                            WHERE "purpose" iLIKE 'event' AND "member" = true
+                            GROUP BY "day"
+                            LIMIT 5
+                            ;`;
+        pool.query(queryText).then((results)=>{
+            res.send(results.rows)
+        }).catch((error)=>{
+            console.log('error obtaining data', error)
+            res.sendStatus(500);
+        })
+    }else {
+        res.sendStatus(403);
+    }
+});
+
 
 module.exports = router;
