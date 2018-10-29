@@ -22,6 +22,21 @@ class GraphComponent extends Component {
     }
   }
   //function to get number of visits per hour today
+  getVisitsEachHourToday = () => {
+    console.log('in getVisitsEachHourToday');
+    axios({
+        method: 'GET',
+        url:'/api/admin/visitsEachHourToday',
+    }).then((response)=>{
+        console.log(response.data);
+        this.setState({
+            memberVisitToday: response.data,
+        })
+    }).catch((error)=> {
+        console.log(error, 'Error getting visits today', error);
+        alert ('Error getting visits today');
+    })
+}
 
   //function to get number of visits per day last 7 days
 

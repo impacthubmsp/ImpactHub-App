@@ -4,6 +4,7 @@ import VisitorAddInfo from './VisitorAddInfo';
 import GraphComponent from './GraphComponent';
 import EventsMemberVSVisitor from './EventsMemberVSVisitor';
 import CurrentMemberVSVistor from './CurrentMemberVSVistor'
+import VisitorReason from './VisitorReasonComponent';
 import classNames from 'classnames';
 
 class GraphModalComponent extends Component {
@@ -35,6 +36,11 @@ class GraphModalComponent extends Component {
                 <div className="masonry-layout_panel">
                     <Paper className="paper">
                         <EventsMemberVSVisitor />
+                    </Paper>
+                </div>
+                <div className="masonry-layout_panel">
+                    <Paper className="paper">
+                        <VisitorReason/> 
                     </Paper>
                 </div>
             </div>
