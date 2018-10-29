@@ -5,6 +5,7 @@ const axios = require('axios');
 
 
 //gets list of members from cobot and stores in db
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
     axios({
@@ -106,6 +107,7 @@ router.post('/', (req, res) => {
 });
 
 //checks member in to cobot
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 postCheckin = (id) => {
    
     axios({
@@ -120,6 +122,7 @@ postCheckin = (id) => {
 } 
 
 //checks members out of cobot
+//url will need to be changed to co-working space url e.g. impactdev.cobot.me 
 memberCheckout = (id) => {
 
     axios({
