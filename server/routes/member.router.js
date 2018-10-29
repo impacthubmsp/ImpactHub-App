@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
     }).then((response) => {
         const queryDel = 'DELETE FROM "members";';
         pool.query(queryDel).then(() => {
+            console.log(response.data);
+            
             //To-do limit the amount of data coming back
             for (let member of response.data) {
                 //create a new array of object parsing only information wanted
