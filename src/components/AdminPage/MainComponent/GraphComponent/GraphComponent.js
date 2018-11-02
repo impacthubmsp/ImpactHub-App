@@ -10,14 +10,14 @@ class GraphComponent extends Component {
     super();
     this.state = { // populated with dummy data for the presentation; setState functions are not put in componentDidMount
       graphToShow: 'today',
-      memberVisitToday: [3, 4, 23, 10, 4, 10, 0],
-      visitorVisitToday: [0, 0, 4, 5, 7, 10, 1],
-      memberVisitThisWeek: [25, 30, 40, 27 ],
-      visitorVisitThisWeek: [6, 12, 10, 8],
-      memberVisitThisMonth: [25, 30, 40, 45, 89, 0, 0, 48, 34, 45, 46, 54, 0, 0, 23, 34, 45, 34, 12, 0, 0, 34, 45, 44, 45],
-      visitorVisitThisMonth: [6, 12, 10, 8, 0, 0, 0, 2, 12, 13, 17, 9, 0, 0, 9, 3, 12, 5, 9, 0, 0, 15, 15, 13],
-      memberVisitByMonth: [65, 59, 80, 81, 56, 55, 40, 50, 45, 65],
-      visitorVisitByMonth: [29, 78, 76, 34, 89, 73, 34, 89, 23, 134],
+      memberVisitToday: [3, 4, 10, 10, 7, 12, 25],
+      visitorVisitToday: [0, 0, 4, 5, 7, 8, 10],
+      memberVisitThisWeek: [25, 30, 31, 33 ],
+      visitorVisitThisWeek: [6, 12, 10, 11],
+      memberVisitThisMonth: [25, 23, 25, 39, 19, 0, 0, 20, 34, 32, 33, 35, 0, 0, 23, 32, 39, 34, 40, 0, 0, 34, 45, 44, 45],
+      visitorVisitThisMonth: [6, 12, 10, 8, 0, 0, 0, 2, 12, 13, 10, 9, 0, 0, 9, 3, 12, 5, 9, 0, 0, 15, 17, 23],
+      memberVisitByMonth: [65, 59, 60, 56, 56, 55, 40, 50, 45, 65],
+      visitorVisitByMonth: [29, 49, 55, 56, 50, 65, 45, 75, 100, 134],
     
     }
   }
