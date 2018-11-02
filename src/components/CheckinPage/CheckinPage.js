@@ -51,7 +51,12 @@ class CheckinPage extends Component {
         </div>
 
         <div style={{position:'fixed', bottom:'0%', width:'100%',}} >
-          <NotifyComponent className={classes.notifyComponent} />
+          {/*<NotifyComponent className={classes.notifyComponent} /> 
+          The render of the notify component has been commented out because ImpactHub 
+          will not be using the feature at this time. If/when it does need to be used, 
+          this needs to be uncommented. The application will also need to be hooked up
+          to a live Twilio account (which costs money) There are instructions for doing
+          this on the hand-off document. */}
         </div>
       </div>
     );

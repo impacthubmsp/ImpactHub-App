@@ -9,7 +9,7 @@ const axios = require('axios');
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
     axios({
-        url: `https://impactdev.cobot.me/api/memberships`,
+        url: `https://impacthubmsp.cobot.me/api/memberships`,
         method: 'GET',
         headers: { Authorization: `Bearer ${process.env.myKey}` }
     }).then((response) => {
@@ -111,7 +111,7 @@ router.post('/', (req, res) => {
 postCheckin = (id) => {
    
     axios({
-        url: `https://impactdev.cobot.me/api/memberships/${id}/work_sessions`,
+        url: `https://impacthubmsp.cobot.me/api/memberships/${id}/work_sessions`,
         method: 'POST',
         headers: { Authorization: `Bearer ${process.env.myKey}` }
     }).then((response) => {
@@ -126,7 +126,7 @@ postCheckin = (id) => {
 memberCheckout = (id) => {
 
     axios({
-        url: `https://impactdev.cobot.me/api/memberships/${id}/check_ins/current`,
+        url: `https://impacthubmsp.cobot.me/api/memberships/${id}/check_ins/current`,
         method: 'DELETE',
         headers: { Authorization: `Bearer ${process.env.myKey}` }
     }).then((response) => {
